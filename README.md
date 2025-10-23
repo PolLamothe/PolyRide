@@ -57,66 +57,117 @@ L'équipe dévant réaliser ce projet est consitué de 4 membres :
 ### Pol LAMOTHE :
 **Role Scrum : Product Owner, Dev Team**
 
+- Responsable Technique
+- Responsable Backend
+
 ### Julien PITRE :
 **Role Scrum : Scrum Master, Dev Team**
+
+- Reponsable Frontend
 
 ### Kyllian ARNAUD :
 **Role Scrum : Dev Team**
 
+- Reponsable Base de donnée
+- Developpeur Frontend
+
 ### Anouar EL KHATBI IMANI :
 **Role Scrum : Dev Team**
 
+- Responsable Communication
+- Développeur Frontend
+
 # Planification des Sprints
 
-#### Semaine 1 (Pré-Sprint / Sprint 0) : 13/10 - 19/10
-*Objectif :* Mettre en place les fondations.
-* **Tâches :**
-    * Finaliser le mini-dossier projet et la présentation du Sprint Planning (pour TD1).
-    * Initialiser le dépôt Git, le projet React, le serveur NodeJS (Express).
-    * Concevoir le schéma de la DB SQL (Tables : `Users`, `Courses`, `Trips`, `Messages`).
+### Sprint 1 : "Cadrage & Socle Technique" (23 Octobre - 10 Novembre)
 
-**Livrable : Présentation du Sprint Planning (TD1)**
+**Objectif Sprint :** Préparer tous les livrables administratifs pour le TD1 et construire le socle technique (authentification) pour que le développement fonctionnel puisse démarrer le 10/11.
 
----
+* **Tâches Backend :**
+    * Initialiser le **Backend (NodeJS)**, le dépôt Git.
+    * Développer les endpoints d'inscription/login (avec validation email `@univ-nantes.fr`).
+        * **Responsable(s) :** **Pol** (pour l'ensemble du Backend).
 
-#### Sprint 1 : "Le Noyau : Identité et Données" (2 semaines : ~20/10 - 02/11)
-*Objectif Sprint :* Un étudiant peut s'inscrire (avec validation d'email), se connecter, et voir son propre emploi du temps dans l'application.
-* **Backend (NodeJS/SQL) :**
-    * **Tâche 1 (Auth) :** Implémenter l'**inscription** (limité au domaine `@univ-nantes.fr`) et le **login**. Mettre en place la logique d'envoi d'email de vérification.
-    * **Tâche 2 (EDT) :** Créer un endpoint API où l'utilisateur peut soumettre son **lien `.ics`**.
-    * **Tâche 3 (EDT/DB) :** Quand le lien est soumis, le backend télécharge le fichier, le **parse (avec `node-ical`)**, et stocke les événements à venir dans la table `Courses`.
-* **Frontend (React) :**
-    * **Tâche 1 (Auth) :** Créer les pages : Inscription, Connexion, et "Veuillez vérifier votre email".
-    * **Tâche 2 (Profil) :** Créer la page "Mon Profil" où l'utilisateur colle son lien `.ics` et renseigne son adresse postale.
-    * **Tâche 3 (EDT) :** Créer une vue "Mon Emploi du Temps" qui affiche les cours récupérés depuis le backend.
+* **Tâches Base de Données :**
+    * Concevoir et exécuter le **schéma SQL initial** (pour la gestion des utilisateurs et des événements de calendrier).
+        * **Responsable(s) :** **Kyllian**.
 
----
+* **Tâches Frontend (Core) :**
+    * Initialiser le **Frontend (React)** et définir la structure des dossiers.
+        * **Responsable(s) :** **Julien** (Lead).
+    * Mettre en place le **système de routing** (React Router).
+        * **Responsable(s) :** **Kyllian**.
+    * Implémenter la **logique d'authentification** (Gestion d'état global, appels API).
+        * **Responsable(s) :** **Julien** (Lead), **Kyllian**.
 
-#### Sprint 2 : "Le Matching" (2 semaines : ~03/11 - 16/11)
-*Objectif Sprint :* L'application propose des trajets compatibles en se basant sur les horaires et les adresses géolocalisées.
-* **Backend (NodeJS/SQL) :**
-    * **Tâche 1 (Geo) :** Intégrer l'API **Nominatim** (OpenStreetMap) pour convertir l'adresse de l'utilisateur en coordonnées GPS (Latitude/Longitude) et les stocker dans la table `Users`.
-    * **Tâche 2 (Matching) :** Développer l'algorithme de **matching** :
-        * Requête SQL pour trouver les utilisateurs avec des cours qui finissent/commencent aux mêmes heures.
-        * Pour les "matches", vérifier la compatibilité des adresses (par ex. calcul de distance à vol d'oiseau, ou mieux, via l'API **OSRM**).
-    * **Tâche 3 (API) :** Créer les endpoints API pour "Proposer un trajet" et "Chercher un trajet".
-* **Frontend (React) :**
-    * Créer les pages "Proposer" et "Rechercher" un trajet.
-    * Afficher les résultats des "matches".
-    * Intégrer **Leaflet** pour afficher les points de départ/arrivée sur une carte.
+* **Tâches Frontend (Support) :**
+    * Créer les **composants UI visuels** (HTML/CSS) pour l'inscription et le login.
+        * **Responsable(s) :** **Anouar**.
 
-**Livrable : Démo fonctionnelle pour le Sprint Review (TD2)**
+* **LIVRABLE (TD1 - 10 Novembre) :**
+    * Mini dossier projet.
+    * Présentation du planning des Sprints 2 et 3.
 
 ---
 
-#### Sprint 3 : "L'Interaction et Finition" (2 semaines : ~17/11 - 30/11)
-*Objectif Sprint :* Les utilisateurs peuvent s'organiser via un chat en temps réel et l'application est "installable" (PWA).
-* **Backend (NodeJS/SQL) :**
-    * **Tâche 1 (Chat) :** Implémenter le serveur **Socket.io** pour le chat.
-    * **Tâche 2 (Chat) :** Connecter Socket.io à la DB **SQL** pour que chaque message envoyé soit stocké avant d'être diffusé.
-* **Frontend (React) :**
-    * **Tâche 1 (Chat) :** Développer le composant de **Chat** (interface de messagerie) qui se connecte au serveur Socket.io.
-    * **Tâche 2 (PWA) :** Implémenter le **Service Worker** et le `manifest.json` pour rendre le site installable (PWA).
-    * **Tâches de fin :** Polissage de l'interface, tests, et préparation de tous les livrables finaux (Burndown chart, démo, etc.).
+### Sprint 2 : "Noyau Fonctionnel & Matching" (10 Novembre - 24 Novembre)
 
-**Livrable : Présentation finale (TD3 le 01/12)**
+**Objectif Sprint :** Livrer la fonctionnalité centrale : un utilisateur authentifié importe son EDT, renseigne son adresse, et peut voir des "matches" de covoiturage. (Prêt pour la démo TD2).
+
+* **Tâches Backend :**
+    * (API & Logique) Développer l'endpoint et le *parser* (`node-ical`) pour l'import du lien `.ics`.
+    * (API) Intégrer **Nominatim** (géocodage de l'adresse).
+    * (Logique) Développer l'algorithme de **matching** (horaires + géo).
+        * **Responsable(s) :** **Pol** (pour l'ensemble du Backend).
+
+* **Tâches Base de Données :**
+    * Écrire les **scripts de migration SQL** (pour la gestion des trajets proposés et des réservations).
+        * **Responsable(s) :** **Kyllian**.
+
+* **Tâches Frontend (Core) :**
+    * Créer la page "Mon Profil" (Formulaire `.ics` + Adresse) et la connecter à l'API.
+        * **Responsable(s) :** **Kyllian**.
+    * Créer la page "Rechercher un trajet" (logique des filtres, affichage des "matches").
+        * **Responsable(s) :** **Julien** (Lead).
+    * Intégrer **Leaflet** (carte) pour visualiser les zones.
+        * **Responsable(s) :** **Julien**.
+
+* **Tâches Frontend (Support) :**
+    * Mettre en place la **charte graphique** (CSS global, variables).
+    * Appliquer le style (CSS) aux pages existantes (Login, Profil, etc.).
+        * **Responsable(s) :** **Anouar**.
+
+* **LIVRABLE (TD2 - ~24 Novembre) :**
+    * Préparer la démo de Sprint Review.
+        * **Responsable(s) :** **Anouar** (Présentation), **Julien** (SM).
+
+---
+
+### Sprint 3 : "Interaction & Finition" (24 Novembre - 1er Décembre)
+
+**Objectif Sprint :** Finaliser le produit avec le chat, la PWA, et préparer la livraison finale.
+
+* **Tâches Backend :**
+    * Implémenter le serveur **Socket.io** (Chat) + API de persistance des messages.
+        * **Responsable(s) :** **Pol**.
+
+* **Tâches Base de Données :**
+    * Écrire la **migration SQL** (pour la messagerie).
+        * **Responsable(s) :** **Kyllian**.
+
+* **Tâches Frontend (Core) :**
+    * Implémenter la logique client **Socket.io** (connexion, émission/réception).
+        * **Responsable(s) :** **Julien** (Lead).
+    * Implémenter le **Service Worker** et le `manifest.json` pour la PWA.
+        * **Responsable(s) :** **Kyllian**.
+
+* **Tâches Frontend (Support) :**
+    * Créer le **composant UI du Chat** (visuel des bulles, champ de saisie, CSS).
+        * **Responsable(s) :** **Anouar**.
+
+* **Tâches de Clôture (Livrable TD3) :**
+    * Préparer la **présentation finale** (diapositives, rétrospective).
+        * **Responsable(s) :** **Anouar** (Comms Lead).
+
+* **LIVRABLE (TD3 - 1er Décembre) :**
+    * Présentation finale (7 min) et démo du produit.
