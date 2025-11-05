@@ -1,4 +1,4 @@
-# PRODUCT BACKLOG - Covoit' Étudiant
+# PRODUCT BACKLOG - PolyRide
 
 Ce document recense toutes les fonctionnalités souhaitées pour le produit, ordonnées par priorité. Il est maintenu par le Product Owner (Pol).
 
