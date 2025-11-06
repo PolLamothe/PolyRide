@@ -17,9 +17,14 @@ const userDAO = {
   async findUserByEmail(email) {
     const queryText = 'SELECT * FROM users WHERE email = $1';
     const { rows } = await db.query(queryText, [email]);
-    return rows[0];
+    return rows[0] || null;
+  },
+
+  async findUserByEmailAndPassword(email, password){
+    const queryText = 'SELECT * FROM users WHERE email = $1 AND password = $2';
+    const { rows } = await db.query(queryText, [email, password]);
+    return rows[0] || null;
   }
-  //TODO
 };
 
 module.exports = userDAO;
