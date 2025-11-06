@@ -14,7 +14,7 @@ Ce document recense toutes les fonctionnalités souhaitées pour le produit, ord
 
 | ID | Titre | User Story (En tant que... je veux... afin de...) | Priorité | Sprint Cible | État |
 | :--- | :---- | :------------------------------------------------ | :------- | :----------- | :--- |
-| **US01** | **Authentification Étudiante** | En tant qu'**étudiant**, je veux **m'inscrire/me connecter avec mon email universitaire** afin d'**accéder au service de manière sécurisée**. | **P1** | S1 | À faire |
+| **US01** | **Authentification Étudiante** | En tant qu **'étudiant**, je veux **m'inscrire/me connecter avec mon email universitaire** afin d'**accéder au service de manière sécurisée**. | **P1** | S1 | À faire |
 | **US02** | **Profil & Import EDT** | En tant qu'**utilisateur**, je veux **importer mon fichier `.ics` et renseigner mon adresse** afin que **l'application connaisse mes contraintes de trajets**. | **P2** | S2 | À faire |
 | **US03** | **Recherche de Covoiturage** | En tant que **conducteur ou passager**, je veux **voir les trajets compatibles (horaires/lieux)** afin de **trouver un partenaire de covoiturage**. | **P2** | S2 | À faire |
 | **US04** | **Visualisation Carte** | En tant qu'**utilisateur**, je veux **visualiser les zones de départ/arrivée sur une carte** afin de **mieux repérer les trajets proposés**. | **P2** | S2 | À faire |
@@ -29,7 +29,7 @@ Ce document recense toutes les fonctionnalités souhaitées pour le produit, ord
 
 * **Priorité :** P1
 * **Sprint Cible :** S1
-* **Estimation : 30**
+* **Estimation : 24**
 * **Critères d'acceptation (Definition of Done fonctionnelle) :**
     * [ ] L'inscription refuse les emails qui ne finissent pas par `@univ-nantes.fr`.
     * [ ] Un utilisateur connecté accède à la page d'accueil protégée.
@@ -39,7 +39,7 @@ Ce document recense toutes les fonctionnalités souhaitées pour le produit, ord
 
 * **Priorité :** P2
 * **Sprint Cible :** S2
-* **Estimation :** 20
+* **Estimation : 19**
 * **Critères d'acceptation (DoD) :**
     * [ ] L'utilisateur peut uploader un fichier `.ics` ou coller un lien d'abonnement.
     * [ ] L'application extrait correctement les dates et heures de début/fin des cours.
@@ -50,7 +50,7 @@ Ce document recense toutes les fonctionnalités souhaitées pour le produit, ord
 
 * **Priorité :** P2
 * **Sprint Cible :** S2
-* **Estimation :** 20
+* **Estimation : 18**
 * **Critères d'acceptation (DoD) :**
     * [ ] L'utilisateur voit une liste d'autres étudiants ayant des trajets compatibles.
     * [ ] La compatibilité est définie par : même créneau horaire (+/- 30 min) ET proximité géographique (rayon défini).
@@ -60,7 +60,7 @@ Ce document recense toutes les fonctionnalités souhaitées pour le produit, ord
 
 * **Priorité :** P2
 * **Sprint Cible :** S2
-* **Estimation :** 20
+* **Estimation : 20**
 * **Critères d'acceptation (DoD) :**
     * [ ] Une carte interactive (Leaflet) est intégrée à la page de recherche.
     * [ ] Des marqueurs indiquent les points de départ/arrivée approximatifs des covoitureurs potentiels.
@@ -69,7 +69,7 @@ Ce document recense toutes les fonctionnalités souhaitées pour le produit, ord
 
 * **Priorité :** P3
 * **Sprint Cible :** S3
-* **Estimation :** 25
+* **Estimation : 27**
 * **Critères d'acceptation (DoD) :**
     * [ ] L'utilisateur peut initier une conversation depuis un profil "matché".
     * [ ] Les messages s'envoient et se reçoivent en temps réel (sans rechargement de page).
@@ -79,7 +79,7 @@ Ce document recense toutes les fonctionnalités souhaitées pour le produit, ord
 
 * **Priorité :** P3
 * **Sprint Cible :** S3
-* **Estimation :** 20
+* **Estimation : 20**
 * **Critères d'acceptation (DoD) :**
     * [ ] L'application est servie en HTTPS (ou localhost pour le dev).
     * [ ] Le navigateur mobile propose "Ajouter à l'écran d'accueil".
