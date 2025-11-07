@@ -8,16 +8,16 @@
 1.  Tâche : Développer les endpoints d'inscription/login (avec validation email `@univ-nantes.fr`).
     * **Estimation (pts) : 8**
     * **Responsable(s) :** Pol
-    * [ ] **État :** À faire
-    * **Réalisé par :**
-    * **Terminé le :**
+    * [x] **État :** Fait
+    * **Réalisé par : Pol**
+    * **Terminé le : 7/11/2025**
     * **Commentaire :**
 1.  Tâche : Concevoir et exécuter le **schéma MongoDB initial (Mongoose)** (utilisateurs, événements de calendrier).
     * **Estimation (pts) : 5**
     * **Responsable(s) :** Pol
-    * [ ] **État :** À faire
-    * **Réalisé par :**
-    * **Terminé le :**
+    * [x] **État :** Fait
+    * **Réalisé par : Pol**
+    * **Terminé le : 7/11/2025**
     * **Commentaire :**
 1.  Tâche : Implémenter la **logique d'authentification** (Gestion d'état global, appels API).
     * **Estimation (pts) : 8**
