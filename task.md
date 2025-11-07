@@ -12,9 +12,9 @@
     * **Réalisé par :**
     * **Terminé le :**
     * **Commentaire :**
-1.  Tâche : Concevoir et exécuter le **schéma SQL initial** (utilisateurs, événements de calendrier).
+1.  Tâche : Concevoir et exécuter le **schéma MongoDB initial (Mongoose)** (utilisateurs, événements de calendrier).
     * **Estimation (pts) : 5**
-    * **Responsable(s) :** Kyllian
+    * **Responsable(s) :** Pol
     * [ ] **État :** À faire
     * **Réalisé par :**
     * **Terminé le :**
@@ -116,9 +116,9 @@
     * **Commentaire :**
 
 #### Overhead Technique & Admin (15 points)
-1.  Tâche : Écrire les **scripts de migration SQL** (gestion des trajets proposés et des réservations).
+1.  Tâche : Écrire les **schémas MongoDB (Mongoose)** (gestion des trajets proposés et des réservations).
     * **Estimation (pts) : 5**
-    * **Responsable(s) :** Kyllian
+    * **Responsable(s) :** Pol
     * [ ] **État :** À faire
     * **Réalisé par :**
     * **Terminé le :**
@@ -159,9 +159,9 @@
     * **Réalisé par :**
     * **Terminé le :**
     * **Commentaire :**
-1.  Tâche : Écrire la **migration SQL** (pour la messagerie).
+1.  Tâche : Écrire le **schéma MongoDB** (pour la messagerie).
     * **Estimation (pts) : 3**
-    * **Responsable(s) :** Kyllian
+    * **Responsable(s) :** Pol
     * [ ] **État :** À faire
     * **Réalisé par :**
     * **Terminé le :**

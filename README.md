@@ -59,17 +59,17 @@ L'équipe dévant réaliser ce projet est consitué de 4 membres :
 
 - Responsable Technique
 - Responsable Backend
+- Responsable Base de donnée
 
 ### Julien PITRE :
 **Role Scrum : Scrum Master, Dev Team**
 
-- Reponsable Frontend
+- Responsable Frontend
 
 ### Kyllian ARNAUD :
 **Role Scrum : Dev Team**
 
-- Reponsable Base de donnée
-- Developpeur Frontend
+- Co-Responsable Frontend
 
 ### Anouar EL KHATBI IMANI :
 **Role Scrum : Dev Team**
