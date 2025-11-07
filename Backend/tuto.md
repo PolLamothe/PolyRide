@@ -24,7 +24,16 @@ Le serveur a besoin de variables d'environnement pour fonctionner (notamment pou
 1.  Crée un fichier `.env` à la racine du backend.
 2. Copie le contenu du fichier .env.example dedans
 
-> **Note pour Kyllian** : Assure-toi que la DB locale correspond à ces informations lors de l'exécution de tes scripts SQL.
+### Génération clée JWT
+
+Afin de générer la clée d'encryption JWT utilisez la commande suivant : 
+
+```bash
+node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"
+```
+
+Ensuite donnez cette valeur à la variable "JWT_SECRET" dans le fichier `.env`
+
 
 ## ▶️ Lancement
 
@@ -58,6 +67,12 @@ Connexion à la BDD réussie ✅
 ```
 
 Tu peux tester que l'API répond via ton navigateur ou Postman : `http://localhost:3000/` (ou une route de test si tu en as défini une).
+
+## Documentation
+
+Vous pourrez visualiser et tester les diffents endpoint via cette URL : 
+
+http://localhost:PORT_CHOISI/api-docs/
 
 ## 📂 Structure du Backend
 

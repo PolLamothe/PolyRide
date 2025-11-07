@@ -1,15 +1,29 @@
-const { Pool } = require('pg');
+const { MongoClient } = require('mongodb');
 
 // Utilise les variables d'environnement (à mettre dans .env)
-const pool = new Pool({
-  user: process.env.PG_USER,
-  host: process.env.PG_HOST,
-  database: process.env.PG_DATABASE,
-  password: process.env.PG_PASSWORD,
-  port: process.env.PG_PORT,
-});
+const uri = process.env.MONGODB_URI;
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
-// Exporte une méthode 'query' pour que le DAO puisse l'utiliser
+let db;
+
+async function connectToDatabase() {
+  if (db) {
+    return db;
+  }
+  await client.connect();
+  db = client.db("PolyRide");
+  console.log("Connected to MongoDB");
+  return db;
+}
+
+function getDb() {
+  if (!db) {
+    throw new Error('You must connect to the database first');
+  }
+  return db;
+}
+
 module.exports = {
-  query: (text, params) => pool.query(text, params),
+  connectToDatabase,
+  getDb,
 };

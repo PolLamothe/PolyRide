@@ -33,18 +33,17 @@ const authController = {
 
 	  const newUser = await userDAO.createUser({ email, passwordHash: hashedPassword });
 
-	  const token = jwt.sign(
-		{ userId: newUser.id, email: newUser.email },
-		process.env.JWT_SECRET,
-		{ expiresIn: '24h' }
-	  );
-
-	  res.status(201).json({ 
-		message: "Inscription réussie.", 
-		user: { id: newUser.id, email: newUser.email },
-		token 
-	  });
-
+	        const token = jwt.sign(
+	  		{ userId: newUser._id, email: newUser.email },
+	  		process.env.JWT_SECRET,
+	  		{ expiresIn: '24h' }
+	  	  );
+	  
+	  	  res.status(201).json({ 
+	  		message: "Inscription réussie.", 
+	  		user: { id: newUser._id, email: newUser.email },
+	  		token 
+	  	  });
 	} catch (error) {
 	  console.error("[REGISTER ERROR]", error);
 	  res.status(500).json({ message: "Erreur serveur lors de l'inscription." });
@@ -54,24 +53,33 @@ const authController = {
   // Logique de connexion
   async loginUser(req, res) {
 	try {
-		const hashedPassword = await bcrypt.hash(req.body.password, 10);
-		const user = await userDAO.findUserByEmailAndPassword(req.body.email, hashedPassword)
+	  const { email, password } = req.body;
 
-		if(user == null){
-			return res.status(410).json({message : "La combinaison email/mot de passe est incorrecte"})
-		}
+	  // 1. Trouver l'utilisateur par email
+	  const user = await userDAO.findUserByEmail(email);
+	  if (!user) {
+		return res.status(401).json({ message: "La combinaison email/mot de passe est incorrecte." });
+	  }
 
-		const token = jwt.sign(
-			{ userId: user.id, email: user.email },
-			process.env.JWT_SECRET,
-			{ expiresIn: '24h' }
-		);
+	  // 2. Comparer le mot de passe fourni avec le hash stocké
+	  const isMatch = await bcrypt.compare(password, user.password);
+	  if (!isMatch) {
+		return res.status(401).json({ message: "La combinaison email/mot de passe est incorrecte." });
+	  }
 
-		res.status(201).json({ 
-			message: "Connexion réussie.", 
-			user: { id: user.id, email: user.email },
-			token
-		});
+	  // 3. Générer le token JWT
+	  const token = jwt.sign(
+		{ userId: user._id, email: user.email },
+		process.env.JWT_SECRET,
+		{ expiresIn: '24h' }
+	  );
+
+	  res.status(200).json({ 
+		message: "Connexion réussie.", 
+		user: { id: user._id, email: user.email },
+		token
+	  });
+
 	} catch (error) {
 	  console.error("[LOGIN ERROR]", error);
 	  res.status(500).json({ message: "Erreur serveur lors de la connexion." });
