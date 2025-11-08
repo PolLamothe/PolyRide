@@ -4,16 +4,9 @@
 
 **Objectif Sprint :** Préparer tous les livrables administratifs pour le TD1 et construire le socle technique (authentification) pour que le développement fonctionnel puisse démarrer le 10/11.
 
-#### User Story US01 : Authentification Étudiante (24 points)
+#### User Story US01 : Authentification Étudiante (19 points)
 1.  Tâche : Développer les endpoints d'inscription/login (avec validation email `@univ-nantes.fr`).
     * **Estimation (pts) : 8**
-    * **Responsable(s) :** Pol
-    * [x] **État :** Fait
-    * **Réalisé par : Pol**
-    * **Terminé le : 7/11/2025**
-    * **Commentaire :**
-1.  Tâche : Concevoir et exécuter le **schéma MongoDB initial (Mongoose)** (utilisateurs, événements de calendrier).
-    * **Estimation (pts) : 5**
     * **Responsable(s) :** Pol
     * [x] **État :** Fait
     * **Réalisé par : Pol**
@@ -115,14 +108,7 @@
     * **Terminé le :**
     * **Commentaire :**
 
-#### Overhead Technique & Admin (15 points)
-1.  Tâche : Écrire les **schémas MongoDB (Mongoose)** (gestion des trajets proposés et des réservations).
-    * **Estimation (pts) : 5**
-    * **Responsable(s) :** Pol
-    * [ ] **État :** À faire
-    * **Réalisé par :**
-    * **Terminé le :**
-    * **Commentaire :**
+#### Overhead Technique & Admin (12 points)
 1.  Tâche : Mettre en place la **charte graphique** (CSS global, variables).
     * **Estimation (pts) : 3**
     * **Responsable(s) :** Anouar
@@ -132,6 +118,13 @@
     * **Commentaire :**
 1.  Tâche : Appliquer le style (CSS) aux pages existantes (Login, Profil, etc.).
     * **Estimation (pts) : 5**
+    * **Responsable(s) :** Anouar
+    * [ ] **État :** À faire
+    * **Réalisé par :**
+    * **Terminé le :**
+    * **Commentaire :**
+1.  Tâche : Recruter des utilisateurs pour les tests.
+    * **Estimation (pts) : 2**
     * **Responsable(s) :** Anouar
     * [ ] **État :** À faire
     * **Réalisé par :**
@@ -151,16 +144,9 @@
 
 **Objectif Sprint :** Finaliser le produit avec le chat, la PWA, et préparer la livraison finale.
 
-#### User Story US05 : Messagerie Instantanée (27 points)
+#### User Story US05 : Messagerie Instantanée (24 points)
 1.  Tâche : Implémenter le serveur **Socket.io** (Chat) + API de persistance des messages.
     * **Estimation (pts) : 13**
-    * **Responsable(s) :** Pol
-    * [ ] **État :** À faire
-    * **Réalisé par :**
-    * **Terminé le :**
-    * **Commentaire :**
-1.  Tâche : Écrire le **schéma MongoDB** (pour la messagerie).
-    * **Estimation (pts) : 3**
     * **Responsable(s) :** Pol
     * [ ] **État :** À faire
     * **Réalisé par :**
