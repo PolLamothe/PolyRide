@@ -14,6 +14,23 @@ const options = {
         url: 'http://localhost:'+process.env.PORT || 3001,
       },
     ],
+    components: {
+      securitySchemes: {
+        tokenAuth: { 
+          type: 'apiKey',         // Le type est 'apiKey'
+          in: 'header',           // L'emplacement est 'header'
+          name: 'Authorization',  // Le nom de l'en-tête est 'Authorization'
+          description: "Entrez le token JWT seul (SANS le préfixe 'Bearer')"
+        }
+      }
+    },
+
+    // 2. Appliquer ce schéma de sécurité globalement à toutes les routes
+    security: [
+      {
+        tokenAuth: []
+      }
+    ]
   },
   apis: ['./routes/*.js'], // files containing annotations as above
 };
