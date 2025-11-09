@@ -1,13 +1,45 @@
-//Faire ici page de connexion
+import { useState } from "react";
+import "./Login.css";
 
+export default function Login() {
+  const [showPassword, setShowPassword] = useState(false);
 
-function Login() {
+  return (
+    <div className="page-container">
+      <div className="login-card">
+        <h1 className="brand">PolyRide</h1>
 
-    return (
-        <>
-            <h1>Page de Login</h1>
-        </>
-    )
+        <form>
+          <input type="email" placeholder="Email universitaire" required />
+
+          <div className="password-container">
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Mot de passe"
+              required
+            />
+            <button
+              type="button"
+              className="toggle-password"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? "👁️‍🗨️" : "👁️"}
+            </button>
+          </div>
+
+          <button type="submit" className="btn-primary">
+            Se connecter
+          </button>
+
+          <div className="divider">
+            <span>ou</span>
+          </div>
+
+          <button type="button" className="btn-secondary">
+            S’inscrire
+          </button>
+        </form>
+      </div>
+    </div>
+  );
 }
-
-export default Login;
