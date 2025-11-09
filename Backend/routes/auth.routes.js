@@ -8,6 +8,7 @@ const router = Router();
  * /api/auth/register:
  *   post:
  *     summary: Register a new user
+ *     tags: [auth]
  *     description: Endpoint for user registration.
  *     requestBody:
  *       required: true
@@ -35,6 +36,7 @@ router.post('/register', authController.registerUser);
  * /api/auth/login:
  *   post:
  *     summary: Log in a user
+ *     tags: [auth]
  *     description: Endpoint for user login.
  *     requestBody:
  *       required: true

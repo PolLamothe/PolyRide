@@ -1,0 +1,30 @@
+{
+    "users" : [
+        {
+            "email" : "pol.lamothe@etu.univ-nantes.fr",
+            "password" : "motDePasse1",
+            "calendarLink":"http://edt-v2.univ-nantes.fr/calendar/ics?timetables[0]=105237",
+            "usage":"Passager",
+            "address": {
+                "numero": 1,
+                "rue": "rue de la paix",
+                "codePostal": "44000",
+                "ville": "Nantes"
+            },
+            "phoneNumber" : "0607080910"
+        },
+        {
+            "email" : "kyllian.arnaud@etu.univ-nantes.fr",
+            "password" : "motDePasse2",
+            "calendarLink":"http://edt-v2.univ-nantes.fr/calendar/ics?timetables[0]=105237",
+            "usage":"Conducteur",
+            "address": {
+                "numero": 20,
+                "rue": "Rue Pitre Chevalier",
+                "codePostal": "44000",
+                "ville": "Nantes"
+            },
+            "phoneNumber" : "0607080910"
+        }
+    ]
+}

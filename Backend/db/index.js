@@ -1,4 +1,5 @@
 const { MongoClient } = require('mongodb');
+require('dotenv').config();
 
 // Utilise les variables d'environnement (à mettre dans .env)
 const uri = process.env.MONGODB_URI;
@@ -23,7 +24,12 @@ function getDb() {
   return db;
 }
 
+async function closeDatabaseConnection() {
+  await client.close();
+}
+
 module.exports = {
   connectToDatabase,
   getDb,
+  closeDatabaseConnection,
 };

@@ -8,6 +8,7 @@ const router = Router();
  * /api/profile/profile:
  *   get:
  *     summary: Get user profile information
+ *     tags: [profile]
  *     description: Endpoint for retrieving the authenticated user's profile details.
  *     security:
  *       - tokenAuth: []
@@ -83,6 +84,7 @@ router.get("/profile", profileController.getProfile);
  * /api/profile/profile:
  *   post:
  *     summary: Update user profile information
+ *     tags: [profile]
  *     description: Endpoint for updating the authenticated user's profile details, including usage and calendar link.
  *     security:
  *       - tokenAuth: []

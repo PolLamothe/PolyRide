@@ -2,7 +2,6 @@
 const userDAO = require('../dao/user.dao.js');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const validator = require('validator');
 const utils = require('../utils/utils.js');
 
 const authController = {

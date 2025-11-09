@@ -1,4 +1,4 @@
-const { getDb } = require('../db');
+const { getDb } = require('../db/index.js');
 
 const userDAO = {
 	// Crée un nouvel utilisateur
@@ -29,6 +29,11 @@ const userDAO = {
 			position : position,
 			phoneNumber : phoneNumber
 		}})
+	},
+
+	async removeAll(){
+		const db = getDb();
+		db.collection("users").deleteMany({})
 	}
 };
 

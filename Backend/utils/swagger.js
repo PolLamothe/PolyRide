@@ -9,6 +9,16 @@ const options = {
       version: '1.0.0',
       description: 'API pour l\'application PolyRide',
     },
+    tags: [
+      {
+        name: 'auth',
+        description: 'Authentication routes'
+      },
+      {
+        name: 'profile',
+        description: 'Profile routes'
+      }
+    ],
     servers: [
       {
         url: 'http://localhost:'+process.env.PORT || 3001,
