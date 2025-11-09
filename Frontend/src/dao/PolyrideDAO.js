@@ -6,7 +6,7 @@ const baseHeaders = {
 
 const athenticationHeader = () => {
     const token = getCookie("token");
-    return token ? { "Authorization": "Bearer " + token } : {};
+    return token ? { "Authorization": token } : {};
 }
 
 
@@ -96,6 +96,21 @@ const polyrideDAO = {
             }
         } catch (err) {
             throw err;
+        }
+    },
+
+    getProfile: async () => {
+        const response = await fetch(config.url + "/profile/profile", {
+            method: "GET",
+            headers: {
+                ...baseHeaders,
+                ...athenticationHeader()
+            }
+        });
+        if (response.status === 200) {
+            return await response.json();
+        } else {
+            throw new Error(`${response.status} : ${response.statusText}`);
         }
     },
 
