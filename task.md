@@ -38,16 +38,16 @@
 1.  Tâche : Initialiser le **Frontend (React)** et définir la structure des dossiers.
     * **Estimation (pts) : 3**
     * **Responsable(s) :** Julien (Lead)
-    * [ ] **État :** À faire
-    * **Réalisé par :**
-    * **Terminé le :**
-    * **Commentaire :**
+    * [x] **État :** Fait
+    * **Réalisé par : Kyllian**
+    * **Terminé le : 8/11**
+    * **Commentaire :** 
 1.  Tâche : Mettre en place le **système de routing** (React Router).
     * **Estimation (pts) : 3**
     * **Responsable(s) :** Kyllian
-    * [ ] **État :** À faire
-    * **Réalisé par :**
-    * **Terminé le :**
+    * [x] **État :** Fait
+    * **Réalisé par : Kyllian**
+    * **Terminé le : 8/11**
     * **Commentaire :**
 
 * **LIVRABLE (TD1 - 10 Novembre) :**
