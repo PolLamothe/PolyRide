@@ -64,9 +64,9 @@
 1.  Tâche : (API & Logique) Développer l'endpoint et le *parser* (`node-ical`) pour l'import du lien `.ics`.
     * **Estimation (pts) : 8**
     * **Responsable(s) :** Pol
-    * [ ] **État :** À faire
-    * **Réalisé par :**
-    * **Terminé le :**
+    * [x] **État :** À faire
+    * **Réalisé par : Pol**
+    * **Terminé le : 9/11**
     * **Commentaire :**
 1.  Tâche : (API) Intégrer **Nominatim** (géocodage de l'adresse).
     * **Estimation (pts) : 3**
