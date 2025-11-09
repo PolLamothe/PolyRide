@@ -1,8 +1,10 @@
 import { useState } from "react";
-import "./Login.css";
+import { useNavigate } from "react-router-dom";
+import "./Auth.css";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <div className="page-container">
@@ -35,7 +37,11 @@ export default function Login() {
             <span>ou</span>
           </div>
 
-          <button type="button" className="btn-secondary">
+          <button
+            type="button"
+            className="btn-secondary"
+            onClick={() => navigate("/register")}
+          >
             S’inscrire
           </button>
         </form>
