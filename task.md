@@ -15,9 +15,9 @@
 1.  Tâche : Implémenter la **logique d'authentification** (Gestion d'état global, appels API).
     * **Estimation (pts) : 8**
     * **Responsable(s) :** Julien (Lead), Kyllian
-    * [ ] **État :** À faire
-    * **Réalisé par :**
-    * **Terminé le :**
+    * [x] **État :** Fait
+    * **Réalisé par : Kyllian**
+    * **Terminé le : 9/11**
     * **Commentaire :**
 1.  Tâche : Créer les **composants UI visuels** (HTML/CSS) pour l'inscription et le login.
     * **Estimation (pts) : 3**
@@ -29,7 +29,7 @@
 
 #### Overhead Technique & Admin (7 points)
 1.  Tâche : Initialiser le **Backend (NodeJS)**, le dépôt Git.
-    * **Estimation (pts) : 1** (Tâche déjà réalisée)
+    * **Estimation (pts) : 1**
     * **Responsable(s) :** Pol
     * [x] **État :** Fait
     * **Réalisé par : Pol**
