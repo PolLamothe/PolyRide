@@ -22,9 +22,9 @@
 1.  Tâche : Créer les **composants UI visuels** (HTML/CSS) pour l'inscription et le login.
     * **Estimation (pts) : 3**
     * **Responsable(s) :** Anouar
-    * [ ] **État :** À faire
-    * **Réalisé par :**
-    * **Terminé le :**
+    * [x] **État :** Fait
+    * **Réalisé par : Anouar**
+    * **Terminé le : 9/11**
     * **Commentaire :**
 
 #### Overhead Technique & Admin (7 points)
