@@ -12,10 +12,11 @@ const profileController = {
             user = user.user
             return res.status(200).json({
                 email : user.email,
-                calendar : user.calendarLink,
+                calendarLink : user.calendarLink,
                 userName : user.email.split(".")[0].charAt(0).toUpperCase() + user.email.split(".")[0].slice(1)+" "+(user.email.split(".")[1]).split("@")[0].toUpperCase(),
                 usage : user.usage,
                 address : user.adresse,
+                phoneNumber : user.phoneNumber
             })
         }catch(e){
             console.log("[PROFILE ERROR] : ",e)
@@ -45,9 +46,13 @@ const profileController = {
             if (typeof req.body.address.numero != "number") {
                 return res.status(400).json({ message: "Numéro d'adresse invalide"});
             }
+            if (!/^(\+33|0033|0)[1-9]\d{8}$/.test(req.body.phoneNumber)) {
+                return res.status(400).json({ message: "Numéro de téléphone invalide"});
+            }
+            
             const position = await utils.geocodeAddress(req.body.address);
 
-            userDAO.updateProfile(user.email, req.body.usage, req.body.calendarLink,req.body.address,position);
+            userDAO.updateProfile(user.email, req.body.usage, req.body.calendarLink,req.body.address,position,req.body.phoneNumber);
             return res.status(200).json({ message: "Profil mis à jour avec succès." });
         }catch(e){
             console.log("[PROFILE ERROR] : ",e)

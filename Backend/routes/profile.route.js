@@ -30,6 +30,10 @@ const router = Router();
  *                 userName:
  *                   type: string
  *                   example: "john doe"
+ *                 phoneNumber:
+ *                   type: string
+ *                   nullable: true
+ *                   example: "0612345678"
  *                 usage:
  *                   type: string
  *                   example: "Conducteur et Passager"
@@ -114,6 +118,10 @@ router.get("/profile", profileController.getProfile);
  *                   ville:
  *                     type: string
  *                     example: "Nantes"
+ *               phoneNumber:
+ *                 type: string
+ *                 description: User's phone number.
+ *                 example: "0612345678"
  *     responses:
  *       200:
  *         description: User profile updated successfully.
