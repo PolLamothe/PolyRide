@@ -31,9 +31,9 @@ Ce document recense toutes les fonctionnalités souhaitées pour le produit, ord
 * **Sprint Cible :** S1
 * **Estimation : 24**
 * **Critères d'acceptation (Definition of Done fonctionnelle) :**
-    * [ ] L'inscription refuse les emails qui ne finissent pas par `@univ-nantes.fr`.
-    * [ ] Un utilisateur connecté accède à la page d'accueil protégée.
-    * [ ] Les données utilisateur (email, mot de passe hashé) sont persistées en base de données.
+    * [x] L'inscription refuse les emails qui ne finissent pas par `@univ-nantes.fr`.
+    * [x] Un utilisateur connecté accède à la page d'accueil protégée.
+    * [x] Les données utilisateur (email, mot de passe hashé) sont persistées en base de données.
 
 ### US02 : Profil & Import EDT
 
