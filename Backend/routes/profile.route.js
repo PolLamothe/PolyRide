@@ -30,6 +30,24 @@ const router = Router();
  *                 userName:
  *                   type: string
  *                   example: "john doe"
+ *                 usage:
+ *                   type: string
+ *                   example: "Conducteur et Passager"
+ *                 address:
+ *                   type: object
+ *                   properties:
+ *                     numero:
+ *                       type: number
+ *                       example: 1
+ *                     rue:
+ *                       type: string
+ *                       example: "rue de la paix"
+ *                     codePostal:
+ *                       type: string
+ *                       example: "44000"
+ *                     ville:
+ *                       type: string
+ *                       example: "Nantes"
  *       400:
  *         description: Bad request, e.g., invalid token.
  *         content:
@@ -81,6 +99,21 @@ router.get("/profile", profileController.getProfile);
  *                 format: uri
  *                 description: Link to the user's iCal calendar.
  *                 example: "http://edt-v2.univ-nantes.fr/calendar/ics?..."
+ *               address:
+ *                 type: object
+ *                 properties:
+ *                   numero:
+ *                     type: number
+ *                     example: 1
+ *                   rue:
+ *                     type: string
+ *                     example: "rue de la paix"
+ *                   codePostal:
+ *                     type: string
+ *                     example: "44000"
+ *                   ville:
+ *                     type: string
+ *                     example: "Nantes"
  *     responses:
  *       200:
  *         description: User profile updated successfully.

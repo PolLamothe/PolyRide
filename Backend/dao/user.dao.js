@@ -20,9 +20,9 @@ const userDAO = {
 		return await db.collection('users').findOne({ email, password });
 	},
 
-	async updateProfile(email, newUsage, newCalendarLink){
+	async updateProfile(email, newUsage, newCalendarLink,adresse){
 		const db = getDb();
-		db.collection("users").updateOne({ email: email }, { $set: { calendarLink: newCalendarLink, usage : newUsage} })
+		db.collection("users").updateOne({ email: email }, { $set: { calendarLink: newCalendarLink, usage : newUsage,adresse : adresse} })
 	}
 };
 
