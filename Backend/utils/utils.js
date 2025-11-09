@@ -1,5 +1,7 @@
 const userDAO = require('../dao/user.dao.js');
 const jwt = require('jsonwebtoken');
+const axios = require('axios');
+const ical = require('node-ical');
 
 const utils = {
     verifyPassword : (password)=>{
@@ -37,6 +39,18 @@ const utils = {
     },
     isCalendarLinkValid(link){
         return link.startWith("http://edt-v2.univ-nantes.fr/calendar/ics?")
+    },
+    validateCalendar : async (url) => {
+        try {
+            const response = await axios.get(url);
+            const data = ical.parseICS(response.data);
+            if (Object.keys(data).length === 0) {
+                throw new Error('Le calendrier est vide ou invalide.');
+            }
+        } catch (error) {
+            console.error("Validation Error: ", error);
+            throw new Error('Le lien fourni ne semble pas être un calendrier iCal valide ou est inaccessible.');
+        }
     }
 }
 
