@@ -13,9 +13,10 @@ const authController = {
 	  const { email } = req.body;
 
 	  // 1. Valider le format de l'email et le domaine
-	  if (!validator.isEmail(email) || !email.endsWith('@etu.univ-nantes.fr')) {
+	  const emailRegex = /^[a-z]+\.[a-z]+@etu\.univ-nantes\.fr$/i;
+	  if (!emailRegex.test(email)) {
 		return res.status(400).json({ 
-		  message: "Veuillez fournir une adresse email étudiante de l'Université de Nantes valide (@etu.univ-nantes.fr)." 
+		  message: "L'email doit être au format prénom.nom@etu.univ-nantes.fr" 
 		});
 	  }
 

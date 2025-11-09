@@ -7,6 +7,8 @@ const cookieParser = require('cookie-parser');
 // Importe les routes
 const authRoutes = require('./routes/auth.routes');
 const calendarRoutes = require("./routes/calendar.routes")
+const profileRoutes = require("./routes/profile.route")
+
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -20,6 +22,8 @@ app.use(cookieParser());
 // Toutes les routes d'authentification seront préfixées par /api/auth
 app.use('/api/auth', authRoutes);
 app.use('/api/calendar', calendarRoutes);
+app.use('/api/profile', profileRoutes);
+
 
 // Route de test
 app.get('/api', (req, res) => {
