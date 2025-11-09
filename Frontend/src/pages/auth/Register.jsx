@@ -1,61 +1,121 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Auth.css"; // on réutilise ton style bleu/blanc
+import polyrideDAO from "../../dao/PolyrideDAO.js";
+import "./Auth.css";
 
 export default function Register() {
-  const navigate = useNavigate();
-  const [showPassword, setShowPassword] = useState(false);
+    const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // plus tard tu pourras ajouter la logique d'envoi vers ton backend ici
-    alert("Compte créé avec succès !");
-    navigate("/login");
-  };
+    const [nom, setNom] = useState("");
+    const [prenom, setPrenom] = useState("");
+    const [dateNaissance, setDateNaissance] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
 
-  return (
-    <div className="page-container">
-      <div className="login-card">
-        <h1 className="brand">Créer un compte</h1>
+    async function handleSubmit(e) {
+        e.preventDefault();
+        console.log("ici");
+        setError(null);
+        setLoading(true);
 
-        <form onSubmit={handleSubmit}>
-          <input type="text" placeholder="Nom" required />
-          <input type="text" placeholder="Prénom" required />
-          <input type="date" required />
-          <input type="email" placeholder="Email universitaire" required />
+        try {
+            // 💡 On utilise l'email comme login, et "Prénom Nom" comme pseudo
+            const result = await polyrideDAO.fetchRegister(
+                nom,
+                prenom,
+                dateNaissance,
+                email,
+                password
+            );
+            console.log("la");
+            console.log("📦 Résultat register :", result);
 
-          <div className="password-container">
-            <input
-              type={showPassword ? "text" : "password"}
-              placeholder="Créer un mot de passe"
-              required
-            />
-            <button
-              type="button"
-              className="toggle-password"
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              {showPassword ? "👁️‍🗨️" : "👁️"}
-            </button>
-          </div>
+            setLoading(false);
 
-          <button type="submit" className="btn-primary">
-            S’inscrire
-          </button>
+            if (result) {
+                navigate("/auth/login");
+            } else {
+                setError("Échec de l’inscription. Vérifie tes informations.");
+            }
+        } catch (err) {
+            setLoading(false);
+            setError(err.message || "Erreur lors de l’inscription.");
+        }
+    }
 
-          <div className="divider">
-            <span>ou</span>
-          </div>
+    return (
+        <div className="page-container">
+            <div className="login-card">
+                <h1 className="brand">Créer un compte</h1>
 
-          <button
-            type="button"
-            className="btn-secondary"
-            onClick={() => navigate("/login")}
-          >
-            Se connecter
-          </button>
-        </form>
-      </div>
-    </div>
-  );
+                {error && <div className="error-message">{error}</div>}
+
+                <form onSubmit={handleSubmit}>
+                    <input
+                        type="text"
+                        placeholder="Nom"
+                        value={nom}
+                        onChange={(e) => setNom(e.target.value)}
+                        required
+                    />
+                    <input
+                        type="text"
+                        placeholder="Prénom"
+                        value={prenom}
+                        onChange={(e) => setPrenom(e.target.value)}
+                        required
+                    />
+                    <input
+                        type="date"
+                        value={dateNaissance}
+                        onChange={(e) => setDateNaissance(e.target.value)}
+                        required
+                    />
+                    <input
+                        type="email"
+                        placeholder="Email universitaire"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                    />
+
+                    <div className="password-container">
+                        <input
+                            type={showPassword ? "text" : "password"}
+                            placeholder="Créer un mot de passe"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                        <button
+                            type="button"
+                            className="toggle-password"
+                            onClick={() => setShowPassword(!showPassword)}
+                        >
+                            {showPassword ? "👁️‍🗨️" : "👁️"}
+                        </button>
+                    </div>
+
+                    <button type="submit" className="btn-primary" disabled={loading}>
+                        {loading ? "Inscription..." : "S’inscrire"}
+                    </button>
+
+                    <div className="divider">
+                        <span>ou</span>
+                    </div>
+
+                    <button
+                        type="button"
+                        className="btn-secondary"
+                        onClick={() => navigate("/auth/login")}
+                    >
+                        Se connecter
+                    </button>
+                </form>
+            </div>
+        </div>
+    );
 }
