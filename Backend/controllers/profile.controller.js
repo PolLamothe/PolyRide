@@ -45,8 +45,9 @@ const profileController = {
             if (typeof req.body.address.numero != "number") {
                 return res.status(400).json({ message: "Numéro d'adresse invalide"});
             }
+            const position = await utils.geocodeAddress(req.body.address);
 
-            userDAO.updateProfile(user.email, req.body.usage, req.body.calendarLink,req.body.address);
+            userDAO.updateProfile(user.email, req.body.usage, req.body.calendarLink,req.body.address,position);
             return res.status(200).json({ message: "Profil mis à jour avec succès." });
         }catch(e){
             console.log("[PROFILE ERROR] : ",e)

@@ -71,9 +71,9 @@
 1.  Tâche : (API) Intégrer **Nominatim** (géocodage de l'adresse).
     * **Estimation (pts) : 3**
     * **Responsable(s) :** Pol
-    * [ ] **État :** À faire
-    * **Réalisé par :**
-    * **Terminé le :**
+    * [x] **État :** Fait
+    * **Réalisé par : Pol**
+    * **Terminé le : 9/11**
     * **Commentaire :**
 1.  Tâche : Créer la page "Mon Profil" (Formulaire `.ics` + Adresse) et la connecter à l'API.
     * **Estimation (pts) : 8**

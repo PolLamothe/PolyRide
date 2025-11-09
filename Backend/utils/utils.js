@@ -51,6 +51,31 @@ const utils = {
             console.error("Validation Error: ", error);
             throw new Error('Le lien fourni ne semble pas être un calendrier iCal valide ou est inaccessible.');
         }
+    },
+    async geocodeAddress(address) {
+        const { numero, rue, codePostal, ville } = address;
+        // Formate l'adresse pour l'URL
+        const query = `${numero} ${rue}, ${codePostal} ${ville}, France`;
+        const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`;
+
+        try {
+            const response = await axios.get(url, {
+            headers: {
+                // !! IMPORTANT: Nominatim bloque les requêtes sans User-Agent spécifique
+                'User-Agent': 'PolyRide/1.0'
+            }
+            });
+
+            if (response.data && response.data.length > 0) {
+            const { lat, lon } = response.data[0];
+            return { lat: parseFloat(lat), lon: parseFloat(lon) };
+            } else {
+            throw new Error('Adresse non trouvée.');
+            }
+        } catch (error) {
+            console.error(`[GECODING ERROR] ${error.message}`);
+            throw new Error('Erreur lors de la géolocalisation de l\'adresse.');
+        }
     }
 }
 
