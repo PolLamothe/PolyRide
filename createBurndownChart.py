@@ -4,9 +4,9 @@ from datetime import date, timedelta
 
 # Définition des Sprints selon task.md (avec gestion des chevauchements : jour de fin = deadline)
 sprints = {
-    'Sprint 1': {'start': date(2025, 10, 23), 'end': date(2025, 11, 10), 'points': 31},
-    'Sprint 2': {'start': date(2025, 11, 11), 'end': date(2025, 11, 24), 'points': 72}, # Début le 11 pour éviter chevauchement dans la colonne
-    'Sprint 3': {'start': date(2025, 11, 25), 'end': date(2025, 12, 1), 'points': 49}   # Début le 25
+    'Sprint 1': {'start': date(2025, 10, 23), 'end': date(2025, 11, 10), 'points': 26},
+    'Sprint 2': {'start': date(2025, 11, 11), 'end': date(2025, 11, 24), 'points': 69}, # Début le 11 pour éviter chevauchement dans la colonne
+    'Sprint 3': {'start': date(2025, 11, 25), 'end': date(2025, 12, 1), 'points': 46}   # Début le 25
 }
 
 # Génération de toutes les dates
