@@ -17,6 +17,10 @@ const options = {
       {
         name: 'profile',
         description: 'Profile routes'
+      },
+      {
+        name: 'Trajet',
+        description: 'Trajet related routes'
       }
     ],
     servers: [

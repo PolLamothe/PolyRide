@@ -11,6 +11,10 @@
                 "codePostal": "44000",
                 "ville": "Nantes"
             },
+            "position": {
+                "type": "Point",
+                "coordinates": [ -1.5543, 47.2155 ] 
+            },
             "phoneNumber" : "0607080910"
         },
         {
@@ -24,7 +28,79 @@
                 "codePostal": "44000",
                 "ville": "Nantes"
             },
+            "position": {
+                "type": "Point",
+                "coordinates": [ -1.5457, 47.2185 ]
+            },
             "phoneNumber" : "0607080910"
+        },
+        {
+            "email" : "lea.martin@etu.univ-nantes.fr",
+            "password" : "motDePasse3",
+            "calendarLink":"http://edt-v2.univ-nantes.fr/calendar/ics?timetables[0]=105238",
+            "usage":"Conducteur",
+            "address": {
+                "numero": 15,
+                "rue": "Boulevard des Anglais",
+                "codePostal": "44100",
+                "ville": "Nantes"
+            },
+            "position": {
+                "type": "Point",
+                "coordinates": [ -1.5810, 47.2245 ]
+            },
+            "phoneNumber" : "0612345678"
+        },
+        {
+            "email" : "hugo.bernard@etu.univ-nantes.fr",
+            "password" : "motDePasse4",
+            "calendarLink":"http://edt-v2.univ-nantes.fr/calendar/ics?timetables[0]=105239",
+            "usage":"Passager",
+            "address": {
+                "numero": 50,
+                "rue": "Route de Saint-Joseph",
+                "codePostal": "44300",
+                "ville": "Nantes"
+            },
+            "position": {
+                "type": "Point",
+                "coordinates": [ -1.5350, 47.2410 ]
+            },
+            "phoneNumber" : "0698765432"
+        },
+        {
+            "email" : "chloe.dubois@etu.univ-nantes.fr",
+            "password" : "motDePasse5",
+            "calendarLink":"http://edt-v2.univ-nantes.fr/calendar/ics?timetables[0]=105240",
+            "usage":"Passager",
+            "address": {
+                "numero": 12,
+                "rue": "Boulevard Gustave Roch",
+                "codePostal": "44200",
+                "ville": "Nantes"
+            },
+            "position": {
+                "type": "Point",
+                "coordinates": [ -1.5480, 47.2050 ]
+            },
+            "phoneNumber" : "0611223344"
+        },
+        {
+            "email" : "maxime.leroy@etu.univ-nantes.fr",
+            "password" : "motDePasse6",
+            "calendarLink":"http://edt-v2.univ-nantes.fr/calendar/ics?timetables[0]=105241",
+            "usage":"Conducteur",
+            "address": {
+                "numero": 88,
+                "rue": "Boulevard du Petit Port",
+                "codePostal": "44300",
+                "ville": "Nantes"
+            },
+            "position": {
+                "type": "Point",
+                "coordinates": [ -1.5430, 47.2455 ]
+            },
+            "phoneNumber" : "0655667788"
         }
     ]
 }

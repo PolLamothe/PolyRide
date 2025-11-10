@@ -1,39 +1,51 @@
-const { getDb } = require('../db/index.js');
+const User = require('../db/user.schema.js');
 
 const userDAO = {
 	// Crée un nouvel utilisateur
-	async createUser({ email, passwordHash }) {
-		const db = getDb();
-		const result = await db.collection('users').insertOne({ email, password: passwordHash });
-		const insertedUser = await db.collection('users').findOne({ _id: result.insertedId });
-		return insertedUser;
+	async createUser({ email, passwordHash, firstName, lastName }) {
+		return await User.create({ email, password: passwordHash, firstName, lastName });
 	},
 
 	// Trouve un utilisateur par son email (pour le login)
 	async findUserByEmail(email) {
-		const db = getDb();
-		return await db.collection('users').findOne({ email });
+		return await User.findOne({ email });
 	},
 
 	async findUserByEmailAndPassword(email, password) {
-		const db = getDb();
-		return await db.collection('users').findOne({ email, password });
+		return await User.findOne({ email, password });
 	},
 
 	async updateProfile(email, newUsage, newCalendarLink,adresse,position,phoneNumber){
-		const db = getDb();
-		db.collection("users").updateOne({ email: email }, { $set: { 
+		console.log(position)
+		return await User.updateOne({ email: email }, { $set: { 
 			calendarLink: newCalendarLink,
 			usage : newUsage,
 			adresse : adresse,
-			position : position,
+			position : {
+				type: "Point",
+				coordinates: [+position.lon, +position.lat]
+			},
 			phoneNumber : phoneNumber
-		}})
+		}});
 	},
 
 	async removeAll(){
-		const db = getDb();
-		db.collection("users").deleteMany({})
+		return await User.deleteMany({});
+	},
+
+	async getNearestDriver(user,page = 0,limit = 10){
+		return await User.find({
+			_id : {$ne : user._id},
+			usage : {$in : ["Conducteur","Conducteur et Passager"]},
+			position : {
+				$nearSphere: {
+					$geometry: {
+						type: "Point",
+						coordinates: [user.position.coordinates[0], user.position.coordinates[1]] // Toujours [lon, lat]
+					}
+				}
+			}
+		})
 	}
 };
 

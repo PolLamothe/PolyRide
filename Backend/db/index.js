@@ -1,35 +1,21 @@
-const { MongoClient } = require('mongodb');
+const mongoose = require('mongoose');
 require('dotenv').config();
 
-// Utilise les variables d'environnement (à mettre dans .env)
 const uri = process.env.MONGODB_URI;
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-
-let db;
 
 async function connectToDatabase() {
-  if (db) {
-    return db;
+  if (mongoose.connection.readyState >= 1) {
+    return;
   }
-  await client.connect();
-  db = client.db("PolyRide");
-  console.log("Connected to MongoDB");
-  return db;
-}
-
-function getDb() {
-  if (!db) {
-    throw new Error('You must connect to the database first');
-  }
-  return db;
+  await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+  console.log("Connected to MongoDB using Mongoose");
 }
 
 async function closeDatabaseConnection() {
-  await client.close();
+  await mongoose.connection.close();
 }
 
 module.exports = {
   connectToDatabase,
-  getDb,
   closeDatabaseConnection,
 };

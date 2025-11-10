@@ -1,13 +1,7 @@
-const axios = require('axios');
+const bcrypt = require('bcrypt');
 const seeder = require('./seeder.json');
 const { connectToDatabase, closeDatabaseConnection } = require('../db');
 const userDAO = require('../dao/user.dao');
-
-const BASE_URL = 'http://localhost:3000'; // Assuming the server runs on port 3000
-
-const api = axios.create({
-  baseURL: BASE_URL,
-});
 
 async function seedDatabase() {
   try {
@@ -16,51 +10,36 @@ async function seedDatabase() {
     await userDAO.removeAll();
     console.log('Previous users removed.');
 
-    // 2. Seed users via API
+    // 2. Seed users directly into the database
     for (const userData of seeder.users) {
-      // Register user
-      await api.post('/api/auth/register', {
-        email: userData.email,
-        password: userData.password,
-      });
-      console.log(`User ${userData.email} registered.`);
+      // Hash password
+      const hashedPassword = await bcrypt.hash(userData.password, 10);
 
-      // Login to get token
-      const loginResponse = await api.post('/api/auth/login', {
+      // Create user
+      const newUser = await userDAO.createUser({
         email: userData.email,
-        password: userData.password,
+        passwordHash: hashedPassword,
       });
-      const token = loginResponse.data.token;
-      console.log(`User ${userData.email} logged in.`);
+      console.log(`User ${userData.email} created.`);
 
       // Update profile
-      await api.post(
-        '/api/profile/profile',
-        {
-          usage: userData.usage,
-          calendarLink: userData.calendarLink,
-          address: userData.address,
-          phoneNumber: userData.phoneNumber,
-        },
-        {
-          headers: {
-            Authorization: token,
-          },
-        }
+      await userDAO.updateProfile(
+        newUser.email,
+        userData.usage,
+        userData.calendarLink,
+        userData.address,
+        userData.position,
+        userData.phoneNumber
       );
       console.log(`User ${userData.email} profile updated.`);
     }
 
     console.log('Database seeding complete!');
+  } catch (error) {
+    console.error('Error seeding database:', error.message);
+  } finally {
     await closeDatabaseConnection();
     process.exit(0);
-  } catch (error) {
-    console.error(
-      'Error seeding database:',
-      error.response ? error.response.data : error.message
-    );
-    await closeDatabaseConnection();
-    process.exit(1);
   }
 }
 

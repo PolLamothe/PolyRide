@@ -76,6 +76,38 @@ const utils = {
             console.error(`[GECODING ERROR] ${error.message}`);
             throw new Error('Erreur lors de la géolocalisation de l\'adresse.');
         }
+    },
+    getDistance(lat1, lon1, lat2, lon2) {
+
+    function toRad(deg) {
+        return deg * (Math.PI / 180);
+    }
+
+    // Rayon moyen de la Terre en kilomètres
+    const R = 6371; 
+
+    // Convertir les latitudes et longitudes de degrés en radians
+    const radLat1 = toRad(lat1);
+    const radLon1 = toRad(lon1);
+    const radLat2 = toRad(lat2);
+    const radLon2 = toRad(lon2);
+
+    // Calculer les différences (delta) en radians
+    const dLat = radLat2 - radLat1; // Δφ
+    const dLon = radLon2 - radLon1; // Δλ
+
+    // Appliquer la formule de Haversine
+    const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(radLat1) * Math.cos(radLat2) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+    // Distance finale (d = R * c)
+    const distance = R * c;
+
+    return distance; // Retourne la distance en km
     }
 }
 
