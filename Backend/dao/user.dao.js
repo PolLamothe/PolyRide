@@ -16,14 +16,13 @@ const userDAO = {
 	},
 
 	async updateProfile(email, newUsage, newCalendarLink,adresse,position,phoneNumber){
-		console.log(position)
 		return await User.updateOne({ email: email }, { $set: { 
 			calendarLink: newCalendarLink,
 			usage : newUsage,
 			adresse : adresse,
 			position : {
 				type: "Point",
-				coordinates: [+position.lon, +position.lat]
+				coordinates: [position["lon"], position["lat"]]
 			},
 			phoneNumber : phoneNumber
 		}});

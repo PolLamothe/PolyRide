@@ -51,6 +51,7 @@ const profileController = {
             }
             
             const position = await utils.geocodeAddress(req.body.address);
+            console.log(position)
 
             userDAO.updateProfile(user.email, req.body.usage, req.body.calendarLink,req.body.address,position,req.body.phoneNumber);
             return res.status(200).json({ message: "Profil mis à jour avec succès." });

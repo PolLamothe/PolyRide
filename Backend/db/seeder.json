@@ -11,10 +11,6 @@
                 "codePostal": "44000",
                 "ville": "Nantes"
             },
-            "position": {
-                "type": "Point",
-                "coordinates": [ -1.5543, 47.2155 ] 
-            },
             "phoneNumber" : "0607080910"
         },
         {
@@ -27,10 +23,6 @@
                 "rue": "Rue Pitre Chevalier",
                 "codePostal": "44000",
                 "ville": "Nantes"
-            },
-            "position": {
-                "type": "Point",
-                "coordinates": [ -1.5457, 47.2185 ]
             },
             "phoneNumber" : "0607080910"
         },
@@ -45,10 +37,6 @@
                 "codePostal": "44100",
                 "ville": "Nantes"
             },
-            "position": {
-                "type": "Point",
-                "coordinates": [ -1.5810, 47.2245 ]
-            },
             "phoneNumber" : "0612345678"
         },
         {
@@ -61,10 +49,6 @@
                 "rue": "Route de Saint-Joseph",
                 "codePostal": "44300",
                 "ville": "Nantes"
-            },
-            "position": {
-                "type": "Point",
-                "coordinates": [ -1.5350, 47.2410 ]
             },
             "phoneNumber" : "0698765432"
         },
@@ -79,10 +63,6 @@
                 "codePostal": "44200",
                 "ville": "Nantes"
             },
-            "position": {
-                "type": "Point",
-                "coordinates": [ -1.5480, 47.2050 ]
-            },
             "phoneNumber" : "0611223344"
         },
         {
@@ -95,10 +75,6 @@
                 "rue": "Boulevard du Petit Port",
                 "codePostal": "44300",
                 "ville": "Nantes"
-            },
-            "position": {
-                "type": "Point",
-                "coordinates": [ -1.5430, 47.2455 ]
             },
             "phoneNumber" : "0655667788"
         }

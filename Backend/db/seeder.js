@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const seeder = require('./seeder.json');
 const { connectToDatabase, closeDatabaseConnection } = require('../db');
 const userDAO = require('../dao/user.dao');
+const utils = require("../utils/utils")
 
 async function seedDatabase() {
   try {
@@ -22,13 +23,15 @@ async function seedDatabase() {
       });
       console.log(`User ${userData.email} created.`);
 
+      const position = await utils.geocodeAddress(userData.address);
+
       // Update profile
       await userDAO.updateProfile(
         newUser.email,
         userData.usage,
         userData.calendarLink,
         userData.address,
-        userData.position,
+        position,
         userData.phoneNumber
       );
       console.log(`User ${userData.email} profile updated.`);

@@ -9,7 +9,20 @@ const trajetController = {
                 return res.status(400).json({message : user.message})
             }
             user = user.user
-            res.send(await userDAO.getNearestDriver(user))
+            let nearestUsers = await userDAO.getNearestDriver(user)
+            let result = []
+            nearestUsers.forEach(thisUser => {
+                result.push({
+                    email : thisUser.email,
+                    position : {
+                        lat : thisUser.position.coordinates[0],
+                        lon : thisUser.position.coordinates[1]
+                    },
+                    distance : utils.getDistance(thisUser.position.coordinates[0],thisUser.position.coordinates[1],user.position.coordinates[0],user.position.coordinates[1]),
+                    usage : thisUser.usage
+                })
+            })
+            res.send(result)
         }catch(e){
             console.log("[TRAJET ERROR] : ",e)
             return res.status(500).json({message: "Erreur serveur lors de la récupération des trajets." })

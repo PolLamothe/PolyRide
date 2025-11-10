@@ -4,39 +4,25 @@ const trajetController = require("../controllers/trajet.controller")
 const router = Router();
 
 
+
 /**
  * @swagger
  * /api/trajet/proposal:
  *   get:
- *     summary: Get nearest people for trajet proposal
+ *     summary: Récupère les propositions de trajet
+ *     description: Retourne une liste de propositions de trajets pour l'utilisateur authentifié
  *     tags: [Trajet]
  *     security:
  *       - tokenAuth: []
  *     responses:
  *       200:
- *         description: Successful response with nearest people data.
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 type: object
- *                 properties:
- *                   // TODO: Define properties of the user/person object
- *                   _id:
- *                     type: string
- *                     example: "654321098765432109876543"
- *                   name:
- *                     type: string
- *                     example: "John Doe"
- *                   email:
- *                     type: string
- *                     example: "john.doe@example.com"
+ *         description: Une liste de propositions de trajet
  *       400:
- *         description: Bad request, e.g., invalid token.
+ *         description: Requête invalide
  *       500:
- *         description: Server error.
+ *         description: Erreur serveur
  */
 router.get("/proposal",trajetController.getTrajetProposal)
+
 
 module.exports = router
