@@ -55,16 +55,15 @@
     * Présentation du planning des Sprints 2 et 3. (Tâche admin/mgmt - 0 pts dev)
 
 ---
+### Sprint 2 : "Noyau Fonctionnel - Profil" (10 Novembre - 17 Novembre)
 
-### Sprint 2 : "Noyau Fonctionnel & Matching" (10 Novembre - 24 Novembre)
-
-**Objectif Sprint :** Livrer la fonctionnalité centrale : un utilisateur authentifié importe son EDT, renseigne son adresse, et peut voir des "matches" de covoiturage. (Prêt pour la démo TD2).
+**Objectif Sprint :** Permettre à un utilisateur authentifié d'importer son emploi du temps (`.ics`) et de renseigner son adresse. Mettre en place la charte graphique.
 
 #### User Story US02 : Profil & Import EDT (19 points)
 1.  Tâche : (API & Logique) Développer l'endpoint et le *parser* (`node-ical`) pour l'import du lien `.ics`.
     * **Estimation (pts) : 8**
     * **Responsable(s) :** Pol
-    * [x] **État :** À faire
+    * [x] **État :** Fait
     * **Réalisé par : Pol**
     * **Terminé le : 9/11**
     * **Commentaire :**
@@ -82,6 +81,28 @@
     * **Réalisé par :**
     * **Terminé le :**
     * **Commentaire :**
+
+#### Overhead Technique (8 points)
+1.  Tâche : Mettre en place la **charte graphique** (CSS global, variables).
+    * **Estimation (pts) : 3**
+    * **Responsable(s) :** Anouar
+    * [ ] **État :** À faire
+    * **Réalisé par :**
+    * **Terminé le :**
+    * **Commentaire :**
+1.  Tâche : Appliquer le style (CSS) aux pages existantes (Login, Profil, etc.).
+    * **Estimation (pts) : 5**
+    * **Responsable(s) :** Anouar
+    * [ ] **État :** À faire
+    * **Réalisé par :**
+    * **Terminé le :**
+    * **Commentaire :**
+
+---
+
+### Sprint 3 : "Noyau Fonctionnel - Matching & Carte" (17 Novembre - 24 Novembre)
+
+**Objectif Sprint :** Livrer la fonctionnalité centrale de "matching". Un utilisateur peut voir des "matches" de covoiturage compatibles et les visualiser sur une carte. (Prêt pour la démo TD2).
 
 #### User Story US03 : Recherche de Covoiturage (18 points)
 1.  Tâche : (Logique) Développer l'algorithme de **matching** (horaires + géo).
@@ -108,21 +129,7 @@
     * **Terminé le :**
     * **Commentaire :**
 
-#### Overhead Technique & Admin (12 points)
-1.  Tâche : Mettre en place la **charte graphique** (CSS global, variables).
-    * **Estimation (pts) : 3**
-    * **Responsable(s) :** Anouar
-    * [ ] **État :** À faire
-    * **Réalisé par :**
-    * **Terminé le :**
-    * **Commentaire :**
-1.  Tâche : Appliquer le style (CSS) aux pages existantes (Login, Profil, etc.).
-    * **Estimation (pts) : 5**
-    * **Responsable(s) :** Anouar
-    * [ ] **État :** À faire
-    * **Réalisé par :**
-    * **Terminé le :**
-    * **Commentaire :**
+#### Overhead Admin (4 points)
 1.  Tâche : Recruter des utilisateurs pour les tests.
     * **Estimation (pts) : 2**
     * **Responsable(s) :** Anouar
@@ -130,7 +137,7 @@
     * **Réalisé par :**
     * **Terminé le :**
     * **Commentaire :**
-1.  Tâche : Préparer la démo de Sprint Review.
+1.  Tâche : Préparer la démo de Sprint Review (TD2).
     * **Estimation (pts) : 2**
     * **Responsable(s) :** Anouar (Présentation), Julien (SM)
     * [ ] **État :** À faire
@@ -140,9 +147,9 @@
 
 ---
 
-### Sprint 3 : "Interaction & Finition" (24 Novembre - 1er Décembre)
+### Sprint 4 : "Interaction & Finition" (24 Novembre - 1er Décembre)
 
-**Objectif Sprint :** Finaliser le produit avec le chat, la PWA, et préparer la livraison finale.
+**Objectif Sprint :** Ajouter les fonctionnalités de confort (Chat, PWA) et préparer la livraison finale.
 
 #### User Story US05 : Messagerie Instantanée (24 points)
 1.  Tâche : Implémenter le serveur **Socket.io** (Chat) + API de persistance des messages.
@@ -186,4 +193,4 @@
     * **Commentaire :**
 
 * **LIVRABLE (TD3 - 1er Décembre) :**
-    * Présentation finale (7 min) et démo du produit.
+    * Présentation finale (7 min) et démo du produit complet.
