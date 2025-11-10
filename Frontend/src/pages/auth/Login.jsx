@@ -18,7 +18,7 @@ export default function Login() {
         setLoading(true);
 
         try {
-            // 👉 Connexion avec l'email et le mot de passe
+            // Connexion avec l'email et le mot de passe
             const result = await polyrideDAO.fetchLogin(email, password);
             console.log(result);
             setLoading(false);
