@@ -115,9 +115,9 @@
 1.  Tâche : (Logique) Développer l'algorithme de **matching** (horaires + géo).
     * **Estimation (pts) : 13**
     * **Responsable(s) :** Pol
-    * [ ] **État :** À faire
-    * **Réalisé par :**
-    * **Terminé le :**
+    * [x] **État :** Fait
+    * **Réalisé par : Pol**
+    * **Terminé le : 12/11**
     * **Commentaire :**
 1.  Tâche : Créer la page "Rechercher un trajet" (logique des filtres, affichage des "matches").
     * **Estimation (pts) : 5**
