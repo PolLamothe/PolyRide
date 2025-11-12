@@ -48,3 +48,14 @@ MONGODB_URI=mongodb://localhost:27017/polyride
 ```
 
 Vous êtes maintenant prêt à lancer le backend !
+
+## Utilisation du seeder
+
+Un seeder est disponible pour peupler la base de données avec des données de test. Le seeder utilise le fichier `seeder.json` pour créer des utilisateurs.
+
+Pour lancer le seeder, exécutez la commande suivante à la racine du projet :
+
+```bash
+node Backend/db/seeder.js
+```
+
