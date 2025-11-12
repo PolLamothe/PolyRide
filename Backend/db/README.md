@@ -53,9 +53,9 @@ Vous êtes maintenant prêt à lancer le backend !
 
 Un seeder est disponible pour peupler la base de données avec des données de test. Le seeder utilise le fichier `seeder.json` pour créer des utilisateurs.
 
-Pour lancer le seeder, exécutez la commande suivante à la racine du projet :
+Pour lancer le seeder, exécutez la commande suivante à la racine du dossier Backend:
 
 ```bash
-node Backend/db/seeder.js
+node ./db/seeder.js
 ```
 
