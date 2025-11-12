@@ -32,7 +32,9 @@ const userDAO = {
 		return await User.deleteMany({});
 	},
 
-	async getNearestDriver(user,page = 0,limit = 10){
+	async getNearestDriver(user,page = 0){
+		const limit = 10;
+		const skip = page * limit;
 		return await User.find({
 			_id : {$ne : user._id},
 			usage : {$in : ["Conducteur","Conducteur et Passager"]},
@@ -44,7 +46,7 @@ const userDAO = {
 					}
 				}
 			}
-		})
+		}).skip(skip).limit(limit);
 	}
 };
 

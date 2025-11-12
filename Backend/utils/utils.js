@@ -38,7 +38,7 @@ const utils = {
         }
     },
     isCalendarLinkValid(link){
-        return link.startWith("http://edt-v2.univ-nantes.fr/calendar/ics?")
+        return link.startsWith("http://edt-v2.univ-nantes.fr/calendar/ics?")
     },
     validateCalendar : async (url) => {
         try {
@@ -108,6 +108,74 @@ const utils = {
         const distance = R * c;
 
         return distance;
+    },
+    async getEventsForDate(calendarUrl, date) {
+        if (!(date instanceof Date && !isNaN(date))) {
+            console.error("Invalid date provided to getEventsForDate");
+            return [];
+        }
+        try {
+            const response = await axios.get(calendarUrl);
+            const data = ical.parseICS(response.data);
+            const events = [];
+            for (const k in data) {
+                if (data.hasOwnProperty(k)) {
+                    const ev = data[k];
+                    if (ev.type === 'VEVENT') {
+                        const eventDate = new Date(ev.start);
+                        if (eventDate.toDateString() === date.toDateString()) {
+                            events.push(ev);
+                        }
+                    }
+                }
+            }
+            return events.sort((a, b) => new Date(a.start) - new Date(b.start));
+        } catch (error) {
+            console.error("Error fetching or parsing calendar: ", error);
+            return [];
+        }
+    },
+
+    async startTimeDifference(user1, user2, date) {
+        if (!user1.calendarLink) {
+            throw Error(user1," Calander undefined")
+        }
+        if (!user2.calendarLink) {
+            throw Error(user2," Calander undefined")
+        }
+
+        const events1 = await this.getEventsForDate(user1.calendarLink, date);
+        const events2 = await this.getEventsForDate(user2.calendarLink, date);
+
+        if (events1.length === 0 || events2.length === 0) {
+            return false;
+        }
+
+        const firstEvent1 = events1[0];
+        const firstEvent2 = events2[0];
+
+        const diff = Math.abs(new Date(firstEvent1.start) - new Date(firstEvent2.start));
+
+        return diff;
+    },
+
+    async endTimeDifference(user1, user2, date) {
+        if (!user1.calendarLink || !user2.calendarLink) {
+            return false;
+        }
+
+        const events1 = await this.getEventsForDate(user1.calendarLink, date);
+        const events2 = await this.getEventsForDate(user2.calendarLink, date);
+
+        if (events1.length === 0 || events2.length === 0) {
+            return false;
+        }
+
+        const lastEvent1 = events1[events1.length - 1];
+        const lastEvent2 = events2[events2.length - 1];
+
+        const diff = Math.abs(new Date(lastEvent1.end) - new Date(lastEvent2.end));
+        return diff;
     }
 }
 

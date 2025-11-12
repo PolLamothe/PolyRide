@@ -29,7 +29,7 @@
         {
             "email" : "lea.martin@etu.univ-nantes.fr",
             "password" : "motDePasse3",
-            "calendarLink":"http://edt-v2.univ-nantes.fr/calendar/ics?timetables[0]=105238",
+            "calendarLink":"http://edt-v2.univ-nantes.fr/calendar/ics?timetables[0]=105236",
             "usage":"Conducteur",
             "address": {
                 "numero": 15,
@@ -42,7 +42,7 @@
         {
             "email" : "hugo.bernard@etu.univ-nantes.fr",
             "password" : "motDePasse4",
-            "calendarLink":"http://edt-v2.univ-nantes.fr/calendar/ics?timetables[0]=105239",
+            "calendarLink":"http://edt-v2.univ-nantes.fr/calendar/ics?timetables[0]=105381",
             "usage":"Passager",
             "address": {
                 "numero": 50,
@@ -68,7 +68,7 @@
         {
             "email" : "maxime.leroy@etu.univ-nantes.fr",
             "password" : "motDePasse6",
-            "calendarLink":"http://edt-v2.univ-nantes.fr/calendar/ics?timetables[0]=105241",
+            "calendarLink":"http://edt-v2.univ-nantes.fr/calendar/ics?timetables[0]=105443",
             "usage":"Conducteur",
             "address": {
                 "numero": 88,
