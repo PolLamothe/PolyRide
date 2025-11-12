@@ -57,7 +57,7 @@
 ---
 ### Sprint 2 : "Noyau Fonctionnel - Profil" (10 Novembre - 17 Novembre)
 
-**Objectif Sprint :** Permettre à un utilisateur authentifié d'importer son emploi du temps (`.ics`) et de renseigner son adresse. Mettre en place la charte graphique.
+**Objectif Sprint :** Permettre à un utilisateur authentifié d'importer son emploi du temps (`.ics`) et de renseigner son adresse. Créer une page d'accueil. Créer une page Instagramm.
 
 #### User Story US02 : Profil & Import EDT (19 points)
 1.  Tâche : (API & Logique) Développer l'endpoint et le *parser* (`node-ical`) pour l'import du lien `.ics`.
@@ -74,8 +74,15 @@
     * **Réalisé par : Pol**
     * **Terminé le : 9/11**
     * **Commentaire :**
-1.  Tâche : Créer la page "Mon Profil" (Formulaire `.ics` + Adresse) et la connecter à l'API.
-    * **Estimation (pts) : 8**
+1.  Tâche : Créer la page "Mon Profil" (Formulaire `.ics` + Adresse).
+    * **Estimation (pts) : 4**
+    * **Responsable(s) :** Julien (Lead)
+    * [ ] **État :** À faire
+    * **Réalisé par :**
+    * **Terminé le :**
+    * **Commentaire :**
+1. Tâche : Connecter la page "Mon Profil" à l'API.
+    * **Estimation (pts) : 4**
     * **Responsable(s) :** Kyllian
     * [ ] **État :** À faire
     * **Réalisé par :**
@@ -83,16 +90,16 @@
     * **Commentaire :**
 
 #### Overhead Technique (8 points)
-1.  Tâche : Mettre en place la **charte graphique** (CSS global, variables).
+1.  Tâche : Créer la page Instagramm
     * **Estimation (pts) : 3**
     * **Responsable(s) :** Anouar
     * [ ] **État :** À faire
     * **Réalisé par :**
     * **Terminé le :**
     * **Commentaire :**
-1.  Tâche : Appliquer le style (CSS) aux pages existantes (Login, Profil, etc.).
+1.  Tâche : Créer la page d'accueil.
     * **Estimation (pts) : 5**
-    * **Responsable(s) :** Anouar
+    * **Responsable(s) :** Anouar, Kyllian, Julien
     * [ ] **État :** À faire
     * **Réalisé par :**
     * **Terminé le :**
@@ -186,7 +193,7 @@
 #### Overhead Technique & Admin (2 points)
 1.  Tâche : Préparer la **présentation finale** (diapositives, rétrospective).
     * **Estimation (pts) : 2**
-    * **Responsable(s) :** Anouar
+    * **Responsable(s) :** Pol
     * [ ] **État :** À faire
     * **Réalisé par :**
     * **Terminé le :**
