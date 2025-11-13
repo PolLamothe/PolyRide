@@ -91,3 +91,19 @@ L'équipe dévant réaliser ce projet est consitué de 4 membres :
 | **Planning (Sprints)** | - **Sprint 1 (23/10 - 10/11) :** Cadrage & Socle Technique (Authentification).<br>- **Sprint 2 (10/11 - 17/11) :** Noyau Fonctionnel - Profil (Import EDT, Adresse).<br>- **Sprint 3 (17/11 - 24/11) :** Noyau Fonctionnel - Matching & Carte.<br>- **Sprint 4 (24/11 - 01/12) :** Interaction & Finition (Chat, PWA). |
 | **Livrables** | - **TD1 (10 Nov.) :** Mini dossier projet (note de cadrage), Sprint planning.<br>- **TD2 :** Sprint Review (démonstration matching).<br>- **TD3 (01 Déc.) :** Produit fonctionnel final, présentation finale (7 min), rétrospective, Product Backlog, Burndown Chart. |
 | **Ressources utilisées** | - **Technologies :** React, Node.js, MongoDB, Express, Socket.io, Leaflet, Nominatim.<br>- **Gestion :** Outil de gestion de projet (JIRA ou similaire).<br>- **Infrastructure :** Serveur personnel (Raspberry Pi ou VPS) pour l'hébergement. |
+
+# Matrice de criticité :
+
+**Échelle de notation :**
+* **Probabilité (P) :** Faible (1), Moyenne (2), Élevée (3)
+* **Impact (I) :** Faible (1), Moyen (2), Élevé (3), Critique (4)
+* **Criticité :** Probabilité × Impact (Faible: 1-2, Moyenne: 3-4, Élevée: 6, Critique: 8-12)
+
+| ID | Description du Risque | Probabilité (P) | Impact (I) | Criticité (P×I) | Niveau de Criticité | Actions d'atténuation |
+|:---|:---|:---:|:---:|:---:|:---|:---|
+| **R1** | **[Technique]** Défaillance de l'infrastructure d'hébergement personnelle (Raspberry Pi / VPS). | 2 (Moyenne) | 3 (Élevé) | 6 | **Élevée** | Préparer un plan de déploiement alternatif sur un service gratuit (ex: Vercel/Render) en cas d'échec du matériel personnel. |
+| **R2** | **[Humain]** Manque d'expérience en développement Web de certains membres, entraînant des retards ou une qualité réduite. | 3 (Élevée) | 3 (Élevé) | 9 | **Critique** | Pair programming, revues de code systématiques par les membres seniors (Pol, Kyllian), priorisation stricte du MVP (P1, P2). |
+| **R3** | **[Planning]** Non-respect de la deadline finale du 01/12/2025 pour la livraison du TD3. | 2 (Moyenne) | 4 (Critique) | 8 | **Critique** | Suivi rigoureux du Burndown Chart. Adaptation du périmètre (dé-prioriser P3) si la vélocité est insuffisante. |
+| **R4** | **[Dépendances]** Retard sur une tâche backend bloquante (ex: API Matching S2-BE-3) qui bloque l'équipe Frontend (ex: S2-FE-2). | 2 (Moyenne) | 3 (Élevé) | 6 | **Élevée** | Prioriser le développement des tâches backend bloquantes en début de sprint. Le Frontend travaille avec des données "mock" (fictives) en attendant l'API. |
+| **R5** | **[Coût]** Dépassement de la contrainte "coût 0" (ex: besoin d'un service payant). | 1 (Faible) | 1 (Faible) | 1 | **Faible** | Utilisation exclusive de technologies et services open-source et gratuits (React, Node, MongoDB, Nominatim, Leaflet). |
+| **R6** | **[Périmètre]** L'équipe ne parvient pas à terminer les fonctionnalités P3 (Chat, PWA), prévues dans le dernier sprint. | 2 (Moyenne) | 2 (Moyen) | 4 | **Moyenne** | Le Scrum Master (Julien) protège l'équipe du "scope creep". Le PO (Pol) doit être prêt à sacrifier ces US P3 si le MVP est en retard. |
