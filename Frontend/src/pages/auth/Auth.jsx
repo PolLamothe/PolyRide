@@ -1,5 +1,5 @@
 import {Outlet, useNavigate} from "react-router-dom";
-import polyrideLogo from "../../assets/Polyride_logo.png";
+import polyrideLogo from "../../assets/PolyRide_LOGO-removebg-preview.png";
 import {useEffect} from "react";
 import polyrideDAO from "../../dao/PolyrideDAO.js";
 

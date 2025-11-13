@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import polyrideDAO from "../../dao/PolyrideDAO.js";
+import logo from "../../assets/PolyRide_LOGO-removebg-preview.png"
 import "./Auth.css";
 
 export default function Login() {
@@ -36,7 +37,8 @@ export default function Login() {
     return (
         <div className="page-container">
             <div className="login-card">
-                <h1 className="brand">PolyRide</h1>
+                <img src={logo} className="logo-login" alt="Polyride logo" />
+                <h1 className="brand">POLYRIDE</h1>
 
                 {error && <div className="error-message">{error}</div>}
 

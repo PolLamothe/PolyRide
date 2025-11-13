@@ -30,6 +30,7 @@
 
 .calendar {
     min-width: 80vw;
+    justify-content: center;
 }
 
 .about {
@@ -39,16 +40,16 @@
 
 
 .logo {
-  height: 6em;
-  padding: 1.5em;
+  height: 8rem;
+  padding: 0 0 0 1.5em;
   will-change: filter;
   transition: filter 300ms;
 }
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 1em #646cffaa);
 }
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+  filter: drop-shadow(0 0 1em #61dafbaa);
 }
 
 @keyframes logo-spin {
@@ -84,7 +85,7 @@
 
 .nav-bar {
     background-color: lightblue;
-    border-radius: 9999px; /* effet arrondi type pill */
+    border-radius: 9999px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     padding: 0.6rem 1.5rem;
     display: flex;
@@ -122,13 +123,20 @@
     gap: 0.5rem;
 }
 
-.logo-header {
-    height: 100px; /* ajuste selon ton logo */
-    width: auto;
+
+.logo-login {
+    display: block;
+    margin: 0 auto 20px auto;
+    width: 120px;
+    height: auto;
 }
 
-.logo-title {
-    font-weight: 700;
-    font-size: 1.2rem;
+.lien_ICS {
+    width: 30vw;
+    height: 4vh;
+    background-color: white;
+    border: 0.11rem solid black;
+    padding: 0 0 0 1.5em;
+    border-radius: 2rem;
+    font-size: large;
 }
-

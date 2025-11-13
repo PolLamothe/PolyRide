@@ -28,6 +28,7 @@ function Account() {
                         <p><strong>Nom d'utilisateur:</strong> {user.userName}</p>
                         <p><strong>Email:</strong> {user.email}</p>
                         <p><strong>Usage:</strong> {user.usage}</p>
+                        <button onClick={() => navigate("/auth/login")}>Déconnexion</button>
                     </div>
                 ) : (
                     <p>Loading...</p>

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import polyrideDAO from "../../dao/PolyrideDAO.js";
 import "./Auth.css";
+import logo from "../../assets/PolyRide_LOGO-removebg-preview.png";
 
 export default function Register() {
     const navigate = useNavigate();
@@ -45,7 +46,8 @@ export default function Register() {
 
     return (
         <div className="page-container">
-            <div className="login-card">
+            <div className="register-card">
+                <img src={logo} className="logo-login" alt="Polyride logo" />
                 <h1 className="brand">Créer un compte</h1>
 
                 {error && <div className="error-message">{error}</div>}

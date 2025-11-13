@@ -114,6 +114,24 @@ const polyrideDAO = {
         }
     },
 
+    getAgenda: async (week) => {
+        const response = await fetch(config.url + "/agenda", {
+            method: "POST",
+            headers: {
+                ...baseHeaders,
+                ...athenticationHeader(),
+            },
+            body: JSON.stringify({
+                week : week
+            })
+        });
+        if (response.status === 200) {
+            return await response.json();
+        } else {
+            throw new Error(`${response.status} : ${response.statusText}`);
+        }
+    }
+
 }
 
 export default polyrideDAO;

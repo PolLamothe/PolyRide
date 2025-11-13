@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../App.css";
-import logo from "../assets/Polyride_logo.png";
+import logo from "../assets/PolyRide_LOGO-removebg-preview.png";
 import {useNavigate} from "react-router-dom";
 
 const Header = () => {
@@ -53,7 +53,7 @@ const Header = () => {
                 <img
                     src={logo}
                     alt="Polyride logo"
-                    className="logo-header"
+                    className="logo"
                 />
             </div>
 
