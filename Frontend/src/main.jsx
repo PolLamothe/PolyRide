@@ -7,10 +7,18 @@ import Register from "./pages/auth/Register.jsx";
 import Account from "./pages/Account.jsx";
 import ProtectedRoute from "./pages/auth/ProtectedRoute.jsx";
 import Auth from "./pages/auth/Auth.jsx";
+import Home from "./pages/Home.jsx";
+import Search from "./pages/Search.jsx";
+import About from "./pages/About.jsx";
+import Schedule from "./pages/Schedule.jsx";
 
 createRoot(document.getElementById('root')).render(
     <BrowserRouter>
         <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/schedule" element={<Schedule />} />
             <Route element={<ProtectedRoute />} >
                 <Route path="/account" element={<Account />} />
             </Route>

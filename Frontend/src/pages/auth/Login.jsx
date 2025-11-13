@@ -20,11 +20,9 @@ export default function Login() {
         try {
             // Connexion avec l'email et le mot de passe
             const result = await polyrideDAO.fetchLogin(email, password);
-            console.log(result);
             setLoading(false);
 
             if (result) {
-                console.log("✅ Connexion réussie, redirection vers /account");
                 navigate("/account");
             } else {
                 setError("Adresse e-mail ou mot de passe incorrect.");

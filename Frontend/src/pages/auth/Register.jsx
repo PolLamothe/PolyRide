@@ -17,12 +17,10 @@ export default function Register() {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        console.log("ici");
         setError(null);
         setLoading(true);
 
         try {
-            // 💡 On utilise l'email comme login, et "Prénom Nom" comme pseudo
             const result = await polyrideDAO.fetchRegister(
                 nom,
                 prenom,
@@ -30,8 +28,7 @@ export default function Register() {
                 email,
                 password
             );
-            console.log("la");
-            console.log("📦 Résultat register :", result);
+
 
             setLoading(false);
 

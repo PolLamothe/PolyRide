@@ -1,9 +1,42 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+    width: 100%;
+    min-height: 100vh;
+    background-color: white;
+    color: #1a1a1a;
 }
+
+.home {
+    max-width: 1280px;
+    margin: 10rem auto;
+}
+
+.account {
+    max-width: 1280px;
+    margin: 10rem auto;
+    text-align: center;
+}
+
+.search {
+    max-width: 1280px;
+    margin: 10rem auto;
+}
+
+.schedule {
+    display: flex;
+    padding: 10rem 0 0 0;
+    align-items: center;
+    justify-content: center;
+}
+
+.calendar {
+    min-width: 80vw;
+}
+
+.about {
+    max-width: 1280px;
+    margin: 10rem auto;
+}
+
 
 .logo {
   height: 6em;
@@ -40,3 +73,62 @@
 .read-the-docs {
   color: #888;
 }
+
+.header {
+    position: fixed;
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 50;
+}
+
+.nav-bar {
+    background-color: lightblue;
+    border-radius: 9999px; /* effet arrondi type pill */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 0.6rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+}
+
+.nav-link {
+    border: none;
+    background: transparent;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #333;
+    cursor: pointer;
+    padding: 0.5rem 1.2rem;
+    border-radius: 9999px;
+    transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+    color: black;
+}
+
+.nav-link.active {
+    background-color: white;
+    color: black;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+
+.logo-container {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo-header {
+    height: 100px; /* ajuste selon ton logo */
+    width: auto;
+}
+
+.logo-title {
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
