@@ -1,24 +1,24 @@
-import React, { useState } from "react";
-import "../App.css";
+import React, { useState, useEffect } from "react";
 import logo from "../assets/PolyRide_LOGO-removebg-preview.png";
-import {useNavigate} from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import "./Header.css";
 
 const Header = () => {
-    let init_Page = ""
-    if (location.pathname === "/") {
-        init_Page = "Accueil"
-    } else if (location.pathname === "/about") {
-        init_Page = "À propos"
-    } else if (location.pathname === "/schedule") {
-        init_Page = "Emploi du Temps"
-    } else if (location.pathname === "/account") {
-        init_Page = "Compte"
-    } else if (location.pathname === "/search") {
-        init_Page = "Recherche"
-    }
-
-    const [active, setActive] = useState(init_Page);
+    const location = useLocation();
+    const [active, setActive] = useState("");
+    const [menuOpen, setMenuOpen] = useState(false);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const pathToLink = {
+            "/": "Accueil",
+            "/about": "À propos",
+            "/schedule": "Emploi du Temps",
+            "/account": "Compte",
+            "/search": "Recherche",
+        };
+        setActive(pathToLink[location.pathname] || "");
+    }, [location.pathname]);
 
     const links = [
         "Accueil",
@@ -29,27 +29,20 @@ const Header = () => {
     ];
 
     const handleClick = (link) => {
-        setActive(link);
-        if (link === "Accueil") {
-            navigate("/");
-        }
-        if (link === "Recherche") {
-            navigate("/search");
-        }
-        if (link === "Emploi du Temps") {
-            navigate("/schedule");
-        }
-        if (link === "Compte") {
-            navigate("/account");
-        }
-        if (link === "À propos") {
-            navigate("/about");
-        }
-    }
+        const linkToPath = {
+            "Accueil": "/",
+            "Recherche": "/search",
+            "Emploi du Temps": "/schedule",
+            "Compte": "/account",
+            "À propos": "/about",
+        };
+        navigate(linkToPath[link]);
+        setMenuOpen(false);
+    };
 
     return (
-        <>
-            <div className="logo-container">
+        <div className="header-container">
+            <div className="logoContainer">
                 <img
                     src={logo}
                     alt="Polyride logo"
@@ -57,22 +50,28 @@ const Header = () => {
                 />
             </div>
 
-            <header className="header">
-                <nav className="nav-bar">
-                    {links.map((link) => (
-                        <button
-                            key={link}
-                            onClick={() => handleClick(link)}
-                            className={`nav-link ${active === link ? "active" : ""}`}
-                        >
-                            {link}
-                        </button>
-                    ))}
+            <header className="nav-container">
+                <nav className="navBar">
+                    <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </button>
+                    <div className={`navLinks ${menuOpen ? "open" : ""}`}>
+                        {links.map((link) => (
+                            <button
+                                key={link}
+                                onClick={() => handleClick(link)}
+                                className={`navLink ${active === link ? "active" : ""}`}
+                            >
+                                {link}
+                            </button>
+                        ))}
+                    </div>
                 </nav>
             </header>
-
-        </>
-
+            <div className="spacer"></div>
+        </div>
     );
 };
 

@@ -1,0 +1,140 @@
+.header-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 0 1rem;
+    z-index: 100;
+    background-color: white; /* Or your desired background */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.nav-container {
+    grid-column: 2;
+    justify-self: center;
+}
+
+.logoContainer {
+    grid-column: 1;
+    justify-self: start;
+}
+
+.spacer {
+    grid-column: 3;
+}
+
+.navBar {
+    background-color: lightblue;
+    border-radius: 9999px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 0.6rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+}
+
+.navLink {
+    border: none;
+    background: transparent;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #333;
+    cursor: pointer;
+    padding: 0.5rem 1.2rem;
+    border-radius: 9999px;
+    transition: all 0.2s ease;
+}
+
+.navLink:hover {
+    color: black;
+}
+
+.navLink.active {
+    background-color: white;
+    color: black;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.logo {
+  height: 4rem; /* Adjusted size for a top bar */
+  padding: 0.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 1em #646cffaa);
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    padding: 0.5rem;
+}
+
+.hamburger div {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    margin: 4px 0;
+    transition: 0.4s;
+}
+
+.navLinks {
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+}
+
+@media (max-width: 860px) {
+    .header-container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .nav-container {
+        flex-grow: 1;
+    }
+
+    .logoContainer {
+        /* Flex item */
+    }
+
+    .spacer {
+        display: none; /* No need for a spacer on mobile */
+    }
+
+    .navLinks {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: lightblue;
+        padding: 1rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        width: 200px;
+    }
+
+    .navLinks.open {
+        display: flex;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .navBar {
+        justify-content: flex-end;
+        width: fit-content;
+        float: right;
+    }
+}

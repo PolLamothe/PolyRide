@@ -4,6 +4,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import {useEffect, useState} from "react";
 import polyrideDAO from "../dao/PolyrideDAO.js";
 import {useNavigate} from "react-router-dom";
+import "./Schedule.css";
 
 
 
@@ -11,6 +12,24 @@ function Schedule() {
     const [user, setUser] = useState(null);
     const [schedule, setSchedule] = useState(null);
     const navigate = useNavigate();
+    const [view, setView] = useState(window.innerWidth < 768 ? 'timeGridDay' : 'timeGridWeek');
+
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth < 768) {
+                setView('timeGridDay');
+            } else {
+                setView('timeGridWeek');
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
 
     useEffect(() => {
         polyrideDAO.getProfile()
@@ -21,15 +40,26 @@ function Schedule() {
                 navigate("/auth/login");
             });
 
-        const today = new Date().toISOString().split('T')[0];
+        const cachedSchedule = localStorage.getItem('schedule');
+        const cachedTimestamp = localStorage.getItem('scheduleTimestamp');
+        const now = new Date().getTime();
+        const oneDay = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
 
-        polyrideDAO.getAgenda(today)
-            .then(data => {
-                setSchedule(data);
-            })
-            .catch(err => {
-                console.log(err);
-            })
+        if (cachedSchedule && cachedTimestamp && (now - cachedTimestamp < oneDay)) {
+            setSchedule(JSON.parse(cachedSchedule));
+        } else {
+            const today = new Date().toISOString().split('T')[0];
+
+            polyrideDAO.getAgenda(today)
+                .then(data => {
+                    setSchedule(data);
+                    localStorage.setItem('schedule', JSON.stringify(data));
+                    localStorage.setItem('scheduleTimestamp', now.toString());
+                })
+                .catch(err => {
+                    console.log(err);
+                })
+        }
     }, []);
 
     const events = schedule
@@ -67,13 +97,25 @@ function Schedule() {
                                 <div className="calendar">
                                     <FullCalendar
                                         plugins={[timeGridPlugin]}
-                                        initialView="timeGridWeek"
+                                        view={view}
                                         weekends={false}
-                                        height="70vh"
+                                        initialView="timeGridWeek"
                                         slotMinTime="06:00:00"
                                         slotMaxTime="21:00:00"
                                         locale="fr"
                                         events={events}
+                                        headerToolbar={
+                                            view === 'timeGridWeek' ? {
+                                                left: 'prev,next today',
+                                                center: 'title',
+                                                right: 'timeGridWeek,timeGridDay'
+                                            } : {
+                                                left: 'prev,next',
+                                                center: 'title',
+                                                right: 'timeGridDay'
+                                            }
+                                        }
+                                        height="auto"
                                         eventContent={(info) => {
                                             const start = formatTime(info.event.start);
                                             const end = formatTime(info.event.end);
@@ -82,7 +124,7 @@ function Schedule() {
                                             return (
                                                 <div>
                                                     <b>{info.event.title}</b>
-                                                    <div style={{ fontSize: "0.8em" }}>
+                                                    <div className="event-time">
                                                         {start} - {end}
                                                     </div>
                                                 </div>
