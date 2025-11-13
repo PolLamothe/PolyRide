@@ -176,6 +176,32 @@ const utils = {
 
         const diff = Math.abs(new Date(lastEvent1.end) - new Date(lastEvent2.end));
         return diff;
+    },
+
+    async getUserAgenda(user,week){
+        if (!user.calendarLink) {
+            throw Error("Aucun agenda enregistré pour cet utilisateur")
+        }
+
+        const agenda = {};
+        const startOfWeek = new Date(week);
+        startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay() + (startOfWeek.getDay() === 0 ? -6 : 1)); // Lundi de la semaine (ISO week date, Monday is 1, Sunday is 7)
+        startOfWeek.setHours(1, 0, 0, 0);
+
+        for (let i = 0; i < 7; i++) {
+            const currentDay = new Date(startOfWeek);
+            currentDay.setDate(startOfWeek.getDate() + i);
+            const events = await this.getEventsForDate(user.calendarLink, currentDay);
+            agenda[currentDay.toISOString().split('T')[0]] = events.map(event => ({
+                uid: event.uid,
+                summary: event.summary,
+                location: event.location,
+                start: event.start,
+                end: event.end,
+                description: event.description
+            }));
+        }
+        return agenda;
     }
 }
 

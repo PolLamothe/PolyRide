@@ -8,6 +8,7 @@ const cookieParser = require('cookie-parser');
 const authRoutes = require('./routes/auth.routes');
 const profileRoutes = require("./routes/profile.route")
 const trajetRoutes = require("./routes/trajet.routes")
+const agendaRoutes = require("./routes/agenda.routes")
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -18,10 +19,10 @@ app.use(express.json()); // Permet de lire le req.body en JSON
 app.use(cookieParser());
 
 // --- Routes principales ---
-// Toutes les routes d'authentification seront préfixées par /api/auth
 app.use('/api/auth', authRoutes);
 app.use('/api/profile', profileRoutes);
 app.use('/api/trajet', trajetRoutes);
+app.use('/api/agenda', agendaRoutes);
 
 // Route de test
 app.get('/api', (req, res) => {

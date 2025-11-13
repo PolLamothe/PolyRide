@@ -21,6 +21,10 @@ const options = {
       {
         name: 'Trajet',
         description: 'Trajet related routes'
+      },
+      {
+        name: 'Agenda',
+        description: 'Agenda related routes'
       }
     ],
     servers: [
