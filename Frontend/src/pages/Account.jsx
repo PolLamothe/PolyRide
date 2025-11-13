@@ -14,9 +14,22 @@ function Account() {
                 setUser(data);
             })
             .catch(err => {
-                navigate("/auth/login");
             });
     }, []);
+
+    const handleLogout = () => {
+        document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        setUser(null);
+    }
+
+    const login = () => {
+        navigate("/auth/login");
+    }
+
+    const register = () => {
+        navigate("/auth/register");
+    }
+
 
     return (
         <>
@@ -28,10 +41,13 @@ function Account() {
                         <p><strong>Nom d'utilisateur:</strong> {user.userName}</p>
                         <p><strong>Email:</strong> {user.email}</p>
                         <p><strong>Usage:</strong> {user.usage}</p>
-                        <button onClick={() => navigate("/auth/login")}>Déconnexion</button>
+                        <button onClick={() => handleLogout()}>Déconnexion</button>
                     </div>
                 ) : (
-                    <p>Loading...</p>
+                    <>
+                        <button onClick={() => login()}>Se Connecter</button>
+                        <button onClick={() => register()}>S'inscrire</button>
+                    </>
                 )}
             </div>
         </>

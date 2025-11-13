@@ -37,7 +37,6 @@ function Schedule() {
                 setUser(data);
             })
             .catch(err => {
-                navigate("/auth/login");
             });
 
         const cachedSchedule = localStorage.getItem('schedule');

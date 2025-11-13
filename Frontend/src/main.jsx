@@ -5,7 +5,6 @@ import App from './App.jsx'
 import Login from "./pages/auth/Login.jsx";
 import Register from "./pages/auth/Register.jsx";
 import Account from "./pages/Account.jsx";
-import ProtectedRoute from "./pages/auth/ProtectedRoute.jsx";
 import Auth from "./pages/auth/Auth.jsx";
 import Home from "./pages/Home.jsx";
 import Search from "./pages/Search.jsx";
@@ -19,9 +18,7 @@ createRoot(document.getElementById('root')).render(
             <Route path="/search" element={<Search />} />
             <Route path="/about" element={<About />} />
             <Route path="/schedule" element={<Schedule />} />
-            <Route element={<ProtectedRoute />} >
-                <Route path="/account" element={<Account />} />
-            </Route>
+            <Route path="/account" element={<Account />} />
             <Route path="/auth" element={<Auth />}>
                 <Route index element={<Navigate to="/auth/login" replace />} />
                 <Route path="register" element={<Register />} />

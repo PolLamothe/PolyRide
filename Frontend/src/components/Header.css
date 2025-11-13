@@ -8,8 +8,6 @@
     align-items: center;
     padding: 0 1rem;
     z-index: 100;
-    background-color: white; /* Or your desired background */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .nav-container {
