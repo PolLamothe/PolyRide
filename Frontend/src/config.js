@@ -1,5 +1,5 @@
 const config = {
-    url: "http://localhost:3000/api",
+    url: import.meta.env.VITE_SERVER_URL+"/api",
 };
 
 export default config;
