@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import polyrideDAO from "../dao/PolyrideDAO";
 import Header from "../components/Header.jsx";
-import './Account.css'
+//import './Account.css'
 
 function Account() {
 
@@ -70,26 +70,17 @@ function Account() {
                 {user  && isEditing && (
                     <div className="">
                         <h2 className="test">Informations du compte</h2>
-                        <p><strong>Nom d'utilisateur:</strong> <input type="text" value={formData.userName} 
-                        onChange={(e)=> setFormData({...formData, userName: e.target.value})}/> </p>
-                        <p><strong>Email:</strong><input type="email" value={formData.email} 
-                        onChange={(e)=> setFormData({...formData, email: e.target.value})}/></p>
-                        <p></p>
                         <p><strong>Emploi du temps :</strong> <input type="text" value={formData.calendarLink} 
                         onChange={(e)=> setFormData({...formData, calendarLink: e.target.value})}/> </p>
                         <p><strong>Numéro de téléphone:</strong> <input type="text" value={formData.phoneNumber} 
                         onChange={(e)=> setFormData({...formData, phoneNumber: e.target.value})}/> </p>
                         <p><strong>Usage:</strong>
                         
-                        <input type="radio" name="usage" id="usage1" value={"Conducteur"}
-                        checked={formData.usage === "Conducteur"}
-                        onChange={(e)=> setFormData({...formData, usage: e.target.value})}/>
-                        <label htmlFor="usage1">Conducteur</label>
-
-                        <input type="radio" name="usage" value={"Passager"} 
-                        checked={formData.usage === "Passager"}
-                        onChange={(e)=> setFormData({...formData, usage: e.target.value})}/>
-                        <label htmlFor="usage1">Passager</label> 
+                        <select name="usage" value={formData.usage} onChange={(e) => setFormData({...formData, usage: e.target.value})}>
+                            <option value="Conducteur">Conducteur</option>
+                            <option value="Passager">Passager</option>
+                            <option value="ConducteurEtPassager">Conducteur et passager</option>
+                        </select>
                         </p>
                         
                         <button onClick={() => cancelEditing()}>Annuler</button>
