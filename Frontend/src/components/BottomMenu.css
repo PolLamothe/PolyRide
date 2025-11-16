@@ -1,0 +1,55 @@
+.bottom-menu {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #ffffff;
+  border-top: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 0;
+  box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.05);
+  z-index: 100;
+}
+
+.bottom-menu-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 8px 12px;
+  transition: all 0.2s ease;
+}
+
+.bottom-menu-btn:hover {
+  color: #1a9ba8;
+  transform: scale(1.05);
+}
+
+.bottom-menu-btn.active {
+  color: #1a9ba8;
+  font-weight: 600;
+}
+
+.bottom-menu-btn.active .menu-icon-wrapper {
+  background: #d0f5e8;
+  padding: 8px;
+  border-radius: 12px;
+}
+
+.menu-icon {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
+.menu-label {
+  font-size: 11px;
+  font-weight: 500;
+}

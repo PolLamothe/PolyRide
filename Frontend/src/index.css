@@ -19,7 +19,7 @@ body {
   padding: 0;
   min-width: 320px;
   min-height: 100vh;
-  /* ENLEVER display: flex et place-items: center */
+  overflow-y: auto; /* IMPORTANT */
 }
 
 #root {
@@ -29,10 +29,10 @@ body {
 
 a {
   font-weight: 500;
-  color: #0066ff;
+  color: #1a9ba8;
   text-decoration: inherit;
 }
 
 a:hover {
-  color: #004edb;
+  color: #158895;
 }

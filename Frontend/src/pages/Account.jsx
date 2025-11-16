@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import polyrideDAO from "../dao/PolyrideDAO";
 import Header from "../components/Header.jsx";
+import BottomMenu from "../components/BottomMenu";
 
 function Account() {
     const [user, setUser] = useState(null);
@@ -50,6 +51,8 @@ function Account() {
                     </>
                 )}
             </div>
+            <BottomMenu />
+        
         </>
     )
 }
