@@ -138,12 +138,8 @@ function Schedule() {
                         <input className="lien_ICS" placeholder="Insérer un lien ICS..."/>
                     )}
             </div>
-            <BottomMenu />
-        
         </>
-        
     )
-   
 }
 
 export default Schedule;

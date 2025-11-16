@@ -1,11 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import "./Home.css";
+import Header from "../components/Header.jsx";
 
 export default function Home() {
   const navigate = useNavigate();
 
   return (
     <div className="home-container">
+      <Header></Header>
       {/* Hero Section */}
       <header className="hero-section">
         <div className="hero-content">
