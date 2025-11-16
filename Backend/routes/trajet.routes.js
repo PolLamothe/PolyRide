@@ -67,5 +67,51 @@ const router = Router();
  */
 router.post("/proposal",trajetController.getTrajetProposal)
 
+/**
+ * @swagger
+ * /api/trajet/pending:
+ *   get:
+ *     summary: Récupère les demandes de trajet en attente
+ *     description: Retourne une liste de demandes de trajet en attente pour l'utilisateur authentifié (doit être un conducteur).
+ *     tags: [Trajet]
+ *     security:
+ *       - tokenAuth: []
+ *     responses:
+ *       200:
+ *         description: Une liste de demandes de trajet en attente.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: string
+ *                     example: "60d0fe4f5311236168a109ca"
+ *                   requester:
+ *                     type: object
+*                     properties:
+ *                       email:
+ *                         type: string
+ *                         example: "user@example.com"
+ *                       firstName:
+ *                         type: string
+ *                         example: "John"
+ *                       lastName:
+ *                         type: string
+ *                         example: "Doe"
+ *                   status:
+ *                     type: string
+ *                     example: "pending"
+ *       400:
+ *         description: Requête invalide (par exemple, l'utilisateur n'est pas un conducteur).
+ *       401:
+ *         description: Non autorisé.
+ *       500:
+ *         description: Erreur serveur.
+ */
+router.get("/pending",trajetController.getPendingTrajetRequest)
+
 
 module.exports = router
