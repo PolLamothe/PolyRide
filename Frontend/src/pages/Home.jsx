@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import "./Home.css";
-import Header from "../components/Header.jsx";
+import logo from "../../assets/PolyRide_LOGO-removebg-preview.png"
 
 export default function Home() {
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ export default function Home() {
       <header className="hero-section">
         <div className="hero-content">
           <img 
-            src="/assets/PolyRide_LOGO-removebg-preview.png" 
+            src={logo} 
             alt="PolyRide Logo" 
             className="hero-logo"
           />
