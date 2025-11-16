@@ -47,6 +47,9 @@ const userDAO = {
 				}
 			}
 		}).skip(skip).limit(limit);
+	},
+	deleteUser(email){
+		return User.deleteOne({email : email})
 	}
 };
 

@@ -59,6 +59,20 @@ const profileController = {
             console.log("[PROFILE ERROR] : ",e)
             res.status(500).json({message: "Erreur serveur lors de l'actualisation du profil." })
         }
+    },
+    deleteProfile : async(req,res)=>{
+        try{
+            let user = await utils.getUserFromJWT(req.headers.authorization);
+            if (user.sucess == false){
+                return res.status(400).json({message : user.message})
+            }
+            user = user.user
+            await userDAO.deleteUser(user.email);
+            return res.status(200).json({ message: "Profil supprimé avec succès." });
+        }catch(e){
+            console.log("[PROFILE ERROR] : ",e)
+            res.status(500).json({message: "Erreur serveur lors de la suppression du profil." })
+        }
     }
 }
 module.exports = profileController

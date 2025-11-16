@@ -159,6 +159,100 @@ router.get("/profile", profileController.getProfile);
  *                   example: "Erreur serveur lors de l'actualisation du profil."
  */
 
+
+
 router.post("/profile",profileController.updateProfile);
+
+
+
+/**
+
+ * @swagger
+
+ * /api/profile/profile:
+
+ *   delete:
+
+ *     summary: Delete user profile
+
+ *     tags: [profile]
+
+ *     description: Endpoint for deleting the authenticated user's profile.
+
+ *     security:
+
+ *       - tokenAuth: []
+
+ *     responses:
+
+ *       200:
+
+ *         description: User profile deleted successfully.
+
+ *         content:
+
+ *           application/json:
+
+ *             schema:
+
+ *               type: object
+
+ *               properties:
+
+ *                 message:
+
+ *                   type: string
+
+ *                   example: "Profil supprimé avec succès."
+
+ *       400:
+
+ *         description: Bad request, e.g., invalid token.
+
+ *         content:
+
+ *           application/json:
+
+ *             schema:
+
+ *               type: object
+
+ *               properties:
+
+ *                 message:
+
+ *                   type: string
+
+ *                   example: "Token JWT invalide"
+
+ *       401:
+
+ *         description: Unauthorized, if no valid JWT is provided.
+
+ *       500:
+
+ *         description: Internal server error.
+
+ *         content:
+
+ *           application/json:
+
+ *             schema:
+
+ *               type: object
+
+ *               properties:
+
+ *                 message:
+
+ *                   type: string
+
+ *                   example: "Erreur serveur lors de la suppression du profil."
+
+ */
+
+router.delete("/profile",profileController.deleteProfile)
+
+
 
 module.exports = router;
