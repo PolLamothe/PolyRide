@@ -9,6 +9,7 @@ export default defineConfig(({ mode }) => {
     server: {
       port: parseInt(env.VITE_PORT) || 3000,
       host: '127.0.0.1',
+      allowedHosts: ['pollamothe.fr'],
     },
     optimizeDeps: {
         include: ['@radix-ui/themes'],
