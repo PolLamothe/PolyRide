@@ -10,21 +10,13 @@
     margin: 10rem auto;
 }
 
-.account {
-    max-width: 1280px;
-    margin: 10rem auto;
-    text-align: center;
-}
 
 .search {
     max-width: 1280px;
     margin: 10rem auto;
 }
 
-.calendar {
-    min-width: 80vw;
-    justify-content: center;
-}
+
 
 .about {
     max-width: 1280px;
@@ -73,12 +65,4 @@
     height: auto;
 }
 
-.lien_ICS {
-    width: 30vw;
-    height: 4vh;
-    background-color: white;
-    border: 0.11rem solid black;
-    padding: 0 0 0 1.5em;
-    border-radius: 2rem;
-    font-size: large;
-}
+

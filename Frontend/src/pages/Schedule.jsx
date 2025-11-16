@@ -42,7 +42,7 @@ function Schedule() {
         const cachedSchedule = localStorage.getItem('schedule');
         const cachedTimestamp = localStorage.getItem('scheduleTimestamp');
         const now = new Date().getTime();
-        const oneDay = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+        const oneDay = 24 * 60 * 60 * 1000;
 
         if (cachedSchedule && cachedTimestamp && (now - cachedTimestamp < oneDay)) {
             setSchedule(JSON.parse(cachedSchedule));
@@ -93,6 +93,8 @@ function Schedule() {
             <div className="schedule">
                     {user && user.calendarLink ? (
                         schedule ? (
+                            <div className="temp" style={{width:'100%'}}>
+                                <h2 className="title_schedule">Emploi du temps</h2>
                                 <div className="calendar">
                                     <FullCalendar
                                         plugins={[timeGridPlugin]}
@@ -131,11 +133,15 @@ function Schedule() {
                                         }}
                                     />
                                 </div>
+                            </div>
                         ) : (
                             <span>Chargement...</span>
                         )
                     ) : (
-                        <input className="lien_ICS" placeholder="Insérer un lien ICS..."/>
+                        <div style={{width:'100%'}}>
+                            <h2 className="title_schedule">Emploi du temps</h2>
+                            <input className="lien_ICS" placeholder="Insérer un lien ICS..."/>
+                        </div>
                     )}
             </div>
         </>

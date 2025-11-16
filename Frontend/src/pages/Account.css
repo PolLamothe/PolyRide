@@ -1,0 +1,36 @@
+.account_form{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2em;
+}
+
+.account_form p{
+    max-width: fit-content;
+    padding: 1em;
+}
+
+.account_form input, select{
+    margin-left: 1em;
+    width: 20em;
+    padding: 0.5em;
+}
+
+.account_form_but{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.account_form_but button{
+    padding: 1em;
+    width: 200px;
+}
+
+.title_account {
+    padding:6rem;
+    text-align: center;
+    margin-bottom:2em;
+    background: linear-gradient(135deg, #1a9ba8 0%, #2bb4c4 100%);
+    color: white;
+}

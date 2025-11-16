@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import polyrideDAO from "../dao/PolyrideDAO";
 import Header from "../components/Header.jsx";
-//import './Account.css'
+import './Account.css'
 
 function Account() {
 
@@ -17,6 +17,7 @@ function Account() {
                 setUser(data);
             })
             .catch(err => {
+                console.log(err);
             });
     }, []);
 
@@ -37,6 +38,14 @@ function Account() {
     const saveInformations = () =>{
         setUser(formData);
         setIsEditing(false);
+        polyrideDAO.updateProfile(formData.usage, formData.calendarLink, formData.phoneNumber, formData.address.numero, formData.address.rue, formData.address.codePostal, formData.address.ville)
+            .then(r => {
+                console.log(r.data);
+                }
+            )
+            .catch(err => {
+                console.log(err);
+            })
     }
     const login = () => {
         navigate("/auth/login");
@@ -55,46 +64,103 @@ function Account() {
                 {/* affichage sans modif */}
                 {user  && !isEditing && (
                     <div>
-                        <h2>Informations du compte</h2>
-                        <p><strong>Nom d'utilisateur:</strong> {user.userName}</p>
-                        <p><strong>Email:</strong> {user.email}</p>
-                        <p><strong>Usage:</strong> {user.usage}</p>
-                        <p><strong>Emploi du temps:</strong> {user.calendarLink}</p>
-                        <p><strong>Numéro de téléphone:</strong> {user.phoneNumber}</p>
-                        <button onClick={() => editing()}>Modifier les informations</button>
-                        <button onClick={() => handleLogout()}>Déconnexion</button>
+                        <div className="account_form">
+                            <h2 className="title_account">Informations du compte</h2>
+                            <p><strong>Nom d'utilisateur:</strong> {user.userName}</p>
+                            <p><strong>Email:</strong> {user.email}</p>
+                            <p><strong>Usage:</strong> {user.usage}</p>
+                            <p><strong>Emploi du temps:</strong> {user.calendarLink}</p>
+                            <p><strong>Numéro de téléphone:</strong> {user.phoneNumber}</p>
+                            <p><strong>Adresse Postale:</strong> {user.address.numero} {user.address.rue} {user.address.ville} {user.address.codePostal}</p>
+                        </div>
+                        <div className="account_form_but">
+                            <button onClick={() => editing()}>Modifier les informations</button>
+                            <button onClick={() => handleLogout()}>Déconnexion</button>
+                        </div>
                     </div>
                 )
                 }
                 {/* affichage en modifiant */}
                 {user  && isEditing && (
-                    <div className="">
-                        <h2 className="test">Informations du compte</h2>
-                        <p><strong>Emploi du temps :</strong> <input type="text" value={formData.calendarLink} 
-                        onChange={(e)=> setFormData({...formData, calendarLink: e.target.value})}/> </p>
-                        <p><strong>Numéro de téléphone:</strong> <input type="text" value={formData.phoneNumber} 
-                        onChange={(e)=> setFormData({...formData, phoneNumber: e.target.value})}/> </p>
-                        <p><strong>Usage:</strong>
-                        
-                        <select name="usage" value={formData.usage} onChange={(e) => setFormData({...formData, usage: e.target.value})}>
-                            <option value="Conducteur">Conducteur</option>
-                            <option value="Passager">Passager</option>
-                            <option value="ConducteurEtPassager">Conducteur et passager</option>
-                        </select>
-                        </p>
-                        
-                        <button onClick={() => cancelEditing()}>Annuler</button>
-                        <button onClick={() => saveInformations()}>Enregistrer</button>
-                        <button onClick={() => handleLogout()}>Déconnexion</button>
+                    <div>
+                        <div className="account_form">
+                            <h2 className="title_account">Informations du compte</h2>
+                            <p><strong>Emploi du temps :</strong> <input type="text" value={formData.calendarLink}
+                                                                         onChange={(e)=> setFormData({...formData, calendarLink: e.target.value})}/> </p>
+                            <p><strong>Numéro de téléphone:</strong> <input type="text" value={formData.phoneNumber}
+                                                                            onChange={(e)=> setFormData({...formData, phoneNumber: e.target.value})}/> </p>
+                            <p><strong>Usage:</strong>
+
+                                <select name="usage" value={formData.usage} onChange={(e) => setFormData({...formData, usage: e.target.value})}>
+                                    <option value="Conducteur">Conducteur</option>
+                                    <option value="Passager">Passager</option>
+                                    <option value="ConducteurEtPassager">Conducteur et passager</option>
+                                </select>
+                            </p>
+
+                            <p>
+                                <strong>Numéro :</strong>
+                                <input
+                                    type="text"
+                                    value={formData.address.numero}
+                                    onChange={(e)=> setFormData({
+                                        ...formData,
+                                        address: { ...formData.address, numero: Number(e.target.value) }
+                                    })}
+                                />
+                            </p>
+
+                            <p>
+                                <strong>Rue :</strong>
+                                <input
+                                    type="text"
+                                    value={formData.address.rue}
+                                    onChange={(e)=> setFormData({
+                                        ...formData,
+                                        address: { ...formData.address, rue: e.target.value }
+                                    })}
+                                />
+                            </p>
+
+                            <p>
+                                <strong>Code Postal :</strong>
+                                <input
+                                    type="text"
+                                    value={formData.address.codePostal}
+                                    onChange={(e)=> setFormData({
+                                        ...formData,
+                                        address: { ...formData.address, codePostal: e.target.value }
+                                    })}
+                                />
+                            </p>
+
+                            <p>
+                                <strong>Ville :</strong>
+                                <input
+                                    type="text"
+                                    value={formData.address.ville}
+                                    onChange={(e)=> setFormData({
+                                        ...formData,
+                                        address: { ...formData.address, ville: e.target.value }
+                                    })}
+                                />
+                            </p>
+
+                        </div>
+
+                        <div className="account_form_but">
+                            <button onClick={() => saveInformations()}>Enregistrer</button>
+                            <button onClick={() => cancelEditing()}>Annuler</button>
+                        </div>
                     </div>
                 )
                 }
                 {/* affichage si non connecté */}
                 {!user && (
-                    <>
+                    <div style={{ marginTop: '100px' }}>
                         <button onClick={() => login()}>Se Connecter</button>
                         <button onClick={() => register()}>S'inscrire</button>
-                    </>
+                    </div>
                 )}
             </div>
         </>

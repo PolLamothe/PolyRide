@@ -130,6 +130,32 @@ const polyrideDAO = {
         } else {
             throw new Error(`${response.status} : ${response.statusText}`);
         }
+    },
+
+    updateProfile: async (usage, calendar, phoneNumber, numero, rue, codePostal, ville) => {
+        const response = await fetch(config.url + "/profile/profile", {
+            method: "POST",
+            headers: {
+                ...baseHeaders,
+                ...athenticationHeader()
+            },
+            body: JSON.stringify({
+                usage: usage,
+                calendarLink: calendar,
+                phoneNumber: phoneNumber,
+                address: {
+                    numero: numero,
+                    rue: rue,
+                    codePostal: codePostal,
+                    ville: ville
+                }
+            })
+        });
+        if (response.status === 200) {
+            return await response.json();
+        } else {
+            throw new Error(`${response.status} : ${response.statusText}`);
+        }
     }
 
 }
