@@ -12,7 +12,7 @@ const authController = {
 	  const { email } = req.body;
 
 	  // 1. Valider le format de l'email et le domaine
-	  const emailRegex = /^[a-z]+\.[a-z]+@etu\.univ-nantes\.fr$/i;
+		const emailRegex = /^[a-z-]+\.[a-z-]+@etu\.univ-nantes\.fr$/i;
 	  if (!emailRegex.test(email)) {
 		return res.status(400).json({ 
 		  message: "L'email doit être au format prénom.nom@etu.univ-nantes.fr" 
