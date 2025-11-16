@@ -1,7 +1,7 @@
-import { createRoot } from 'react-dom/client'
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import './index.css'
-import App from './App.jsx'
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import './index.css';
+import App from './App.jsx';
 import Login from "./pages/auth/Login.jsx";
 import Register from "./pages/auth/Register.jsx";
 import Account from "./pages/Account.jsx";
@@ -12,21 +12,26 @@ import About from "./pages/About.jsx";
 import Schedule from "./pages/Schedule.jsx";
 
 createRoot(document.getElementById('root')).render(
-    <BrowserRouter>
-        <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/search" element={<Search />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/schedule" element={<Schedule />} />
-            <Route path="/account" element={<Account />} />
-            <Route path="/auth" element={<Auth />}>
-                <Route index element={<Navigate to="/auth/login" replace />} />
-                <Route path="register" element={<Register />} />
-                <Route path="login" element={<Login />} />
-            </Route>
-            <Route path="*" element={<h1>404 Not found</h1>} />
-        </Routes>
-    </BrowserRouter>
-)
+  <BrowserRouter>
+    <Routes>
+      {/* Page d'accueil accessible sans authentification */}
+      <Route path="/" element={<Home />} />
 
+      {/* Autres pages principales */}
+      <Route path="/search" element={<Search />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/schedule" element={<Schedule />} />
+      <Route path="/account" element={<Account />} />
 
+      {/* Routes d'authentification */}
+      <Route path="/auth" element={<Auth />}>
+        <Route index element={<Navigate to="/auth/login" replace />} />
+        <Route path="register" element={<Register />} />
+        <Route path="login" element={<Login />} />
+      </Route>
+
+      {/* Route par défaut si aucune autre ne correspond */}
+      <Route path="*" element={<h1>404 - Page non trouvée</h1>} />
+    </Routes>
+  </BrowserRouter>
+);
