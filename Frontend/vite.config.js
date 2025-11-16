@@ -8,6 +8,7 @@ export default defineConfig(({ mode }) => {
     plugins: [react()],
     server: {
       port: parseInt(env.VITE_PORT) || 3000,
+      host: '127.0.0.1',
     },
     optimizeDeps: {
         include: ['@radix-ui/themes'],
