@@ -7,12 +7,23 @@ const trajetDAO = {
         }
         return await Trajet.create({conducteur,passager,jour,direction})
     },
+
     accceptTrajet : async(id)=>{
-        return await Trajet.updateOne({_id : id},{$set : {état : "Accepté"}})
+        return await Trajet.updateOne(
+            {_id : id},
+            {$set : {état : "Accepté"}},
+            { runValidators: true }
+        )
     },
+
     refuseTrajet : async (id)=>{
-        return await Trajet.updateOne({_id : id},{$set : {état : "Refusé"}})
+        return await Trajet.updateOne(
+            {_id : id},
+            {$set : {état : "Refusé"}},
+            { runValidators: true }
+        )
     },
+
     getUserPendingTrajetRequest : async(user)=>{
         if(user.usage != "Conducteur" && user.usage != "Conducteur et Passager"){
             throw Error("L'utilisateur n'est pas un conducteur")

@@ -6,7 +6,7 @@ const userSchema = new Schema({
         type: String,
         required: true,
         unique: true,
-        match: [/^.+@.+$/, 'Please fill a valid email address']
+        match: [/^[a-z-]+\.[a-z-]+@etu\.univ-nantes\.fr$/i, 'Please fill a valid email address']
     },
     password: {
         type: String,
@@ -16,7 +16,8 @@ const userSchema = new Schema({
         type: String
     },
     usage: {
-        type: String
+        type: String,
+        enum : ["Conducteur","Passager","Conducteur et Passager"]
     },
     adresse: {
         type: {

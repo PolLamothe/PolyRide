@@ -11,20 +11,6 @@ const authController = {
 	try {
 	  const { email } = req.body;
 
-	  // 1. Valider le format de l'email et le domaine
-		const emailRegex = /^[a-z-]+\.[a-z-]+@etu\.univ-nantes\.fr$/i;
-	  if (!emailRegex.test(email)) {
-		return res.status(400).json({ 
-		  message: "L'email doit être au format prénom.nom@etu.univ-nantes.fr" 
-		});
-	  }
-
-	  // 2. Vérifier si l'utilisateur existe déjà
-	  const existingUser = await userDAO.findUserByEmail(email);
-	  if (existingUser) {
-		return res.status(409).json({ message: "Un utilisateur avec cet email existe déjà." });
-	  }
-
 	  if (!utils.verifyPassword(req.body.password)) {
 		return res.status(410).json({message : "Votre mot de passe doit contenir au moins un chiffre et faire au moins 0 caractères"})
 	  }

@@ -30,9 +30,6 @@ const profileController = {
                 return res.status(400).json({message : user.message})
             }
             user = user.user
-            if (req.body.usafe && (req.body.usage != "Conducteur" && req.body.usage != "Passager" && req.body.usage != "Conducteur et Passager")){
-                return res.status(400).json({message : "Utilisation invalide"})
-            }
 
             if (req.body.calendarLink && !validator.isURL(req.body.calendarLink)) {
                 return res.status(400).json({ message: 'Lien de calendrier invalide' });
@@ -57,7 +54,7 @@ const profileController = {
                 position = await utils.geocodeAddress(req.body.address);
             }
 
-            userDAO.updateProfile(user.email, req.body.usage, req.body.calendarLink,req.body.address,position,req.body.phoneNumber);
+            await userDAO.updateProfile(user.email, req.body.usage, req.body.calendarLink,req.body.address,position,req.body.phoneNumber);
             return res.status(200).json({ message: "Profil mis à jour avec succès." });
         }catch(e){
             console.log("[PROFILE ERROR] : ",e)

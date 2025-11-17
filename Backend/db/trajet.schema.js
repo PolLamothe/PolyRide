@@ -19,11 +19,13 @@ const trajetSchema = new Schema({
     état : {
         type : String,
         required : true,
-        default : "En attente"
+        default : "En attente",
+        enum : ["En attente","Accepté","Refusé"]
     },
     direction : {
         type : String,
-        required : true
+        required : true,
+        enum : ["aller","retour"]
     }
 })
 
