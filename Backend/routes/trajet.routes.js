@@ -114,4 +114,51 @@ router.post("/proposal",trajetController.getTrajetProposal)
 router.get("/pending",trajetController.getPendingTrajetRequest)
 
 
+
+/**
+ * @swagger
+ * /api/trajet/ask:
+ *   post:
+ *     summary: Demande un trajet à un conducteur
+ *     description: Permet à un utilisateur authentifié de demander un trajet à un conducteur spécifique pour un jour et une direction donnés.
+ *     tags: [Trajet]
+ *     security:
+ *       - tokenAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - conducteur
+ *               - jour
+ *               - direction
+ *             properties:
+ *               conducteur:
+ *                 type: string
+ *                 description: L'email du conducteur à qui demander le trajet.
+ *                 example: "driver@example.com"
+ *               jour:
+ *                 type: string
+ *                 format: date-time
+ *                 description: Le jour du trajet demandé.
+ *                 example: "2025-11-12T08:00:00.000Z"
+ *               direction:
+ *                 type: string
+ *                 description: La direction du trajet (par exemple, "aller" ou "retour").
+ *                 example: "aller"
+ *     responses:
+ *       200:
+ *         description: La demande de trajet a été créée avec succès.
+ *       400:
+ *         description: Requête invalide (par exemple, l'utilisateur cible n'est pas un conducteur).
+ *       401:
+ *         description: Non autorisé.
+ *       500:
+ *         description: Erreur serveur lors de la création de la demande de trajet.
+ */
+router.post("/ask",trajetController.askTtrajet)
+
+
 module.exports = router

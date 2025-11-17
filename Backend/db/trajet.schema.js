@@ -5,13 +5,11 @@ const trajetSchema = new Schema({
     conducteur: {
         type: String,
         required: true,
-        unique: true,
         match: [/^.+@.+$/, 'Please fill a valid email address']
     },
     passager: {
         type: String,
         required: true,
-        unique: true,
         match: [/^.+@.+$/, 'Please fill a valid email address']
     },
     jour : {

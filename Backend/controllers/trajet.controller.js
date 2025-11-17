@@ -48,13 +48,27 @@ const trajetController = {
                 return res.status(400).json({message : user.message})
             }
             user = user.user
-            if(user.usage != "Conducteur" && user.usage != "Conducteur et Passager"){
-                return res.status(400).json({message : "Usage non valide"})
-            }
             return res.send(await trajetDAO.getUserPendingTrajetRequest(user))
         }catch(e){
             console.log("[TRAJET ERROR] : ",e)
             return res.status(500).json({message: "Erreur serveur lors de la récupération des demandes de trajets." })
+        }
+    },
+    askTtrajet : async(req,res)=>{
+        try{
+            let user = await utils.getUserFromJWT(req.headers.authorization);
+            if (user.sucess == false){
+                return res.status(400).json({message : user.message})
+            }
+            let passager = user.user
+            let conducteur = await userDAO.findUserByEmail(req.body.conducteur)
+            if(conducteur.usage != "Conducteur et Passager" && conducteur.usage != "Conducteur"){
+                return res.status(400).json({message : "L'utilisateur n'est pas un conducteur"})
+            }
+            return res.status(200).json(await trajetDAO.createTrajet(conducteur.email,passager.email,new Date(req.body.jour),req.body.direction))
+        }catch(e){
+            console.log("[TRAJET ERROR] : ",e)
+            return res.status(500).json({message: "Erreur serveur lors de la requête du trajet." })
         }
     }
 }
