@@ -26,7 +26,11 @@ function Account() {
         setUser(null);
     }
     const editing = () =>{
-        setFormData(user);
+        const initialFormData = {
+            ...user,
+            address: user.address || { numero: '', rue: '', codePostal: '', ville: '' }
+        };
+        setFormData(initialFormData);
         setIsEditing(true);
     }
 
@@ -68,10 +72,10 @@ function Account() {
                             <h2 className="title_account">Informations du compte</h2>
                             <p><strong>Nom d'utilisateur:</strong> {user.userName}</p>
                             <p><strong>Email:</strong> {user.email}</p>
-                            <p><strong>Usage:</strong> {user.usage}</p>
-                            <p><strong>Emploi du temps:</strong> {user.calendarLink}</p>
-                            <p><strong>Numéro de téléphone:</strong> {user.phoneNumber}</p>
-                            <p><strong>Adresse Postale:</strong> {user.address.numero} {user.address.rue} {user.address.ville} {user.address.codePostal}</p>
+                            <p><strong>Usage:</strong> {user.usage || 'Non renseigné'}</p>
+                            <p><strong>Emploi du temps:</strong> {user.calendarLink || 'Non renseigné'}</p>
+                            <p><strong>Numéro de téléphone:</strong> {user.phoneNumber || 'Non renseigné'}</p>
+                            <p><strong>Adresse Postale:</strong> {user.address ? `${user.address.numero} ${user.address.rue}, ${user.address.ville} ${user.address.codePostal}` : 'Non renseignée'}</p>
                         </div>
                         <div className="account_form_but">
                             <button onClick={() => editing()}>Modifier les informations</button>
