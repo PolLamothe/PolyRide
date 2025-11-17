@@ -135,7 +135,7 @@ function Schedule() {
                                 </div>
                             </div>
                         ) : (
-                            <span>Chargement...</span>
+                            <span className="loader">Chargement...</span>
                         )
                     ) : (
                         <div style={{width:'100%'}}>

@@ -110,22 +110,23 @@
     }
 
     .navLinks {
-        display: none;
+        position: fixed;
+        top: 0;
+        height: 100vh;
+        width: 100vw;
+        display: flex;
         flex-direction: column;
-        position: absolute;
-        top: 5rem;
-        left: 50%;
-        transform: translateX(-50%);
-        background: rgba(255, 255, 255, 0.3);
+        justify-content: center;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.7);
         backdrop-filter: blur(20px);
-        padding: 1rem;
-        border-radius: 10px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        width: 200px;
+        z-index: 200;
     }
+
 
     .navLinks.open {
         display: flex;
+        left: -5rem;
     }
 
     .hamburger {
@@ -135,6 +136,5 @@
     .navBar {
         justify-content: flex-end;
         width: fit-content;
-        float: right;
     }
 }

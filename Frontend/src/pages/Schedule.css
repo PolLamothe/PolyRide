@@ -38,6 +38,10 @@
     font-size: 0.8em;
 }
 
+.loader {
+    margin-top: 15rem;
+}
+
 @media (max-width: 768px) {
     .schedule {
         padding: 10px;
@@ -50,5 +54,9 @@
 
     .calendar .fc-header-toolbar .fc-toolbar-chunk {
         margin-bottom: 10px;
+    }
+
+    .loader {
+        margin-top: 3rem;
     }
 }

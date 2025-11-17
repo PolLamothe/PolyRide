@@ -1,54 +1,72 @@
 import Header from "../components/Header.jsx";
-import {Box, Tabs, Text} from "@radix-ui/themes";
+import { Box, Text } from "@radix-ui/themes";
+import { useState } from "react";
+import "./Search.css"
+
+// Exemples de composants différents pour chaque jour
+function LundiComponent() {
+    return <Text size="3">Make changes to your account.</Text>;
+}
+
+function MardiComponent() {
+    return <Text size="3">Access and update your documents.</Text>;
+}
+
+function MercrediComponent() {
+    return <Text size="3">Edit your profile or update contact information.</Text>;
+}
+
+function ReposComponent() {
+    return <Text size="3">Repos bien mérité</Text>;
+}
 
 function Search() {
+    const [day, setDay] = useState("Lundi");
+
+    // On stocke les composants dans un objet
+    const dayComponents = {
+        Lundi: <LundiComponent />,
+        Mardi: <MardiComponent />,
+        Mercredi: <MercrediComponent />,
+        Jeudi: <MercrediComponent />,
+        Vendredi: <MercrediComponent />,
+        Samedi: <MercrediComponent />,
+        Dimanche: <ReposComponent />,
+    };
+
     return (
         <>
-            <Header/>
+            <Header />
 
+            <h2 className="title_search">Recherche</h2>
             <div className="search">
-                <Tabs.Root defaultValue="Lundi">
-                    <Tabs.List>
-                        <Tabs.Trigger value="Lundi">Lundi</Tabs.Trigger>
-                        <Tabs.Trigger value="Mardi">Mardi</Tabs.Trigger>
-                        <Tabs.Trigger value="Mercredi">Mercredi</Tabs.Trigger>
-                        <Tabs.Trigger value="Jeudi">Jeudi</Tabs.Trigger>
-                        <Tabs.Trigger value="Vendredi">Vendredi</Tabs.Trigger>
-                        <Tabs.Trigger value="Samedi">Samedi</Tabs.Trigger>
-                        <Tabs.Trigger value="Dimanche">Dimanche</Tabs.Trigger>
-                    </Tabs.List>
+                <Box mb="4">
+                    <select
+                        value={day}
+                        onChange={(e) => setDay(e.target.value)}
+                        style={{
+                            fontSize: "1rem",
+                            borderRadius: "8px",
+                            border: "1px solid #ccc",
+                            cursor: "pointer"
+                        }}
+                    >
+                        <option value="Lundi">Lundi</option>
+                        <option value="Mardi">Mardi</option>
+                        <option value="Mercredi">Mercredi</option>
+                        <option value="Jeudi">Jeudi</option>
+                        <option value="Vendredi">Vendredi</option>
+                        <option value="Samedi">Samedi</option>
+                        <option value="Dimanche">Dimanche</option>
+                    </select>
+                </Box>
 
-                    <Box pt="3">
-                        <Tabs.Content value="Lundi">
-                            <Text size="2">Make changes to your account.</Text>
-                        </Tabs.Content>
-
-                        <Tabs.Content value="Mardi">
-                            <Text size="2">Access and update your documents.</Text>
-                        </Tabs.Content>
-
-                        <Tabs.Content value="Mercredi">
-                            <Text size="2">Edit your profile or update contact information.</Text>
-                        </Tabs.Content>
-
-                        <Tabs.Content value="Jeudi">
-                            <Text size="2">Edit your profile or update contact information.</Text>
-                        </Tabs.Content>
-
-                        <Tabs.Content value="Vendredi">
-                            <Text size="2">Edit your profile or update contact information.</Text>
-                        </Tabs.Content>
-
-                        <Tabs.Content value="Samedi">
-                            <Text size="2">Edit your profile or update contact information.</Text>
-                        </Tabs.Content>
-
-                        <Tabs.Content value="Dimanche"></Tabs.Content>
-                    </Box>
-                </Tabs.Root>
+                <Box pt="3">
+                    {dayComponents[day]}
+                </Box>
             </div>
         </>
-    )
+    );
 }
 
 export default Search;
