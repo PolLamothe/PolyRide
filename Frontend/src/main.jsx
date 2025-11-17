@@ -11,7 +11,7 @@ import Search from "./pages/Search.jsx";
 import About from "./pages/About.jsx";
 import Schedule from "./pages/Schedule.jsx";
 
-const appBasename = import.meta.env.ROUTER_BASE || '/';
+const appBasename = import.meta.env.VITE_ROUTER_BASE || '/';
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter basename={appBasename}>
