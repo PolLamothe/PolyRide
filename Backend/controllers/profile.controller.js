@@ -30,28 +30,32 @@ const profileController = {
                 return res.status(400).json({message : user.message})
             }
             user = user.user
-            if (req.body.usage != "Conducteur" && req.body.usage != "Passager" && req.body.usage != "Conducteur et Passager"){
+            if (req.body.usafe && (req.body.usage != "Conducteur" && req.body.usage != "Passager" && req.body.usage != "Conducteur et Passager")){
                 return res.status(400).json({message : "Utilisation invalide"})
             }
 
-            if (!req.body.calendarLink || !validator.isURL(req.body.calendarLink)) {
+            if (req.body.calendarLink && !validator.isURL(req.body.calendarLink)) {
                 return res.status(400).json({ message: 'Lien de calendrier invalide' });
+            }else if (req.body.calendarLink){
+                try {
+                    await utils.validateCalendar(req.body.calendarLink);
+                } catch (error) {
+                    return res.status(400).json({ message: error.message });
+                }
             }
 
-            try {
-                await utils.validateCalendar(req.body.calendarLink);
-            } catch (error) {
-                return res.status(400).json({ message: error.message });
+            let position = null
+
+            if(req.body.address){
+                if (typeof req.body.address.numero != "number") {
+                    return res.status(400).json({ message: "Numéro d'adresse invalide"});
+                }
+                if (!/^(\+33|0033|0)[1-9]\d{8}$/.test(req.body.phoneNumber)) {
+                    return res.status(400).json({ message: "Numéro de téléphone invalide"});
+                }
+                
+                position = await utils.geocodeAddress(req.body.address);
             }
-            if (typeof req.body.address.numero != "number") {
-                return res.status(400).json({ message: "Numéro d'adresse invalide"});
-            }
-            if (!/^(\+33|0033|0)[1-9]\d{8}$/.test(req.body.phoneNumber)) {
-                return res.status(400).json({ message: "Numéro de téléphone invalide"});
-            }
-            
-            const position = await utils.geocodeAddress(req.body.address);
-            console.log(position)
 
             userDAO.updateProfile(user.email, req.body.usage, req.body.calendarLink,req.body.address,position,req.body.phoneNumber);
             return res.status(200).json({ message: "Profil mis à jour avec succès." });

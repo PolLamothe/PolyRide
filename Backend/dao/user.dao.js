@@ -15,17 +15,20 @@ const userDAO = {
 		return await User.findOne({ email, password });
 	},
 
-	async updateProfile(email, newUsage, newCalendarLink,adresse,position,phoneNumber){
-		return await User.updateOne({ email: email }, { $set: { 
-			calendarLink: newCalendarLink,
-			usage : newUsage,
-			adresse : adresse,
-			position : {
+	async updateProfile(email, newUsage, newCalendarLink, adresse, position, phoneNumber) {
+		const updateData = {};
+		if (newUsage != null) updateData.usage = newUsage;
+		if (newCalendarLink != null) updateData.calendarLink = newCalendarLink;
+		if (adresse != null) updateData.adresse = adresse;
+		if (position && position.lon != null && position.lat != null) {
+			updateData.position = {
 				type: "Point",
-				coordinates: [position["lon"], position["lat"]]
-			},
-			phoneNumber : phoneNumber
-		}});
+				coordinates: [position.lon, position.lat]
+			};
+		}
+		if (phoneNumber != null) updateData.phoneNumber = phoneNumber;
+
+		return await User.updateOne({ email: email }, { $set: updateData });
 	},
 
 	async removeAll(){

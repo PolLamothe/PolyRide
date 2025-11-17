@@ -133,23 +133,27 @@ const polyrideDAO = {
     },
 
     updateProfile: async (usage, calendar, phoneNumber, numero, rue, codePostal, ville) => {
+        let body = {
+            usage: usage,
+            calendarLink: calendar,
+            phoneNumber: phoneNumber,
+            
+        }
+        if (numero != "" && rue != "" && codePostal != "" && ville != ""){
+            body.address = {
+                numero: numero,
+                rue: rue,
+                codePostal: codePostal,
+                ville: ville
+            }
+        }
         const response = await fetch(config.url + "/profile/profile", {
             method: "POST",
             headers: {
                 ...baseHeaders,
                 ...athenticationHeader()
             },
-            body: JSON.stringify({
-                usage: usage,
-                calendarLink: calendar,
-                phoneNumber: phoneNumber,
-                address: {
-                    numero: numero,
-                    rue: rue,
-                    codePostal: codePostal,
-                    ville: ville
-                }
-            })
+            body: JSON.stringify(body)
         });
         if (response.status === 200) {
             return await response.json();
