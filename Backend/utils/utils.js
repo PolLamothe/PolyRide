@@ -202,6 +202,14 @@ const utils = {
             }));
         }
         return agenda;
+    },
+
+    async isUserDriver(user){
+        return user.usage == "Conducteur" || user.usage == "Conducteur et Passager"
+    },
+
+    async isUserPassenger(user){
+        return user.usage == "Passager" || user.usage == "Conducteur et Passager"
     }
 }
 

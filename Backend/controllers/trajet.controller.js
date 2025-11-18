@@ -1,6 +1,7 @@
 const userDAO = require('../dao/user.dao.js');
 const trajetDAO = require('../dao/trajet.dao.js');
 const utils = require('../utils/utils.js');
+const { response } = require('express');
 
 const trajetController = {
     getTrajetProposal : async (req,res)=>{
@@ -41,14 +42,21 @@ const trajetController = {
             return res.status(500).json({message: "Erreur serveur lors de la récupération des trajets." })
         }
     },
-    getPendingTrajetRequest : async (req,res)=>{
+    getTrajetRequest : async (req,res)=>{
         try{
             let user = await utils.getUserFromJWT(req.headers.authorization);
             if (user.sucess == false){
                 return res.status(400).json({message : user.message})
             }
             user = user.user
-            return res.send(await trajetDAO.getUserPendingTrajetRequest(user))
+            let response = {}
+            if(await utils.isUserDriver(user)){
+                response.driver = await trajetDAO.getDriverTrajetRequest(user)
+            }
+            if(await utils.isUserPassenger(user)){
+                response.passenger = await trajetDAO.getPassengerTrajetRequest(user)
+            }
+            return res.send(response)
         }catch(e){
             console.log("[TRAJET ERROR] : ",e)
             return res.status(500).json({message: "Erreur serveur lors de la récupération des demandes de trajets." })

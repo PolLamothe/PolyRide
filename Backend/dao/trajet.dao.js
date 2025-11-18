@@ -1,4 +1,5 @@
 const Trajet = require('../db/trajet.schema.js');
+const utils = require('../utils/utils.js');
 
 const trajetDAO = {
     createTrajet : async(conducteur, passager,jour,direction)=>{
@@ -24,11 +25,18 @@ const trajetDAO = {
         )
     },
 
-    getUserPendingTrajetRequest : async(user)=>{
-        if(user.usage != "Conducteur" && user.usage != "Conducteur et Passager"){
+    getDriverTrajetRequest : async(user)=>{
+        if(!utils.isUserDriver(user)){
             throw Error("L'utilisateur n'est pas un conducteur")
         }
-        return await Trajet.find({conducteur : user.email, état : "En attente", jour : {$gte : new Date()}})
+        return await Trajet.find({conducteur : user.email, jour : {$gte : new Date()}})
+    },
+    getPassengerTrajetRequest : async(user)=>{
+        if(!utils.isUserPassenger(user)){
+            throw Error("L'utilisateur n'est pas un passager")
+        }
+        return await Trajet.find({passager : user.email, jour : {$gte : new Date()}})
+
     },
     removeAll: async () => {
         return await Trajet.deleteMany({});

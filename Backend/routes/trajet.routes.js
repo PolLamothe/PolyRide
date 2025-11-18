@@ -69,10 +69,10 @@ router.post("/proposal",trajetController.getTrajetProposal)
 
 /**
  * @swagger
- * /api/trajet/pending:
+ * /api/trajet/request:
  *   get:
  *     summary: Récupère les demandes de trajet en attente
- *     description: Retourne une liste de demandes de trajet en attente pour l'utilisateur authentifié (doit être un conducteur).
+ *     description: Retourne une liste de demandes de trajet en attente pour l'utilisateur authentifié.
  *     tags: [Trajet]
  *     security:
  *       - tokenAuth: []
@@ -111,7 +111,7 @@ router.post("/proposal",trajetController.getTrajetProposal)
  *       500:
  *         description: Erreur serveur.
  */
-router.get("/pending",trajetController.getPendingTrajetRequest)
+router.get("/request",trajetController.getTrajetRequest)
 
 
 
