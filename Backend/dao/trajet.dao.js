@@ -1,4 +1,5 @@
 const Trajet = require('../db/trajet.schema.js');
+const { find } = require('../db/user.schema.js');
 const utils = require('../utils/utils.js');
 
 const trajetDAO = {
@@ -23,6 +24,10 @@ const trajetDAO = {
             {$set : {état : "Refusé"}},
             { runValidators: true }
         )
+    },
+
+    findTrajetById : async(id)=>{
+        return await Trajet.findOne({_id : id})
     },
 
     getDriverTrajetRequest : async(user)=>{

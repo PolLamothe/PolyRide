@@ -161,4 +161,44 @@ router.get("/request",trajetController.getTrajetRequest)
 router.post("/ask",trajetController.askTtrajet)
 
 
+/**
+ * @swagger
+ * /api/trajet/decideTrajet:
+ *   post:
+ *     summary: Répondre à une demande de trajet
+ *     description: Permet au conducteur de répondre à une demande de trajet en l'acceptant ou en la refusant.
+ *     tags: [Trajet]
+ *     security:
+ *       - tokenAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - trajetId
+ *               - decision
+ *             properties:
+ *               trajetId:
+ *                 type: string
+ *                 description: L'ID du trajet à accepter ou refuser.
+ *                 example: "60d0fe4f5311236168a109ca"
+ *               decision:
+ *                 type: string
+ *                 description: La décision du conducteur ('accept' or 'refuse').
+ *                 example: "accept"
+ *     responses:
+ *       200:
+ *         description: La décision a été enregistrée avec succès.
+ *       400:
+ *         description: Requête invalide (par exemple, l'utilisateur n'est pas le conducteur ou la décision est invalide).
+ *       401:
+ *         description: Non autorisé.
+ *       500:
+ *         description: Erreur serveur.
+ */
+router.post("/decideTrajet",trajetController.responseTrajet)
+
+
 module.exports = router

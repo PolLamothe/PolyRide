@@ -78,6 +78,30 @@ const trajetController = {
             console.log("[TRAJET ERROR] : ",e)
             return res.status(500).json({message: "Erreur serveur lors de la requête du trajet." })
         }
+    },
+    responseTrajet : async(req,res)=>{
+        try{
+            let user = await utils.getUserFromJWT(req.headers.authorization);
+            if (user.sucess == false){
+                return res.status(400).json({message : user.message})
+            }
+            user = user.user
+            let trajet = await trajetDAO.findTrajetById(req.body.trajetId)
+            if(trajet.conducteur != user.email){
+                return res.status(400).json({message : "Vous n'êtes pas le conducteur de ce trajet"})
+            }
+            if(req.body.decision == "accept"){
+                await trajetDAO.accceptTrajet(trajet.id)
+                return res.json({message : "Trajet accepté"})
+            }else if (req.body.decision == "refuse"){
+                await trajetDAO.refuseTrajet(trajet.id)
+                return res.json({message : "Trajet refusé"})
+            }else{
+                return res.status(400).json({message : "Invalid decision"})
+            }
+        }catch(e){
+            console.log("[TRAJET ERROR] : ",e)
+        }
     }
 }
 
