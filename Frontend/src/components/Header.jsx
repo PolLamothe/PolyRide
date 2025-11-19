@@ -38,6 +38,7 @@ const Header = () => {
         };
         navigate(linkToPath[link]);
         setMenuOpen(false);
+        console.log(menuOpen);
     };
 
     return (
@@ -57,19 +58,19 @@ const Header = () => {
                         <div></div>
                         <div></div>
                     </button>
-                    <div className={`navLinks ${menuOpen ? "open" : ""}`}>
-                        {links.map((link) => (
-                            <button
-                                key={link}
-                                onClick={() => handleClick(link)}
-                                className={`navLink ${active === link ? "active" : ""}`}
-                            >
-                                {link}
-                            </button>
-                        ))}
-                    </div>
                 </nav>
             </header>
+            <div className={`navLinks ${menuOpen ? "open" : ""}`}>
+                {links.map((link) => (
+                    <button
+                        key={link}
+                        onClick={() => handleClick(link)}
+                        className={`navLink ${active === link ? "active" : ""}`}
+                    >
+                        {link}
+                    </button>
+                ))}
+            </div>
             <div className="spacer"></div>
         </div>
     );

@@ -13,3 +13,9 @@
     align-items: center;
     gap: 5em;
 }
+
+.gridCard {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}

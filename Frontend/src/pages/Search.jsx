@@ -2,6 +2,7 @@ import Header from "../components/Header.jsx";
 import { Box, Text } from "@radix-ui/themes";
 import { useState } from "react";
 import "./Search.css"
+import ResultSearchCard from "../components/ResultSearchCard.jsx";
 
 // Exemples de composants différents pour chaque jour
 function LundiComponent() {
@@ -25,8 +26,13 @@ function Search() {
 
     // On stocke les composants dans un objet
     const dayComponents = {
-        Lundi: <LundiComponent />,
-        Mardi: <MardiComponent />,
+        Lundi:
+            <div className="gridCard">
+                <ResultSearchCard prenom="pol" nom="lamothe" distance="5km" heure_debut="8H00"/>
+                <ResultSearchCard prenom="anouar" nom="al khatbi imani" distance="5km" heure_debut="8H00"/>
+                <ResultSearchCard prenom="julien" nom="Pitré" distance="5km" heure_debut="8H00"/>
+            </div>,
+        Mardi: <ResultSearchCard prenom="kyllian" nom="arnaud" distance="5km" heure_debut="8H00"/>,
         Mercredi: <MercrediComponent />,
         Jeudi: <MercrediComponent />,
         Vendredi: <MercrediComponent />,
