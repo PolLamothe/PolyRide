@@ -42,10 +42,9 @@
     margin-top: 15rem;
 }
 
-@media (max-width: 768px) {
-    .schedule {
-        padding: 10px;
-        margin-top: 25rem;
+@media (max-width: 860px) {
+    .title_schedule {
+        padding: 4rem 2rem 2rem 2rem;
     }
 
     .calendar .fc-header-toolbar {

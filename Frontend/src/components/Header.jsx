@@ -41,6 +41,23 @@ const Header = () => {
         console.log(menuOpen);
     };
 
+    const [headerPC, setHeaderPC] = useState(
+        window.innerWidth >= 860
+    );
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth < 860) {
+                setHeaderPC(false);
+            } else {
+                setHeaderPC(true);
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     return (
         <div className="header-container">
             <div className="logoContainer">
@@ -50,27 +67,51 @@ const Header = () => {
                     className="logo"
                 />
             </div>
-
-            <header className="nav-container">
-                <nav className="navBar">
-                    <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </button>
-                </nav>
-            </header>
-            <div className={`navLinks ${menuOpen ? "open" : ""}`}>
-                {links.map((link) => (
-                    <button
-                        key={link}
-                        onClick={() => handleClick(link)}
-                        className={`navLink ${active === link ? "active" : ""}`}
-                    >
-                        {link}
-                    </button>
-                ))}
-            </div>
+            {headerPC ? (
+                    <header className="nav-container">
+                        <nav className="navBar">
+                            <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </button>
+                            <div className={`navLinks ${menuOpen ? "open" : ""}`}>
+                                {links.map((link) => (
+                                    <button
+                                        key={link}
+                                        onClick={() => handleClick(link)}
+                                        className={`navLink ${active === link ? "active" : ""}`}
+                                    >
+                                        {link}
+                                    </button>
+                                ))}
+                            </div>
+                        </nav>
+                    </header>
+            ) : (
+                <>
+                    <header className="nav-container">
+                        <nav className="navBar">
+                            <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </button>
+                        </nav>
+                    </header>
+                    <div className={`navLinks ${menuOpen ? "open" : ""}`}>
+                        {links.map((link) => (
+                            <button
+                                key={link}
+                                onClick={() => handleClick(link)}
+                                className={`navLink ${active === link ? "active" : ""}`}
+                            >
+                                {link}
+                            </button>
+                        ))}
+                    </div>
+                </>
+            )}
             <div className="spacer"></div>
         </div>
     );

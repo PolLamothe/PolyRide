@@ -19,3 +19,9 @@
     flex-wrap: wrap;
     justify-content: center;
 }
+
+@media (max-width: 860px) {
+    .title_search {
+        padding: 4rem 2rem 2rem 2rem;
+    }
+}

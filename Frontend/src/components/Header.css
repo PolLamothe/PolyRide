@@ -75,14 +75,14 @@
     cursor: pointer;
     background: transparent;
     border: none;
-    padding: 0.5rem;
+    padding: 0.1rem;
 }
 
 .hamburger div {
-    width: 25px;
-    height: 3px;
+    width: 20px;
+    height: 1px;
     background-color: #333;
-    margin: 4px 0;
+    margin: 3.5px 0;
     transition: 0.4s;
     display: flex;
 }
