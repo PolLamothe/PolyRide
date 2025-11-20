@@ -23,6 +23,9 @@ const trajetController = {
                     return res.status(500).json({message : "Invalid time parameter"})
                 }
                 
+                if(difference === false){
+                    continue
+                }
                 if (difference <= 15) {
                     result.push({
                         email: thisUser.email,

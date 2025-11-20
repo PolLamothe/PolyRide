@@ -90,6 +90,7 @@ function Search() {
                             nom={nom}
                             prenom={prenom}
                             temps={element.difference}
+                            when={direction}
                             distance={Number(element.distance).toFixed(2)}
                         />
                     );

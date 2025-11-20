@@ -12,7 +12,7 @@ function ResultSearchCard({prenom, nom, distance, temps, when}) {
             <Card>
                 <div className="ResultSearchCardInfos">
                     <div>{prenom} {nom} - Se situe à environ {distance} Km</div>
-                    {when === "start" ? (
+                    {when == "start" ? (
                         temps === 0 ? (
                             <div>Vous commencez les cours à la même heure</div>
                         ) : (

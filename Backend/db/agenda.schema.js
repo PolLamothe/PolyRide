@@ -8,8 +8,8 @@ const agendaSchema = new Schema({
         unique : true
     },
     data: {
-        type: Map,
-        of: Schema.Types.Mixed
+        type: Object,
+        required: true
     }
 },{ timestamps: true })
 

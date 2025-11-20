@@ -109,7 +109,7 @@ const utils = {
             for (const k in data) {
                 if (data.hasOwnProperty(k)) {
                     const ev = data[k];
-                    if (ev && ev.type === 'VEVENT') {
+                    if (ev && ev.type == 'VEVENT') {
                         const eventDate = new Date(ev.start);
                         if (eventDate.toDateString() === date.toDateString()) {
                             events.push(ev);
@@ -149,7 +149,7 @@ const utils = {
 
     async endTimeDifference(user1, user2, date) {
         if (!user1.calendarLink || !user2.calendarLink) {
-            return false;
+            return false
         }
 
         const events1 = await this.getEventsForDate(user1.calendarLink, date);
