@@ -1,7 +1,7 @@
 import {Box, Card} from "@radix-ui/themes";
 import "./ResultSearchCard.css"
 
-function ResultSearchCard({prenom, nom, distance, heure_debut}) {
+function ResultSearchCard({prenom, nom, distance, temps, when}) {
 
     function handleSubmit() {
 
@@ -11,10 +11,22 @@ function ResultSearchCard({prenom, nom, distance, heure_debut}) {
         <Box className="ResultSearchCardBox">
             <Card>
                 <div className="ResultSearchCardInfos">
-                    <span>{prenom} {nom} </span>
-                    <span>&nbsp;- {distance}</span>
-                    <br/>
-                    <span>Commence les cours à {heure_debut}</span>
+                    <div>{prenom} {nom} - Se situe à environ {distance} Km</div>
+                    {when === "start" ? (
+                        temps === 0 ? (
+                            <div>Vous commencez les cours à la même heure</div>
+                        ) : (
+                            <div>Vous commencez les cours avec {temps} min d'écarts</div>
+                        )
+                    ) : (
+                        temps === 0 ? (
+                            <div>Vous finissez les cours à la même heure</div>
+                        ) : (
+                            <div>Vous finissez les cours avec {temps} min d'écarts</div>
+                        )
+                    )}
+
+
                 </div>
 
                 <div className="ResultSearchCardButton">

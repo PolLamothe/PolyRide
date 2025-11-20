@@ -160,6 +160,25 @@ const polyrideDAO = {
         } else {
             throw new Error(`${response.status} : ${response.statusText}`);
         }
+    },
+
+    getProposal: async (time, day) =>{
+        const response = await fetch(config.url + "/trajet/proposal", {
+            method: "POST",
+            headers: {
+                ...baseHeaders,
+                ...athenticationHeader(),
+            },
+            body: JSON.stringify({
+                time: time,
+                day: day
+            })
+        })
+        if (response.status === 200) {
+            return await response.json();
+        } else {
+            throw new Error(`${response.status} : ${response.statusText}`);
+        }
     }
 
 }

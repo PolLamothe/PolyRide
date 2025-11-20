@@ -11,12 +11,10 @@ function Schedule() {
     const [schedule, setSchedule] = useState(null);
     const navigate = useNavigate();
 
-    // Vue dynamique selon largeur écran
     const [view, setView] = useState(
         window.innerWidth < 860 ? 'timeGridDay' : 'timeGridWeek'
     );
 
-    // 🔄 Mise à jour de la vue lors du resize
     useEffect(() => {
         const handleResize = () => {
             setView(window.innerWidth < 860 ? 'timeGridDay' : 'timeGridWeek');
@@ -26,7 +24,6 @@ function Schedule() {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    // Charger utilisateur + emploi du temps
     useEffect(() => {
         polyrideDAO.getProfile()
             .then(data => setUser(data))

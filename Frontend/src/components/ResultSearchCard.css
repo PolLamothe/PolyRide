@@ -14,16 +14,21 @@
     justify-content: end;
 }
 
-.ResultSearchCardInfos{
-    display: flex;
-    flex-wrap: wrap;
+.ResultSearchCardInfos {
+    display: block;
     max-width: 350px;
- }
+}
+
 
 .ResultSearchCardButton {
     display: flex;
     justify-content: end;
 }
+
+.ResultSearchCardInfos div {
+    margin-bottom: 4px;
+}
+
 
 @media (max-width: 505px) {
     .ResultSearchCardBox {
