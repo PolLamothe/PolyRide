@@ -1,5 +1,4 @@
 const Trajet = require('../db/trajet.schema.js');
-const { find } = require('../db/user.schema.js');
 const utils = require('../utils/utils.js');
 
 const trajetDAO = {

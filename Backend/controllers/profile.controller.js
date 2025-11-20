@@ -1,6 +1,6 @@
 const userDAO = require('../dao/user.dao.js');
 const utils = require('../utils/utils.js');
-const validator = require('validator');
+const agendaDAO = require('../dao/agenda.dao.js');
 
 const profileController = {
     getProfile : async (req,res)=>{
@@ -31,14 +31,9 @@ const profileController = {
             }
             user = user.user
 
-            if (req.body.calendarLink && !validator.isURL(req.body.calendarLink)) {
-                return res.status(400).json({ message: 'Lien de calendrier invalide' });
-            }else if (req.body.calendarLink){
-                try {
-                    await utils.validateCalendar(req.body.calendarLink);
-                } catch (error) {
-                    return res.status(400).json({ message: error.message });
-                }
+            const agenda = await agendaDAO.findAgendaByUrl(req.body.calendarLink);
+            if(agenda == null){
+                await agendaDAO.createAgenda(req.body.calendarLink);
             }
 
             let position = null

@@ -2,6 +2,7 @@ const userDAO = require('../dao/user.dao.js');
 const jwt = require('jsonwebtoken');
 const axios = require('axios');
 const ical = require('node-ical');
+const agendaDAO = require('../dao/agenda.dao.js');
 
 const utils = {
     verifyPassword : (password)=>{
@@ -39,18 +40,6 @@ const utils = {
     },
     isCalendarLinkValid(link){
         return link.startsWith("http://edt-v2.univ-nantes.fr/calendar/ics?")
-    },
-    validateCalendar : async (url) => {
-        try {
-            const response = await axios.get(url);
-            const data = ical.parseICS(response.data);
-            if (Object.keys(data).length === 0) {
-                throw new Error('Le calendrier est vide ou invalide.');
-            }
-        } catch (error) {
-            console.error("Validation Error: ", error);
-            throw new Error('Le lien fourni ne semble pas être un calendrier iCal valide ou est inaccessible.');
-        }
     },
     async geocodeAddress(address) {
         const { numero, rue, codePostal, ville } = address;
@@ -115,13 +104,12 @@ const utils = {
             return [];
         }
         try {
-            const response = await axios.get(calendarUrl);
-            const data = ical.parseICS(response.data);
+            const data = await agendaDAO.getData(calendarUrl)
             const events = [];
             for (const k in data) {
                 if (data.hasOwnProperty(k)) {
                     const ev = data[k];
-                    if (ev.type === 'VEVENT') {
+                    if (ev && ev.type === 'VEVENT') {
                         const eventDate = new Date(ev.start);
                         if (eventDate.toDateString() === date.toDateString()) {
                             events.push(ev);
