@@ -31,9 +31,11 @@ const profileController = {
             }
             user = user.user
 
-            const agenda = await agendaDAO.findAgendaByUrl(req.body.calendarLink);
-            if(agenda == null){
-                await agendaDAO.createAgenda(req.body.calendarLink);
+            if(req.body.calendarLink){
+                const agenda = await agendaDAO.findAgendaByUrl(req.body.calendarLink);
+                if(agenda == null){
+                    await agendaDAO.createAgenda(req.body.calendarLink);
+                }
             }
 
             let position = null
