@@ -98,7 +98,7 @@ function Account() {
                                 <select name="usage" value={formData.usage} onChange={(e) => setFormData({...formData, usage: e.target.value})}>
                                     <option value="Conducteur">Conducteur</option>
                                     <option value="Passager">Passager</option>
-                                    <option value="ConducteurEtPassager">Conducteur et passager</option>
+                                    <option value="Conducteur Et Passager">Conducteur et passager</option>
                                 </select>
                             </p>
 
