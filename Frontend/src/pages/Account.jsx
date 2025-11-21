@@ -14,6 +14,7 @@ function Account() {
     useEffect(() => {
         polyrideDAO.getProfile()
             .then(data => {
+                console.log(data);
                 setUser(data);
             })
             .catch(err => {

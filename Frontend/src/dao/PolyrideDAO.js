@@ -71,18 +71,17 @@ const polyrideDAO = {
         throw new Error(`${response.status} : ${response.statusText}`)
     },
 
-    fetchRegister: async (nom, prenom, dateNaissance, email, password) => {
+    fetchRegister: async (nom, prenom, email, password) => {
         try {
 
             const response = await fetch(config.url + "/auth/register", {
                 method: "POST",
                 headers: baseHeaders,
                 body: JSON.stringify({
-                    nom,
-                    prenom,
-                    dateNaissance,
-                    email,
-                    password,
+                    nom : nom,
+                    prenom : prenom,
+                    email : email,
+                    password : password,
                 }),
             });
 

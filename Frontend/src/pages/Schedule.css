@@ -42,6 +42,17 @@
     margin-top: 15rem;
 }
 
+.scheduleNotConnect {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.scheduleNotConnect Button {
+    width: 9em;
+    padding: 1em;
+}
+
 @media (max-width: 860px) {
     .title_schedule {
         padding: 4rem 2rem 2rem 2rem;

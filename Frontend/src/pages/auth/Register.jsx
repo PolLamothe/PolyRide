@@ -9,7 +9,6 @@ export default function Register() {
 
     const [nom, setNom] = useState("");
     const [prenom, setPrenom] = useState("");
-    const [dateNaissance, setDateNaissance] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
@@ -25,7 +24,6 @@ export default function Register() {
             const result = await polyrideDAO.fetchRegister(
                 nom,
                 prenom,
-                dateNaissance,
                 email,
                 password
             );
@@ -65,12 +63,6 @@ export default function Register() {
                         placeholder="Prénom"
                         value={prenom}
                         onChange={(e) => setPrenom(e.target.value)}
-                        required
-                    />
-                    <input
-                        type="date"
-                        value={dateNaissance}
-                        onChange={(e) => setDateNaissance(e.target.value)}
                         required
                     />
                     <input

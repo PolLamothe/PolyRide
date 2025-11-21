@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import polyrideDAO from "../dao/PolyrideDAO.js";
 import { useNavigate } from "react-router-dom";
 import "./Schedule.css";
+import {Box, Button, Text} from "@radix-ui/themes/dist/esm/index.js";
 
 function Schedule() {
     const [user, setUser] = useState(null);
@@ -73,52 +74,80 @@ function Schedule() {
         }).replace(":", "h");
     };
 
+    const [icsLink, setIcsLink] = useState("");
+
+    const handleClick = () => {
+        console.log(user);
+        polyrideDAO.updateProfile(user.usage, icsLink, user.phoneNumber, user.address.numero, user.address.rue, user.address.codePostal, user.address.ville)
+            .then(() => {
+                window.location.reload();
+            })
+            .catch(err => console.log(err));
+    }
+
     return (
         <>
             <Header />
 
             <div className="schedule">
-                {user && user.calendarLink ? (
-                    schedule ? (
-                        <div className="temp" style={{ width: '100%' }}>
-                            <h2 className="title_schedule">Emploi du temps</h2>
-                            <div className="calendar">
-                                <FullCalendar
-                                    plugins={[timeGridPlugin]}
-                                    initialView={view}
-                                    view={view}
-                                    weekends={false}
-                                    slotMinTime="06:00:00"
-                                    slotMaxTime="21:00:00"
-                                    locale="fr"
-                                    events={events}
-                                    headerToolbar={{
-                                        left: 'prev,next today',
-                                        center: 'title',
-                                        right: 'timeGridWeek,timeGridDay'
-                                    }}
-                                    height="auto"
-                                    eventContent={(info) => {
-                                        const start = formatTime(info.event.start);
-                                        const end = formatTime(info.event.end);
+                {user ? (
+                    user.calendarLink ? (
+                        schedule ? (
+                            <div className="temp" style={{ width: '100%' }}>
+                                <h2 className="title_schedule">Emploi du temps</h2>
+                                <div className="calendar">
+                                    <FullCalendar
+                                        plugins={[timeGridPlugin]}
+                                        initialView={view}
+                                        view={view}
+                                        weekends={false}
+                                        slotMinTime="06:00:00"
+                                        slotMaxTime="21:00:00"
+                                        locale="fr"
+                                        events={events}
+                                        headerToolbar={{
+                                            left: 'prev,next today',
+                                            center: 'title',
+                                            right: 'timeGridWeek,timeGridDay'
+                                        }}
+                                        height="auto"
+                                        eventContent={(info) => {
+                                            const start = formatTime(info.event.start);
+                                            const end = formatTime(info.event.end);
 
-                                        return (
-                                            <div>
-                                                <b>{info.event.title}</b>
-                                                <div className="event-time">{start} - {end}</div>
-                                            </div>
-                                        );
-                                    }}
-                                />
+                                            return (
+                                                <div>
+                                                    <b>{info.event.title}</b>
+                                                    <div className="event-time">{start} - {end}</div>
+                                                </div>
+                                            );
+                                        }}
+                                    />
+                                </div>
                             </div>
-                        </div>
+                        ) : (
+                            <span className="loader">Chargement...</span>
+                        )
                     ) : (
-                        <span className="loader">Chargement...</span>
+                        <div style={{ width: '100%', gap: '2em' }}>
+                            <h2 className="title_schedule">Emploi du temps</h2>
+                            <input className="lien_ICS" placeholder="Insérer un lien ICS..." value={icsLink} onChange={(e) => setIcsLink(e.target.value)}/>
+
+                            <Button style={{width:"9em", padding:"1em"}} onClick={handleClick}>Valider</Button>
+                        </div>
                     )
                 ) : (
-                    <div style={{ width: '100%' }}>
+                    <div className="temp" style={{ width: '100%' }}>
                         <h2 className="title_schedule">Emploi du temps</h2>
-                        <input className="lien_ICS" placeholder="Insérer un lien ICS..." />
+                        <Box className="scheduleNotConnect" style={{padding: "2rem", textAlign: "center"}}>
+                            <Text>Vous devez être connecté pour accéder à cette page.</Text>
+                            <Button
+                                onClick={() => (window.location.href = "/auth/login")}
+                                style={{marginTop: "1rem"}}
+                            >
+                                Se connecter
+                            </Button>
+                        </Box>
                     </div>
                 )}
             </div>
