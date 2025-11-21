@@ -27,7 +27,7 @@ const trajetSchema = new Schema({
         required : true,
         enum : ["aller","retour"]
     }
-})
+},{ timestamps: true })
 
 const Trajet = mongoose.model('Trajet', trajetSchema);
 
