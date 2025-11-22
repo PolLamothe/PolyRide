@@ -52,6 +52,17 @@ function Account() {
                 console.log(err);
             })
     }
+    const deleteAccount =  async () => {
+        const confirmDelete = window.confirm("Voulez-vous vraiment supprimer votre compte ?");
+        if (!confirmDelete) return;
+        try {
+            await polyrideDAO.deleteProfile();
+            document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            setUser(null);
+            navigate("/auth/register");
+        } catch (err) {
+        console.log(err);
+    }
     const login = () => {
         navigate("/auth/login");
     }
@@ -81,6 +92,7 @@ function Account() {
                         <div className="account_form_but">
                             <button onClick={() => editing()}>Modifier les informations</button>
                             <button onClick={() => handleLogout()}>Déconnexion</button>
+                            <button onClick={() => deleteAccount()}>Supprimer le compte</button>
                         </div>
                     </div>
                 )
