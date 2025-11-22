@@ -161,6 +161,22 @@ const polyrideDAO = {
         }
     },
 
+    deleteProfile: async()=> {
+        const response = await fetch(config.url + "/profile/profile",{
+            method: "DELETE",
+            headers:{
+                ...baseHeaders,
+                ...athenticationHeader()
+            }
+        });
+        if (response.status == 200 || response. status == 204){
+            return true
+        } else {
+            throw new Error('${response.status} : ${response.statusText}')
+        }
+    },
+
+    
     getProposal: async (time, day) =>{
         const response = await fetch(config.url + "/trajet/proposal", {
             method: "POST",
