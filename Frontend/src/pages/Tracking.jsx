@@ -3,6 +3,7 @@ import Header from "../components/Header.jsx";
 import { useState, useEffect } from "react";
 import "./Tracking.css";
 import {Box} from "@radix-ui/themes";
+import PassagerSuiviRequete from "../components/PassagerSuiviRequete.jsx";
 
 
 function Tracking(){
@@ -61,7 +62,9 @@ function Tracking(){
                         <h2>Demandes de trajets reçues</h2>
                         {passengerRequest ? (
                             passengerRequest.map((passenger, index) => (
-                                <span key={index} style={{padding: "2em"}}>{passenger.passager}</span>
+                                <div>
+                                    <span key={index} style={{padding: "2em"}}>{passenger.passager}</span>
+                                </div>
                             ))
                         ) : (
                             <span>Chargement ...</span>
@@ -73,7 +76,9 @@ function Tracking(){
                         <h2>Demandes de trajets envoyées</h2>
                         {myDriverRequest ? (
                             myDriverRequest.map((driver, index) => (
-                                <span key={index} style={{padding: "2em"}}>{driver.conducteur}</span>
+                                <div>
+                                    <PassagerSuiviRequete trajet={driver}></PassagerSuiviRequete>
+                                </div>
                             ))
                         ) : (
                             <span>Chargement ...</span>

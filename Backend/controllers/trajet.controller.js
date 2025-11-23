@@ -55,9 +55,24 @@ const trajetController = {
             let response = {}
             if(await utils.isUserDriver(user)){
                 response.driver = await trajetDAO.getDriverTrajetRequest(user)
+                response.driver = await response.driver.map(async trajet => ({
+                        ...trajet._doc,
+                        driverName: utils.extractUserNameFromEmail(trajet.conducteur),
+                        passengerName: utils.extractUserNameFromEmail(trajet.passager),
+                        distance : await utils.getDistanceBetweenTwoUsers(trajet.conducteur,trajet.passager)
+                    }));
+                response.driver = await Promise.all(response.driver);
             }
             if(await utils.isUserPassenger(user)){
                 response.passenger = await trajetDAO.getPassengerTrajetRequest(user)
+                response.passenger = await response.passenger.map(async trajet => ({
+                        ...trajet._doc,
+                        driverName: utils.extractUserNameFromEmail(trajet.conducteur),
+                        passengerName: utils.extractUserNameFromEmail(trajet.passager),
+                        distance: await utils.getDistanceBetweenTwoUsers(trajet.passager,trajet.conducteur)
+                    }));                
+                response.passenger = await Promise.all(response.passenger);
+
             }
             return res.send(response)
         }catch(e){

@@ -14,7 +14,7 @@ const profileController = {
             return res.status(200).json({
                 email : user.email,
                 calendarLink : user.calendarLink,
-                userName : user.email.split(".")[0].charAt(0).toUpperCase() + user.email.split(".")[0].slice(1)+" "+(user.email.split(".")[1]).split("@")[0].toUpperCase(),
+                userName : utils.extractUserNameFromEmail(user.email),
                 usage : user.usage,
                 address : user.adresse,
                 phoneNumber : user.phoneNumber

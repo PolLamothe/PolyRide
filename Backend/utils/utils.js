@@ -5,6 +5,19 @@ const ical = require('node-ical');
 const agendaDAO = require('../dao/agenda.dao.js');
 
 const utils = {
+    extractUserNameFromEmail: (email) => {
+        if (!email || !email.includes('@')) {
+            return null; 
+        }
+        const namePart = email.split("@")[0];
+        const names = namePart.split(".");
+        if (names.length < 2) {
+            return names[0].charAt(0).toUpperCase() + names[0].slice(1);
+        }
+        const firstName = names[0].charAt(0).toUpperCase() + names[0].slice(1);
+        const lastName = names[1].toUpperCase();
+        return `${firstName} ${lastName}`;
+    },
     verifyPassword : (password)=>{
         if (password.length < 9){
             return false
@@ -198,6 +211,14 @@ const utils = {
 
     async isUserPassenger(user){
         return user.usage == "Passager" || user.usage == "Conducteur et Passager"
+    },
+
+    async getDistanceBetweenTwoUsers(user1Email,user2Email){
+        const user1 = await userDAO.findUserByEmail(user1Email)
+        const user2 = await userDAO.findUserByEmail(user2Email)
+
+        return this.getDistance(user1.position.coordinates[0],user1.position.coordinates[1],user2.position.coordinates[0],user2.position.coordinates[1])
+
     }
 }
 
