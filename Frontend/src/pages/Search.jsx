@@ -3,7 +3,6 @@ import {Box, Button, Text} from "@radix-ui/themes";
 import {useEffect, useState} from "react";
 import "./Search.css";
 import ResultSearchCard from "../components/ResultSearchCard.jsx";
-import ActiveRequestCard from "../components/ActiveRequestCard.jsx";
 import polyrideDAO from "../dao/PolyrideDAO.js";
 
 function getDateOfCurrentWeek(dayName) {
@@ -50,61 +49,32 @@ function Search() {
     const [direction, setDirection] = useState("start");
     const [trajet, setTrajet] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [myActiveRequest, setMyActiveRequest] = useState(null);
 
     useEffect(() => {
         const token = getCookie("token");
         setIsConnected(!!token);
     }, []);
 
-    // Fonction pour charger la requête active
-    const loadActiveRequest = async (selectedDay) => {
-        const dateKey = getDateOfCurrentWeek(selectedDay);
-        
-        try {
-            const response = await fetch(`https://api.polyride.fr/api/rides/my-request?date=${dateKey}`, {
-                method: "GET",
-                headers: {
-                    'Authorization': `Bearer ${getCookie("token")}`
-                }
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                setMyActiveRequest(data.request || null);
-            } else {
-                setMyActiveRequest(null);
-            }
-        } catch (err) {
-            console.log("Erreur loadActiveRequest:", err);
-            setMyActiveRequest(null);
-        }
-    };
-
-    // Callback quand une demande est annulée
-    const handleRequestCancelled = () => {
-        setMyActiveRequest(null);
-    };
 
     const allProposal = async (selectedDay, selectedDirection = direction) => {
         const dateKey = getDateOfCurrentWeek(selectedDay);
         await getTrajets(selectedDirection, dateKey);
-        await loadActiveRequest(selectedDay);
     };
 
     const getTrajets = async (direction, date) => {
-        setLoading(true);
+        setLoading(true);   // début chargement
 
         polyrideDAO.getProposal(direction, date)
             .then((res) => {
                 setTrajet(res);
             })
             .catch((err) => console.log("Erreur getTrajets:", err))
-            .finally(() => setLoading(false));
+            .finally(() => setLoading(false));   // fin chargement
     };
 
+
     const dayComponents = (traj) => {
-        if (loading) return <Text className="loading-text">Chargement...</Text>;
+        if (loading) return <Text>Chargement...</Text>;
 
         if (!traj || traj.length === 0)
             return <Text>Aucun trajet trouvé.</Text>;
@@ -129,11 +99,12 @@ function Search() {
         );
     };
 
+
     useEffect(() => {
         const dateKey = getDateOfCurrentWeek(day);
         getTrajets(direction, dateKey);
-        loadActiveRequest(day);
     }, []);
+
 
     return (
         <>
@@ -161,6 +132,12 @@ function Search() {
                                 setDay(selectedDay);
                                 allProposal(selectedDay);
                             }}
+                            style={{
+                                fontSize: "1rem",
+                                borderRadius: "8px",
+                                border: "1px solid #ccc",
+                                cursor: "pointer",
+                            }}
                         >
                             <option value="Lundi">Lundi</option>
                             <option value="Mardi">Mardi</option>
@@ -178,17 +155,17 @@ function Search() {
                                 setDirection(newDirection);
                                 allProposal(day, newDirection);
                             }}
+                            style={{
+                                fontSize: "1rem",
+                                borderRadius: "8px",
+                                border: "1px solid #ccc",
+                                cursor: "pointer",
+                            }}
                         >
                             <option value="start">Aller à Polytech</option>
                             <option value="end">Partir de Polytech</option>
                         </select>
                     </Box>
-
-                    {/* Composant de requête active */}
-                    <ActiveRequestCard 
-                        request={myActiveRequest}
-                        onRequestCancelled={handleRequestCancelled}
-                    />
 
                     <Box pt="3">{dayComponents(trajet)}</Box>
                 </div>
