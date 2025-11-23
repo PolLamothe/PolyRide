@@ -16,6 +16,7 @@ const Header = () => {
             "/schedule": "Emploi du Temps",
             "/account": "Compte",
             "/search": "Recherche",
+            "/tracking": "Suivi",
         };
         setActive(pathToLink[location.pathname] || "");
     }, [location.pathname]);
@@ -23,6 +24,7 @@ const Header = () => {
     const links = [
         "Accueil",
         "Recherche",
+        "Suivi",
         "Emploi du Temps",
         "Compte",
         "À propos",
@@ -32,6 +34,7 @@ const Header = () => {
         const linkToPath = {
             "Accueil": "/",
             "Recherche": "/search",
+            "Suivi" : "/tracking",
             "Emploi du Temps": "/schedule",
             "Compte": "/account",
             "À propos": "/about",

@@ -10,6 +10,7 @@ import Home from "./pages/Home.jsx";
 import Search from "./pages/Search.jsx";
 import About from "./pages/About.jsx";
 import Schedule from "./pages/Schedule.jsx";
+import Tracking from "./pages/Tracking.jsx"
 
 const appBasename = import.meta.env.VITE_ROUTER_BASE || '/';
 
@@ -24,6 +25,7 @@ createRoot(document.getElementById('root')).render(
       <Route path="/about" element={<About />} />
       <Route path="/schedule" element={<Schedule />} />
       <Route path="/account" element={<Account />} />
+      <Route path="/tracking" element={<Tracking />}/>
 
       {/* Routes d'authentification */}
       <Route path="/auth" element={<Auth />}>
