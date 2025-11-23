@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import {Box, Button, Text} from "@radix-ui/themes";
 import polyrideDAO from "../dao/PolyrideDAO";
 import Header from "../components/Header.jsx";
 import './Account.css'
@@ -78,11 +79,11 @@ function Account() {
         <>
             <Header />
             <div className="account">
+                <h2 className="title_account">Informations du compte</h2>
                 {/* affichage sans modif */}
                 {user && !isEditing && (
                     <div>
                         <div className="account_form">
-                            <h2 className="title_account">Informations du compte</h2>
                             <p><strong>Nom d'utilisateur:</strong> {user.userName}</p>
                             <p><strong>Email:</strong> {user.email}</p>
                             <p><strong>Usage:</strong> {user.usage || 'Non renseigné'}</p>
@@ -102,7 +103,6 @@ function Account() {
                 {user && isEditing && (
                     <div>
                         <div className="account_form">
-                            <h2 className="title_account">Informations du compte</h2>
                             <p><strong>Emploi du temps :</strong> <input type="text" value={formData.calendarLink}
                                 onChange={(e) => setFormData({ ...formData, calendarLink: e.target.value })} /> </p>
                             <p><strong>Numéro de téléphone:</strong> <input type="text" value={formData.phoneNumber}
@@ -175,10 +175,15 @@ function Account() {
                 }
                 {/* affichage si non connecté */}
                 {!user && (
-                    <div style={{ marginTop: '100px' }}>
-                        <button onClick={() => login()}>Se Connecter</button>
-                        <button onClick={() => register()}>S'inscrire</button>
-                    </div>
+                    <Box className="searchNotConnect" style={{ padding: "2rem", textAlign: "center" }}>
+                        <Text>Vous devez être connecté pour accéder à cette page.</Text>
+                        <Button
+                            onClick={() => (window.location.href = "/auth/login")}
+                            style={{ marginTop: "1rem" }}
+                        >
+                            Se connecter
+                        </Button>
+                    </Box>
                 )}
             </div>
         </>

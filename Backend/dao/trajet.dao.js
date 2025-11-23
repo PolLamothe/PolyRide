@@ -42,6 +42,11 @@ const trajetDAO = {
         return await Trajet.find({passager : user.email, jour : {$gte : new Date()}})
 
     },
+
+    deleteUserTrajet : async(user)=>{
+        return await Trajet.deleteMany({$or : [{passager : user.email},{conducteur : user.email}]})
+    },
+
     removeAll: async () => {
         return await Trajet.deleteMany({});
     }

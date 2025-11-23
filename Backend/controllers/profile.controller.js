@@ -1,6 +1,7 @@
 const userDAO = require('../dao/user.dao.js');
 const utils = require('../utils/utils.js');
 const agendaDAO = require('../dao/agenda.dao.js');
+const trajetDAO = require('../dao/trajet.dao.js');
 
 const profileController = {
     getProfile : async (req,res)=>{
@@ -66,6 +67,7 @@ const profileController = {
             }
             user = user.user
             await userDAO.deleteUser(user.email);
+            await trajetDAO.deleteUserTrajet(user)
             return res.status(200).json({ message: "Profil supprimé avec succès." });
         }catch(e){
             console.log("[PROFILE ERROR] : ",e)
