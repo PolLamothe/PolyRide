@@ -62,14 +62,14 @@ function Search() {
     };
 
     const getTrajets = async (direction, date) => {
-        setLoading(true);   // début chargement
+        setLoading(true);
 
         polyrideDAO.getProposal(direction, date)
             .then((res) => {
                 setTrajet(res);
             })
             .catch((err) => console.log("Erreur getTrajets:", err))
-            .finally(() => setLoading(false));   // fin chargement
+            .finally(() => setLoading(false));
     };
 
 
@@ -83,6 +83,8 @@ function Search() {
             <div className="gridCard">
                 {traj.map((element, index) => {
                     const { prenom, nom } = getNameFromEmail(element.email);
+                    const dateKey = getDateOfCurrentWeek(day);
+                    const iso = new Date(dateKey + "T00:00:00Z").toISOString();
 
                     return (
                         <ResultSearchCard
@@ -92,6 +94,8 @@ function Search() {
                             temps={element.difference}
                             when={direction}
                             distance={Number(element.distance).toFixed(2)}
+                            conducteur={element.email}
+                            jour={iso}
                         />
                     );
                 })}

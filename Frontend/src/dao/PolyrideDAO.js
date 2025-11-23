@@ -194,6 +194,26 @@ const polyrideDAO = {
         } else {
             throw new Error(`${response.status} : ${response.statusText}`);
         }
+    },
+
+    askForTrajet: async (conducteur, jour, direction) => {
+        const response = await fetch(config.url + "/trajet/ask", {
+            method: "POST",
+            headers: {
+                ...baseHeaders,
+                ...athenticationHeader(),
+            },
+            body: JSON.stringify({
+                conducteur: conducteur,
+                jour: jour,
+                direction: direction
+            })
+        })
+        if (response.status === 200) {
+            return await response.json();
+        } else {
+            throw new Error(`${response.status} : ${response.statusText}`);
+        }
     }
 
 }
