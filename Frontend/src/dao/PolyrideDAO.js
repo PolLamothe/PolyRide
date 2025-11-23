@@ -214,6 +214,21 @@ const polyrideDAO = {
         } else {
             throw new Error(`${response.status} : ${response.statusText}`);
         }
+    },
+
+    getTrajetRequest: async () => {
+        const response = await fetch(config.url + "/trajet/request", {
+            method: "GET",
+            headers: {
+                ...baseHeaders,
+                ...athenticationHeader()
+            }
+        })
+        if (response.status === 200) {
+            return await response.json();
+        } else {
+            throw new Error(`${response.status} : ${response.statusText}`);
+        }
     }
 
 }

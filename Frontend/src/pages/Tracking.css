@@ -1,3 +1,46 @@
 #activeUsageButton{
-    border-bottom: solid 2px black;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 6px;
+}
+
+.title_Tracking {
+    padding:6rem;
+    text-align: center;
+    margin-bottom:2em;
+    background: linear-gradient(135deg, #1a9ba8 0%, #2bb4c4 100%);
+    color: white;
+}
+
+.buttonChoice {
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+    margin-bottom: 4em;
+}
+
+.buttonChoice button {
+    padding: 1em;
+    width: 200px;
+}
+
+.mainContent {
+    display: flex;
+    flex-direction: column;
+    margin-left: 5%;
+    width: 90%;
+}
+
+@media (max-width: 860px) {
+    .title_Tracking {
+        padding: 4rem 2rem 2rem 2rem;
+    }
+
+    .buttonChoice {
+        flex-direction: column;
+        gap: 1em;
+        align-items: center;
+    }
 }
