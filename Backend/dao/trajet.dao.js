@@ -6,6 +6,10 @@ const trajetDAO = {
         if(direction != "aller" && direction != "retour"){
             throw Error("Direction invalide")
         }
+        let trajet = await trajetDAO.findPreciseTrajet(conducteur,passager,jour,direction)
+        if(trajet != null){
+            return trajet
+        }
         return await Trajet.create({conducteur,passager,jour,direction})
     },
 
@@ -49,6 +53,9 @@ const trajetDAO = {
 
     removeAll: async () => {
         return await Trajet.deleteMany({});
+    },
+    findPreciseTrajet: async(conducteur,passager,jour,direction) =>{
+        return await Trajet.findOne({conducteur : conducteur, passager : passager, jour : jour, direction : direction})
     }
 }
 
