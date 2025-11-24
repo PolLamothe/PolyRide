@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import Header from "../components/Header.jsx";
 import {Box, Button, Text} from "@radix-ui/themes";
 import {useEffect, useState} from "react";
@@ -44,6 +45,7 @@ function getCookie(name) {
 }
 
 function Search() {
+    const navigate = useNavigate();
     const [isConnected, setIsConnected] = useState(false);
     const [day, setDay] = useState("Lundi");
     const [direction, setDirection] = useState("start");
@@ -120,7 +122,7 @@ function Search() {
                 <Box className="searchNotConnect" style={{ padding: "2rem", textAlign: "center" }}>
                     <Text>Vous devez être connecté pour accéder à cette page.</Text>
                     <Button
-                        onClick={() => (window.location.href = "/auth/login")}
+                        onClick={() => navigate("/auth/login")}
                         style={{ marginTop: "1rem" }}
                     >
                         Se connecter
