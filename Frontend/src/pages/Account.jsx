@@ -163,7 +163,7 @@ function Account() {
                                     })}
                                 />
                             </p>
-                            <button onClick={()=>{navigate("/tutoedt")}} style={{width : "fit-content",padding : "10px"}}>Comment trouver mon emploi du temp</button>
+                            <button onClick={()=>{navigate("/tutoedt")}} style={{width : "fit-content",padding : "10px"}}>Comment trouver mon emploi du temps</button>
 
                         </div>
 
