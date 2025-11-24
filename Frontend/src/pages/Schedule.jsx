@@ -132,7 +132,7 @@ function Schedule() {
                         <div style={{ width: '100%', gap: '2em' }}>
                             <h2 className="title_schedule">Emploi du temps</h2>
                             <input className="lien_ICS" placeholder="Insérer un lien ICS..." value={icsLink} onChange={(e) => setIcsLink(e.target.value)}/>
-                            <a href="" className="test" onClick={() => navigate("/tutoedt")}>Besoin d'aide ?</a>
+                            <a href="" className="test" onClick={() => navigate("/tutoedt")}>Comment faire ?</a>
                             <Button style={{width:"9em", padding:"1em"}} onClick={handleClick}>Valider</Button>
                         </div>
                     )
