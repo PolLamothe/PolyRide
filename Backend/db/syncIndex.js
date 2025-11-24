@@ -14,8 +14,8 @@ async function syncDatabase() {
     console.log('Trajet model is registered.');
 
     // You can optionally force index creation if needed, but it's often automatic.
-    // await User.createIndexes();
-    // await Trajet.createIndexes();
+    await User.createIndexes();
+    await Trajet.createIndexes();
     // console.log('Indexes have been ensured.');
 
   } catch (error) {
