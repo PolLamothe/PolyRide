@@ -219,6 +219,13 @@ const utils = {
 
         return this.getDistance(user1.position.coordinates[0],user1.position.coordinates[1],user2.position.coordinates[0],user2.position.coordinates[1])
 
+    },
+
+    async isTrajetSame(conducteur1,conducteur2,passenger1,passenger2,jour1,jour2,direction1,direction2){
+        if(conducteur1 != conducteur2 || passenger1 != passenger2 || jour1 != jour2 || direction1 != direction2){
+            return false
+        }
+        return true
     }
 }
 

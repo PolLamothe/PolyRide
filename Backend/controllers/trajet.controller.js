@@ -13,8 +13,23 @@ const trajetController = {
             user = user.user
             let nearestUsers = await userDAO.getNearestDriver(user)
             let result = []
+            const userTrajet = await trajetDAO.getPassengerTrajetRequest(user)
             for (const thisUser of nearestUsers) {
                 let difference;
+
+                let trajetAlreadyRequested = false
+                for(const trajet of userTrajet){
+                    let temp = req.body.time == "start" ? "aller" : "retour"
+                    console.log(thisUser.email,trajet.conducteur,user.email,trajet.passager,trajet.jour.toLocaleDateString(),new Date(req.body.day).toLocaleDateString(),trajet.direction,temp)
+                    if(await utils.isTrajetSame(thisUser.email,trajet.conducteur,user.email,trajet.passager,trajet.jour.toLocaleDateString(),new Date(req.body.day).toLocaleDateString(),trajet.direction,temp)){
+                        trajetAlreadyRequested = true
+                        break
+                    }
+                }
+                if(trajetAlreadyRequested){
+                    continue
+                }
+
                 if(req.body.time == "start"){
                     difference = await utils.startTimeDifference(user, thisUser, new Date(req.body.day));
                 }else if (req.body.time == "end"){
@@ -59,7 +74,8 @@ const trajetController = {
                         ...trajet._doc,
                         driverName: utils.extractUserNameFromEmail(trajet.conducteur),
                         passengerName: utils.extractUserNameFromEmail(trajet.passager),
-                        distance : await utils.getDistanceBetweenTwoUsers(trajet.conducteur,trajet.passager)
+                        distance : await utils.getDistanceBetweenTwoUsers(trajet.conducteur,trajet.passager),
+                        telephone : trajet.état == "Accepté" ? (await userDAO.findUserByEmail(trajet.passager)).phoneNumber : null
                     }));
                 response.driver = await Promise.all(response.driver);
             }
@@ -69,7 +85,8 @@ const trajetController = {
                         ...trajet._doc,
                         driverName: utils.extractUserNameFromEmail(trajet.conducteur),
                         passengerName: utils.extractUserNameFromEmail(trajet.passager),
-                        distance: await utils.getDistanceBetweenTwoUsers(trajet.passager,trajet.conducteur)
+                        distance: await utils.getDistanceBetweenTwoUsers(trajet.passager,trajet.conducteur),
+                        telephone : trajet.état == "Accepté" ? (await userDAO.findUserByEmail(trajet.conducteur)).phoneNumber : null
                     }));                
                 response.passenger = await Promise.all(response.passenger);
 

@@ -14,6 +14,9 @@ function PassagerSuiviRequete(trajet){
                     ): <p>Ce trajet est de l'école vers votre domicile</p>}
                     <p>Etat de la requête : {trajet.état}</p>
                     <p>Date du trajet : {new Date(trajet.jour).toLocaleDateString()}</p>
+                    {trajet.telephone && (
+                        <p>Numéro de téléphone : {trajet.telephone}</p>
+                    )} 
                 </div>
             </Card>
         </Box>
