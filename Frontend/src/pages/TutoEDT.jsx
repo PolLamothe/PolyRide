@@ -22,7 +22,7 @@ export default function TutoEDT() {
       <ol style={{"--length": 4}} role="list">
 	<li style={{"--i": 1}}>
 		<h3>Aller sur la page "Emploi du temps"</h3>
-		<p>Commence par accéder au service "Emploi du temps" de Nantes Université via le <a href="http://edt.univ-nantes.fr/">lien suivant</a> (accessible depuis l'intranet).</p>
+		<p>Commence par accéder au service "Emploi du temps" de Nantes Université via le <a href="http://edt.univ-nantes.fr/" target="_blank">lien suivant</a> (accessible depuis l'intranet).</p>
 	</li>
 	<li style={{"--i": 2}}>
 		<h3>Accès aux emplois du temps</h3>
