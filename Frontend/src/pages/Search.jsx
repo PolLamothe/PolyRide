@@ -51,10 +51,29 @@ function Search() {
     const [direction, setDirection] = useState("start");
     const [trajet, setTrajet] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [badProfile,setBadProfile] = useState();
 
     useEffect(() => {
-        const token = getCookie("token");
-        setIsConnected(!!token);
+        const checkProfile = async () => {
+            const token = getCookie("token");
+            setIsConnected(!!token);
+            if (token) {
+                try {
+                    const user = await polyrideDAO.getProfile();
+                    if(user.calendarLink == null || user.usage == null || user.address == null){
+                        setBadProfile(true);
+                    }else{
+                        setBadProfile(false);
+                    }
+                } catch(e) {
+                    console.error("Failed to get profile:", e);
+                    setBadProfile(true);
+                }
+            } else {
+                setBadProfile(true);
+            }
+        };
+        checkProfile();
     }, []);
 
 
@@ -129,7 +148,11 @@ function Search() {
                     </Button>
                 </Box>
             ) : (
-                <div className="search">
+
+                badProfile ?(
+                    <p>Veuillez renseigner vos informations pour pouvoir utiliser la recherche</p>
+                ) : (
+                    <div className="search">
                     <Box mb="4">
                         <select
                             value={day}
@@ -175,6 +198,7 @@ function Search() {
 
                     <Box pt="3">{dayComponents(trajet)}</Box>
                 </div>
+                )
             )}
         </>
     );
