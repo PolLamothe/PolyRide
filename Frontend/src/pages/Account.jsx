@@ -178,7 +178,7 @@ function Account() {
                     <Box className="searchNotConnect" style={{ padding: "2rem", textAlign: "center" }}>
                         <Text>Vous devez être connecté pour accéder à cette page.</Text>
                         <Button
-                            onClick={() => (window.location.href = "/auth/login")}
+                            onClick={() => (navigate("/auth/login"))}
                             style={{ marginTop: "1rem" }}
                         >
                             Se connecter
