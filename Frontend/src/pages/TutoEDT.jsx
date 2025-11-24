@@ -21,20 +21,21 @@ export default function TutoEDT() {
 
       <ol style={{"--length": 4}} role="list">
 	<li style={{"--i": 1}}>
-		<h3>Accès au service "Emploi du temps"</h3>
+		<h3>Aller sur la page "Emploi du temps"</h3>
 		<p>Commence par accéder au service "Emploi du temps" de Nantes Université via le <a href="http://edt.univ-nantes.fr/">lien suivant</a> (accessible depuis l'intranet).</p>
 	</li>
 	<li style={{"--i": 2}}>
-		<h3>ETAPE 2</h3>
-		<p>La page est down, compléter quand c'est réglé</p>
+		<h3>Accès aux emplois du temps</h3>
+		<p>Sur la page des emplois du temps, sélectionne Polytech en cliquant sur "Nouvelle version" (penses bien à sélectionner cette nouvelle version, sinon tu n'aura pas accès au lien ICS !)</p>
 	</li>
     <li style={{"--i": 3}}>
-		<h3>ETAPE 3</h3>
-		<p>La page est down, compléter quand c'est réglé</p>
+		<h3>Sélection de l'emploi du temps</h3>
+		<p>Dans le menu de la sélection de groupes, coche toutes les cases auxquelles tu appartiens (n'oublies pas les groupes de langues, UE supplémentaires, ...)</p>
 	</li>
 	<li style={{"--i": 4}}>
-		<h3>ETAPE 4</h3>
-		<p>La page est down, compléter quand c'est réglé</p>
+		<h3>Export du lien ICS</h3>
+		<p>Une fois ton emploi du temps complété avec les cases du menu, il te suffit d'appuyer sur le bouton "Export ICS", situé en haut à droite de l'emploi du temps, à côté du bouton pour imprimer.
+      Il te suffit désormais de copier ton lien ICS et de le coller <a href="" onClick={() => navigate("/schedule")}>ici</a>! </p>
 	</li>
 </ol>
     </div>
