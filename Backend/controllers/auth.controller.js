@@ -22,7 +22,7 @@ const authController = {
 	        const token = jwt.sign(
 	  		{ userId: newUser._id, email: newUser.email },
 	  		process.env.JWT_SECRET,
-	  		{ expiresIn: '24h' }
+	  		{ expiresIn: '7d' }
 	  	  );
 	  
 	  	  res.status(201).json({ 
@@ -57,7 +57,7 @@ const authController = {
 	  const token = jwt.sign(
 		{ userId: user._id, email: user.email },
 		process.env.JWT_SECRET,
-		{ expiresIn: '24h' }
+		{ expiresIn: '7d' }
 	  );
 
 	  res.status(200).json({ 

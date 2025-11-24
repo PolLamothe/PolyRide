@@ -44,7 +44,7 @@ const polyrideDAO = {
             })
             if (result.status === 200) {
                 const data = await result.json();
-                setCookie("token", data.token, 24);
+                setCookie("token", data.token, 24*7);
                 return true
             }
         }
@@ -63,7 +63,7 @@ const polyrideDAO = {
         })
         if(response.status === 200) {
             let newToken = await response.json()
-            setCookie("token", newToken.token, 24)
+            setCookie("token", newToken.token, 24*7)
             return true
         } else if (response.status === 401) {
             return false
@@ -85,7 +85,7 @@ const polyrideDAO = {
 
             if (response.status === 200 || response.status === 201) {
                 const data = await response.json();
-                setCookie("token", data.token, 24);
+                setCookie("token", data.token, 24*7);
                 return true;
             } else {
                 const errorData = await response.json().catch(() => ({}));
