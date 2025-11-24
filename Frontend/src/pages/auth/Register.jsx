@@ -22,8 +22,6 @@ export default function Register() {
 
         try {
             const result = await polyrideDAO.fetchRegister(
-                nom,
-                prenom,
                 email,
                 password
             );
@@ -51,20 +49,6 @@ export default function Register() {
                 {error && <div className="error-message">{error}</div>}
 
                 <form onSubmit={handleSubmit}>
-                    <input
-                        type="text"
-                        placeholder="Nom"
-                        value={nom}
-                        onChange={(e) => setNom(e.target.value)}
-                        required
-                    />
-                    <input
-                        type="text"
-                        placeholder="Prénom"
-                        value={prenom}
-                        onChange={(e) => setPrenom(e.target.value)}
-                        required
-                    />
                     <input
                         type="email"
                         placeholder="Email universitaire"
