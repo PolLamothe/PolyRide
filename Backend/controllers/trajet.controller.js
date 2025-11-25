@@ -20,7 +20,6 @@ const trajetController = {
                 let trajetAlreadyRequested = false
                 for(const trajet of userTrajet){
                     let temp = req.body.time == "start" ? "aller" : "retour"
-                    console.log(thisUser.email,trajet.conducteur,user.email,trajet.passager,trajet.jour.toLocaleDateString(),new Date(req.body.day).toLocaleDateString(),trajet.direction,temp)
                     if(await utils.isTrajetSame(thisUser.email,trajet.conducteur,user.email,trajet.passager,trajet.jour.toLocaleDateString(),new Date(req.body.day).toLocaleDateString(),trajet.direction,temp)){
                         trajetAlreadyRequested = true
                         break
