@@ -24,7 +24,7 @@ function ConducteurDemande({trajet, onTrajetUpdate}){
     return <Box className="replyTrajetBox">
             <Card>
                 <div className="replyTrajetInfos">
-                    <div>{trajet.driverName} - Habite à environ {Math.round(trajet.distance*10)/10} Km de votre domicile</div>
+                    <div>{trajet.passengerName} - Habite à environ {Math.round(trajet.distance*10)/10} Km de votre domicile</div>
                     {trajet.direction === "aller" ? (
                         <p>Ce trajet est de votre domicile vers l'école</p>
                     ): <p>Ce trajet est de l'école vers votre domicile</p>}
