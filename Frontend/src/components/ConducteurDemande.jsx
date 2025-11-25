@@ -1,16 +1,15 @@
 import "./ConducteurDemande.css";
 import {Box, Card} from "@radix-ui/themes";
 import polyrideDAO from "../dao/PolyrideDAO.js";
-import {useState} from "react";
 
-function ConducteurDemande(trajet){
-    trajet = trajet.trajet
+function ConducteurDemande({trajet, onTrajetUpdate}){
     console.log("trajet : ",trajet)
 
     const handleRefuse = async (trajectID) => {
         polyrideDAO.replyTrajet(trajectID, 'refuse')
             .then(result => {
                 console.log("denyTrajet lancé",result);
+                onTrajetUpdate();
             })
             .catch(error => {})
     }
@@ -18,6 +17,7 @@ function ConducteurDemande(trajet){
         polyrideDAO.replyTrajet(trajectID, 'accept')
             .then(result => {
                 console.log("acceptTrajet lancé",result);
+                onTrajetUpdate();
             })
             .catch(error => {})
     }

@@ -17,6 +17,17 @@ function Tracking(){
     // Nouveau state pour afficher le message d’erreur / succès
     const [feedback, setFeedback] = useState(null);
 
+    const refreshTrajets = () => {
+        polyrideDAO.getTrajetRequest()
+            .then(data => {
+                setPassengerRequest(data.driver);
+                setMyDriverRequest(data.passenger);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
+
     useEffect(() => {
         polyrideDAO.getProfile()
             .then(data => {
@@ -31,11 +42,10 @@ function Tracking(){
                 console.log(err);
             });
 
+        refreshTrajets();
+
         polyrideDAO.getTrajetRequest()
             .then(data => {
-                setPassengerRequest(data.driver);
-                setMyDriverRequest(data.passenger);
-
                 if (data.message === "request_sent") {
                     setFeedback({ type: "success", text: "Votre demande de trajet a bien été envoyée !" });
                 }
@@ -97,7 +107,7 @@ function Tracking(){
                                 <span style={{marginTop:"2em"}}>Vous n'avez envoyé aucune demande de trajet pour cette semaine</span>
                                 :
                                 passengerRequest.map((passenger) => (
-                                    <ConducteurDemande trajet={passenger}></ConducteurDemande>
+                                    <ConducteurDemande trajet={passenger} onTrajetUpdate={refreshTrajets}></ConducteurDemande>
                                 ))
                         ) : (
                             <span>Chargement ...</span>
