@@ -8,12 +8,24 @@ function ResultSearchCard({prenom, nom, distance, temps, when, conducteur, jour}
         when === "start" ? "aller" : "retour"
     );
 
+    const [popupMessage, setPopupMessage] = useState(""); // ➤ popup
+
     const handleSubmit = async (conducteur, jour, direction) => {
         polyrideDAO.askForTrajet(conducteur, jour, direction)
             .then(result => {
-                console.log("askTrajet lancé",result);
+                console.log("askTrajet lancé", result);
+
+                // ➤ Affiche le popup :
+                setPopupMessage("Votre demande a été envoyée !");
+
+                // ➤ Fermeture automatique après 3s
+                setTimeout(() => setPopupMessage(""), 3000);
             })
-            .catch(error => {})
+            .catch(error => {
+                console.error(error);
+                setPopupMessage("Une erreur est survenue.");
+                setTimeout(() => setPopupMessage(""), 3000);
+            });
     }
 
     return (
@@ -34,14 +46,22 @@ function ResultSearchCard({prenom, nom, distance, temps, when, conducteur, jour}
                             <div>Vous finissez les cours avec {temps} min d'écarts</div>
                         )
                     )}
-
-
                 </div>
 
                 <div className="ResultSearchCardButton">
-                    <button className="askButton" onClick={() => handleSubmit(conducteur, jour, direction)}>Demander</button>
+                    <button className="askButton"
+                            onClick={() => handleSubmit(conducteur, jour, direction)}>
+                        Demander
+                    </button>
                 </div>
             </Card>
+
+            {/* ➤ POPUP temporaire */}
+            {popupMessage && (
+                <div className="popupMessage">
+                    {popupMessage}
+                </div>
+            )}
         </Box>
     )
 }

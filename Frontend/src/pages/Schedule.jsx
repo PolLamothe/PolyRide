@@ -77,7 +77,7 @@ function Schedule() {
     const [icsLink, setIcsLink] = useState("");
 
     const handleClick = () => {
-        console.log(user);
+        console.log("sss",user);
         polyrideDAO.updateProfile(user.usage, icsLink, user.phoneNumber, user.address.numero, user.address.rue, user.address.codePostal, user.address.ville)
             .then(() => {
                 window.location.reload();
@@ -131,9 +131,9 @@ function Schedule() {
                     ) : (
                         <div style={{ width: '100%', gap: '2em' }}>
                             <h2 className="title_schedule">Emploi du temps</h2>
-                            <input className="lien_ICS" placeholder="Insérer un lien ICS..." value={icsLink} onChange={(e) => setIcsLink(e.target.value)}/>
-                            <a href="" className="test" onClick={() => navigate("/tutoedt")}>Comment faire ?</a>
-                            <Button style={{width:"9em", padding:"1em"}} onClick={handleClick}>Valider</Button>
+                            <h4>Insérer un lien ICS dans les paramètres de votre profil</h4>
+                            <a href="" className="test" onClick={() => navigate("/tutoedt")}>Besoin d'aide ?</a>
+                            <Button style={{width:"9em", padding:"1em"}} onClick={() => (window.location.href = "/account")}>Compte</Button>
                         </div>
                     )
                 ) : (

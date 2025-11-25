@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import "./Tracking.css";
 import {Box} from "@radix-ui/themes";
 import PassagerSuiviRequete from "../components/PassagerSuiviRequete.jsx";
+import {Button, Text} from "@radix-ui/themes/dist/esm/index.js";
 
 
 function Tracking(){
@@ -12,17 +13,18 @@ function Tracking(){
     const [passengerRequest,setPassengerRequest] = useState(null)
     const [myDriverRequest,setMyDriverRequest] = useState(null)
 
+    // Nouveau state pour afficher le message d’erreur / succès
+    const [feedback, setFeedback] = useState(null);
+
     useEffect(() => {
         polyrideDAO.getProfile()
             .then(data => {
-                console.log(data);
                 setUser(data);
-                if(data.usage == "Passager"){
-                    setUsage("Passager")
-                }else if(data.usage == "Conducteur et Passager" || data.usage == "Conducteur"){
-                    setUsage("Conducteur")
+                if (data.usage === "Passager") {
+                    setUsage("Passager");
+                } else if (data.usage === "Conducteur et Passager" || data.usage === "Conducteur") {
+                    setUsage("Conducteur");
                 }
-
             })
             .catch(err => {
                 console.log(err);
@@ -30,18 +32,26 @@ function Tracking(){
 
         polyrideDAO.getTrajetRequest()
             .then(data => {
-                console.log(data);
                 setPassengerRequest(data.driver);
                 setMyDriverRequest(data.passenger);
+
+                if (data.message === "request_sent") {
+                    setFeedback({ type: "success", text: "Votre demande de trajet a bien été envoyée !" });
+                }
+
+                if (data.error === "past_or_today_not_allowed") {
+                    setFeedback({ type: "error", text: "Impossible d'envoyer une demande pour aujourd'hui ou un jour déjà passé." });
+                }
             })
             .catch(err => {
                 console.log(err);
+                setFeedback({ type: "error", text: "Une erreur est survenue lors de l’envoi de la demande." });
             });
 
     }, []);
 
     function updateUsage(newUsage){
-        if(newUsage != usage){
+        if(newUsage !== usage){
             setUsage(newUsage)
         }
     }
@@ -49,46 +59,86 @@ function Tracking(){
     return <div>
         <Header />
         <h2 className="title_Tracking">Suivi</h2>
+
+        {/* Message feedback */}
+        {feedback && (
+            <div
+                style={{
+                    margin: "1em auto",
+                    padding: "1em",
+                    width: "80%",
+                    borderRadius: "10px",
+                    textAlign: "center",
+                    background: feedback.type === "error" ? "#ffdddd" : "#ddffdd",
+                    border: feedback.type === "error" ? "1px solid #ff9090" : "1px solid #60c060",
+                    color: feedback.type === "error" ? "#c00000" : "#006000",
+                    fontWeight: "bold",
+                }}
+            >
+                {feedback.text}
+            </div>
+        )}
+
         {user && usage && (
             <div>
-                {user.usage == "Conducteur et Passager" && (
+                {user.usage === "Conducteur et Passager" && (
                     <div className="buttonChoice">
-                        <button id={usage == "Conducteur" ? "activeUsageButton" : ""} onClick={()=>{updateUsage("Conducteur")}}>Conducteur</button>
-                        <button id={usage == "Passager" ? "activeUsageButton" : ""} onClick={()=>{updateUsage("Passager")}}>Passager</button>
+                        <button id={usage === "Conducteur" ? "activeUsageButton" : ""} onClick={()=>{updateUsage("Conducteur")}}>Conducteur</button>
+                        <button id={usage === "Passager" ? "activeUsageButton" : ""} onClick={()=>{updateUsage("Passager")}}>Passager</button>
                     </div>
                 )}
-                {usage == "Conducteur" && (
+
+                {usage === "Conducteur" && (
                     <div className="mainContent">
                         <h2>Demandes de trajets reçues</h2>
                         {passengerRequest ? (
-                            passengerRequest.map((passenger, index) => (
-                                <div>
-                                    <span key={index} style={{padding: "2em"}}>{passenger.passager}</span>
-                                </div>
-                            ))
+                            passengerRequest.length === 0 ?
+                                <span style={{marginTop:"2em"}}>Vous n'avez envoyé aucune demande de trajet pour cette semaine</span>
+                                :
+                                passengerRequest.map((passenger) => (
+                                    <div key={passenger._id}>
+                                        <span style={{padding: "2em"}}>{passenger.passager}</span>
+                                    </div>
+                                ))
                         ) : (
                             <span>Chargement ...</span>
                         )}
                     </div>
                 )}
-                {usage == "Passager" && (
+
+                {usage === "Passager" && (
                     <div className="mainContent">
                         <h2>Demandes de trajets envoyées</h2>
-                        {myDriverRequest ? (
-                            myDriverRequest.map((driver, index) => (
-                                <div>
-                                    <PassagerSuiviRequete trajet={driver}></PassagerSuiviRequete>
-                                </div>
-                            ))
-                        ) : (
-                            <span>Chargement ...</span>
-                        )}
+                        <div className="contentContainer">
+                            {myDriverRequest ? (
+                                myDriverRequest.length === 0 ?
+                                    <span style={{marginTop:"2em"}}>Vous n'avez envoyé aucune demande de trajet pour cette semaine</span>
+                                    :
+                                    myDriverRequest.map((driver) => (
+                                        <div key={driver._id}>
+                                            <PassagerSuiviRequete trajet={driver}></PassagerSuiviRequete>
+                                        </div>
+                                    ))
+
+                            ) : (
+                                <span>Chargement ...</span>
+                            )}
+                        </div>
                     </div>
                 )}
             </div>
         )}
+
         {!user && (
-            <p>Chargement</p>
+            <Box className="trackingNotConnect" style={{ padding: "2rem", textAlign: "center" }}>
+                <Text>Vous devez être connecté pour accéder à cette page.</Text>
+                <Button
+                    onClick={() => (window.location.href = "/auth/login")}
+                    style={{ marginTop: "1rem" }}
+                >
+                    Se connecter
+                </Button>
+            </Box>
         )}
     </div>
 }

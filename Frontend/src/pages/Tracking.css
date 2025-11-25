@@ -33,6 +33,23 @@
     width: 90%;
 }
 
+.contentContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.trackingNotConnect {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.trackingNotConnect Button {
+    width: 9em;
+    padding: 1em;
+}
+
 @media (max-width: 860px) {
     .title_Tracking {
         padding: 4rem 2rem 2rem 2rem;

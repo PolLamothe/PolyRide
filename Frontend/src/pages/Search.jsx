@@ -31,10 +31,8 @@ function getDateOfCurrentWeek(dayName) {
 function getNameFromEmail(email) {
     const base = email.split("@")[0];
     const parts = base.split(".");
-
     const prenom = parts[0] || "";
     const nom = parts.slice(1).join(" ") || "";
-
     return { prenom, nom };
 }
 
@@ -42,6 +40,16 @@ function getCookie(name) {
     const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
     if (match) return match[2];
     return null;
+}
+
+function isPastOrToday(dateString) {
+    const today = new Date();
+    today.setHours(0,0,0,0);
+
+    const date = new Date(dateString);
+    date.setHours(0,0,0,0);
+
+    return date <= today;
 }
 
 function Search() {
@@ -52,6 +60,7 @@ function Search() {
     const [trajet, setTrajet] = useState([]);
     const [loading, setLoading] = useState(false);
     const [badProfile,setBadProfile] = useState();
+    const [message, setMessage] = useState("");
 
     useEffect(() => {
         const checkProfile = async () => {
@@ -62,7 +71,7 @@ function Search() {
                     const user = await polyrideDAO.getProfile();
                     if(user.calendarLink == null || user.usage == null || user.address == null){
                         setBadProfile(true);
-                    }else{
+                    } else {
                         setBadProfile(false);
                     }
                 } catch(e) {
@@ -76,9 +85,16 @@ function Search() {
         checkProfile();
     }, []);
 
-
     const allProposal = async (selectedDay, selectedDirection = direction) => {
         const dateKey = getDateOfCurrentWeek(selectedDay);
+
+        if (isPastOrToday(dateKey)) {
+            setMessage("Impossible de rechercher un trajet pour un jour passé ou le jour même.");
+            setTrajet([]);
+            return;
+        }
+
+        setMessage(""); // pas de message de succès ici
         await getTrajets(selectedDirection, dateKey);
     };
 
@@ -92,7 +108,6 @@ function Search() {
             .catch((err) => console.log("Erreur getTrajets:", err))
             .finally(() => setLoading(false));
     };
-
 
     const dayComponents = (traj) => {
         if (loading) return <Text>Chargement...</Text>;
@@ -124,12 +139,10 @@ function Search() {
         );
     };
 
-
     useEffect(() => {
-        const dateKey = getDateOfCurrentWeek(day);
-        getTrajets(direction, dateKey);
+        // 🎯 Check automatique au chargement
+        allProposal(day, direction);
     }, []);
-
 
     return (
         <>
@@ -153,51 +166,46 @@ function Search() {
                     <p>Veuillez renseigner vos informations pour pouvoir utiliser la recherche</p>
                 ) : (
                     <div className="search">
-                    <Box mb="4">
-                        <select
-                            value={day}
-                            onChange={(e) => {
-                                const selectedDay = e.target.value;
-                                setDay(selectedDay);
-                                allProposal(selectedDay);
-                            }}
-                            style={{
-                                fontSize: "1rem",
-                                borderRadius: "8px",
-                                border: "1px solid #ccc",
-                                cursor: "pointer",
-                            }}
-                        >
-                            <option value="Lundi">Lundi</option>
-                            <option value="Mardi">Mardi</option>
-                            <option value="Mercredi">Mercredi</option>
-                            <option value="Jeudi">Jeudi</option>
-                            <option value="Vendredi">Vendredi</option>
-                            <option value="Samedi">Samedi</option>
-                            <option value="Dimanche">Dimanche</option>
-                        </select>
 
-                        <select
-                            value={direction}
-                            onChange={(e) => {
-                                const newDirection = e.target.value;
-                                setDirection(newDirection);
-                                allProposal(day, newDirection);
-                            }}
-                            style={{
-                                fontSize: "1rem",
-                                borderRadius: "8px",
-                                border: "1px solid #ccc",
-                                cursor: "pointer",
-                            }}
-                        >
-                            <option value="start">Aller à Polytech</option>
-                            <option value="end">Partir de Polytech</option>
-                        </select>
-                    </Box>
+                        {message && (
+                            <Box mb="3" style={{ color: "red", fontWeight: "bold" }}>
+                                {message}
+                            </Box>
+                        )}
 
-                    <Box pt="3">{dayComponents(trajet)}</Box>
-                </div>
+                        <Box mb="4">
+                            <select
+                                value={day}
+                                onChange={(e) => {
+                                    const selectedDay = e.target.value;
+                                    setDay(selectedDay);
+                                    allProposal(selectedDay);
+                                }}
+                            >
+                                <option value="Lundi">Lundi</option>
+                                <option value="Mardi">Mardi</option>
+                                <option value="Mercredi">Mercredi</option>
+                                <option value="Jeudi">Jeudi</option>
+                                <option value="Vendredi">Vendredi</option>
+                                <option value="Samedi">Samedi</option>
+                                <option value="Dimanche">Dimanche</option>
+                            </select>
+
+                            <select
+                                value={direction}
+                                onChange={(e) => {
+                                    const newDirection = e.target.value;
+                                    setDirection(newDirection);
+                                    allProposal(day, newDirection);
+                                }}
+                            >
+                                <option value="start">Aller à Polytech</option>
+                                <option value="end">Partir de Polytech</option>
+                            </select>
+                        </Box>
+
+                        <Box pt="3">{dayComponents(trajet)}</Box>
+                    </div>
                 )
             )}
         </>
