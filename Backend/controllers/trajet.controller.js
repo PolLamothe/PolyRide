@@ -120,7 +120,9 @@ const trajetController = {
                 return res.status(400).json({message : user.message})
             }
             user = user.user
+            console.log(req.body)
             let trajet = await trajetDAO.findTrajetById(req.body.trajetId)
+
             if(trajet.conducteur != user.email){
                 return res.status(400).json({message : "Vous n'êtes pas le conducteur de ce trajet"})
             }
@@ -135,6 +137,7 @@ const trajetController = {
             }
         }catch(e){
             console.log("[TRAJET ERROR] : ",e)
+            return res.status(500).json({message: "Erreur serveur lors de la réponse du trajet." })
         }
     }
 }

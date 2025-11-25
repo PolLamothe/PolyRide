@@ -222,8 +222,8 @@ const polyrideDAO = {
                 ...athenticationHeader(),
             },
             body: JSON.stringify({
-                trajectID:trajectID,
-                response:response
+                trajetId:trajectID,
+                decision:response
             })
         })
         if (responseserver.status === 200) {

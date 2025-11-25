@@ -1,9 +1,9 @@
-import "/ConducteurDemande.css";
+import "./ConducteurDemande.css";
 import {Box, Card} from "@radix-ui/themes";
 import polyrideDAO from "../dao/PolyrideDAO.js";
 import {useState} from "react";
 
-function ConducteurDemande(trajet,trajectID){
+function ConducteurDemande(trajet){
     trajet = trajet.trajet
     console.log("trajet : ",trajet)
 
@@ -32,8 +32,8 @@ function ConducteurDemande(trajet,trajectID){
                     <p>Date du trajet : {new Date(trajet.jour).toLocaleDateString()}</p>
                 </div>
                 <div className="replyTrajetButtons">
-                    <button onClick={() => handleAccept(trajectID)}>Accepter</button>
-                    <button onClick={() => handleRefuse(trajectID)}>Refuser</button>
+                    <button onClick={() => handleAccept(trajet._id)}>Accepter</button>
+                    <button onClick={() => handleRefuse(trajet._id)}>Refuser</button>
                 </div>
             </Card>
         </Box>

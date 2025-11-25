@@ -5,6 +5,7 @@ import "./Tracking.css";
 import {Box} from "@radix-ui/themes";
 import PassagerSuiviRequete from "../components/PassagerSuiviRequete.jsx";
 import {Button, Text} from "@radix-ui/themes/dist/esm/index.js";
+import ConducteurDemande from "../components/ConducteurDemande.jsx";
 
 
 function Tracking(){
@@ -96,9 +97,7 @@ function Tracking(){
                                 <span style={{marginTop:"2em"}}>Vous n'avez envoyé aucune demande de trajet pour cette semaine</span>
                                 :
                                 passengerRequest.map((passenger) => (
-                                    <div key={passenger._id}>
-                                        <span style={{padding: "2em"}}>{passenger.passager}</span>
-                                    </div>
+                                    <ConducteurDemande trajet={passenger}></ConducteurDemande>
                                 ))
                         ) : (
                             <span>Chargement ...</span>
