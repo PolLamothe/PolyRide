@@ -3,7 +3,7 @@ import {Box, Card} from "@radix-ui/themes";
 
 function PassagerSuiviRequete(trajet){
     trajet = trajet.trajet
-    console.log("trajet : ",trajet)
+    console.log("trajet : ",trajet.adresse)
 
     return <Box className="ResultSearchCardBox">
             <Card>
@@ -17,6 +17,7 @@ function PassagerSuiviRequete(trajet){
                     {trajet.telephone && (
                         <p>Numéro de téléphone : {trajet.telephone}</p>
                     )} 
+                    <p>Adresse : {trajet.adresse.numero+" "+trajet.adresse.rue+" "+trajet.adresse.ville}</p>
                 </div>
             </Card>
         </Box>

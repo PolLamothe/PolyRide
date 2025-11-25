@@ -3,8 +3,6 @@ import {Box, Card} from "@radix-ui/themes";
 import polyrideDAO from "../dao/PolyrideDAO.js";
 
 function ConducteurDemande({trajet, onTrajetUpdate}){
-    console.log("trajet : ",trajet)
-
     const handleRefuse = async (trajectID) => {
         polyrideDAO.replyTrajet(trajectID, 'refuse')
             .then(result => {
@@ -28,8 +26,12 @@ function ConducteurDemande({trajet, onTrajetUpdate}){
                     {trajet.direction === "aller" ? (
                         <p>Ce trajet est de votre domicile vers l'école</p>
                     ): <p>Ce trajet est de l'école vers votre domicile</p>}
+                    {trajet.telephone && (
+                        <p>Numéro de téléphone : {trajet.telephone}</p>
+                    )} 
                     <p>Etat de la requête : {trajet.état}</p>
                     <p>Date du trajet : {new Date(trajet.jour).toLocaleDateString()}</p>
+                    <p>Adresse : {trajet.adresse.numero+" "+trajet.adresse.rue+" "+trajet.adresse.ville}</p>
                 </div>
                 <div className="replyTrajetButtons">
                     <button onClick={() => handleAccept(trajet._id)}>Accepter</button>
