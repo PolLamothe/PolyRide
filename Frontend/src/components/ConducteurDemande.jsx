@@ -31,7 +31,9 @@ function ConducteurDemande({trajet, onTrajetUpdate}){
                     )} 
                     <p>Etat de la requête : {trajet.état}</p>
                     <p>Date du trajet : {new Date(trajet.jour).toLocaleDateString()}</p>
-                    <p>Adresse : {trajet.adresse.numero+" "+trajet.adresse.rue+" "+trajet.adresse.ville}</p>
+                    {trajet.adresse && (
+                        <p>Adresse : {trajet.adresse.numero+" "+trajet.adresse.rue+" "+trajet.adresse.ville}</p>
+                    )}
                 </div>
                 <div className="replyTrajetButtons">
                     <button onClick={() => handleAccept(trajet._id)}>Accepter</button>

@@ -17,7 +17,9 @@ function PassagerSuiviRequete(trajet){
                     {trajet.telephone && (
                         <p>Numéro de téléphone : {trajet.telephone}</p>
                     )} 
-                    <p>Adresse : {trajet.adresse.numero+" "+trajet.adresse.rue+" "+trajet.adresse.ville}</p>
+                    {trajet.adresse && (
+                        <p>Adresse : {trajet.adresse.numero+" "+trajet.adresse.rue+" "+trajet.adresse.ville}</p>
+                    )}                
                 </div>
             </Card>
         </Box>

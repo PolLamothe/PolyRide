@@ -74,7 +74,7 @@ const trajetController = {
                         driverName: utils.extractUserNameFromEmail(trajet.conducteur),
                         passengerName: utils.extractUserNameFromEmail(trajet.passager),
                         distance : await utils.getDistanceBetweenTwoUsers(trajet.conducteur,trajet.passager),
-                        telephone : trajet.état == "Accepté" ? (await userDAO.findUserByEmail(trajet.passager)).phoneNumber : null,
+                        telephone : (await userDAO.findUserByEmail(trajet.passager)).phoneNumber,
                         adresse : (await userDAO.findUserByEmail(trajet.passager)).adresse
                     }));
                 response.driver = await Promise.all(response.driver);
@@ -87,7 +87,7 @@ const trajetController = {
                         passengerName: utils.extractUserNameFromEmail(trajet.passager),
                         distance: await utils.getDistanceBetweenTwoUsers(trajet.passager,trajet.conducteur),
                         telephone : trajet.état == "Accepté" ? (await userDAO.findUserByEmail(trajet.conducteur)).phoneNumber : null,
-                        adresse : (await userDAO.findUserByEmail(trajet.conducteur)).adresse
+                        adresse : trajet.état == "Accepté" ? (await userDAO.findUserByEmail(trajet.conducteur)).adresse : null
                     }));                
                 response.passenger = await Promise.all(response.passenger);
 
