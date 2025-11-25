@@ -107,6 +107,9 @@ const trajetController = {
             if(conducteur.usage != "Conducteur et Passager" && conducteur.usage != "Conducteur"){
                 return res.status(400).json({message : "L'utilisateur n'est pas un conducteur"})
             }
+            if(new Date(req.body.jour) < new Date(Date.now())){
+                return res.status(400).json({message : "Vous ne pouvez pas demander de trajet pour une date antérieur"})
+            }
             return res.status(200).json(await trajetDAO.createTrajet(conducteur.email,passager.email,new Date(req.body.jour),req.body.direction))
         }catch(e){
             console.log("[TRAJET ERROR] : ",e)
