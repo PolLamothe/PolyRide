@@ -41,12 +41,15 @@ const profileController = {
 
             let position = null
 
+            if(req.body.phoneNumber){
+                if (!/^(\+33|0033|0)[1-9]\d{8}$/.test(req.body.phoneNumber)) {
+                    return res.status(400).json({ message: "Numéro de téléphone invalide"});
+                }
+            }
+
             if(req.body.address){
                 if (typeof req.body.address.numero != "number") {
                     return res.status(400).json({ message: "Numéro d'adresse invalide"});
-                }
-                if (!/^(\+33|0033|0)[1-9]\d{8}$/.test(req.body.phoneNumber)) {
-                    return res.status(400).json({ message: "Numéro de téléphone invalide"});
                 }
                 
                 position = await utils.geocodeAddress(req.body.address);
