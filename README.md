@@ -258,7 +258,7 @@ L'équipe dévant réaliser ce projet est consitué de 4 membres :
             <td>Le Scrum Master (Julien) protège l'équipe du "scope creep". Le PO (Pol) doit être prêt à sacrifier ces US P3 si le MVP est en retard.</td>
         </tr>
         <tr>
-            <td>R8</td>
+            <td>R7</td>
             <td><strong>[Technique / API]</strong> Blocahe par l'API <strong>Nominatim</strong> (OpenStreetMap). Elle est gratuite mais a une politique stricte d'usage (User-Agent obligatoire, limite de requêtes/seconde).</td>
             <td style="text-align:center">2<br>(Moyenne)</td>
             <td style="text-align:center">2<br>(Moyen)</td>
@@ -267,7 +267,7 @@ L'équipe dévant réaliser ce projet est consitué de 4 membres :
             <td>Mettre un système de backup utilisant une autre API d'encodage GPS</td>
         </tr>
         <tr>
-            <td>R9</td>
+            <td>R8</td>
             <td><strong>[Données]</strong> Hétérogénéité ou indisponibilité du service ICS de l'université (Lien cassé, format non standard, serveur EDT down).</td>
             <td style="text-align:center">2<br>(Moyenne)</td>
             <td style="text-align:center">3<br>(Élevé)</td>
