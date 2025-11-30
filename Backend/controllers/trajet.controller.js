@@ -69,6 +69,7 @@ const trajetController = {
             let response = {}
             if(await utils.isUserDriver(user)){
                 response.driver = await trajetDAO.getDriverTrajetRequest(user)
+                response.driver = response.driver.filter(trajet => trajet.passager.position && trajet.passager.position.coordinates);
                 response.driver = await response.driver.map(async trajet => ({
                         ...trajet._doc,
                         driverName: utils.extractUserNameFromEmail(trajet.conducteur),
