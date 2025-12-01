@@ -123,7 +123,7 @@ L'équipe dévant réaliser ce projet est consitué de 4 membres :
     </tr>
     <tr>
       <td><strong>Périmètre (Product Backlog)</strong></td>
-      <td>TODO</td>
+      <td>Le projet couvre l'ensemble des tâches liées aux developpement logiciel de l'application</td>
     </tr>
     <tr>
       <td><strong>Acteurs / Équipe</strong></td>
