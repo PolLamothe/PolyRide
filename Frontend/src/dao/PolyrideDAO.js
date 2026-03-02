@@ -113,7 +113,7 @@ const polyrideDAO = {
                 firstName: "Jean",
                 lastName: "Dupont",
                 phoneNumber: "0601020304",
-                usage: "Passager",
+                usage: "Conducteur et Passager",
                 address: {
                     numero: "1",
                     rue: "Rue de la Paix",

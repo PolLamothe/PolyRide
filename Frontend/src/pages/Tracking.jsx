@@ -109,22 +109,22 @@ function Tracking(){
 
         {user && usage && (
             <div>
-                {user.usage === "Conducteur et Passager" && (
+                {user.usage === "Conducteur et Passager" && !config.demoMode && (
                     <div className="buttonChoice">
                         <button id={usage === "Conducteur" ? "activeUsageButton" : ""} onClick={()=>{updateUsage("Conducteur")}}>Conducteur</button>
                         <button id={usage === "Passager" ? "activeUsageButton" : ""} onClick={()=>{updateUsage("Passager")}}>Passager</button>
                     </div>
                 )}
 
-                {usage === "Conducteur" && (
-                    <div className="mainContent">
+                {(usage === "Conducteur" || config.demoMode) && (
+                    <div className="mainContent" style={config.demoMode ? {marginBottom: "4em"} : {}}>
                         <h2>Demandes de trajets reçues</h2>
                         {passengerRequest ? (
                             passengerRequest.length === 0 ?
-                                <span style={{marginTop:"2em"}}>Vous n'avez envoyé aucune demande de trajet pour cette semaine</span>
+                                <span style={{marginTop:"2em"}}>Vous n'avez reçu aucune demande de trajet pour cette semaine</span>
                                 :
                                 passengerRequest.map((passenger) => (
-                                    <ConducteurDemande trajet={passenger} onTrajetUpdate={refreshTrajets}></ConducteurDemande>
+                                    <ConducteurDemande key={passenger._id} trajet={passenger} onTrajetUpdate={refreshTrajets}></ConducteurDemande>
                                 ))
                         ) : (
                             <span>Chargement ...</span>
@@ -132,7 +132,7 @@ function Tracking(){
                     </div>
                 )}
 
-                {usage === "Passager" && (
+                {(usage === "Passager" || config.demoMode) && (
                     <div className="mainContent">
                         <h2>Demandes de trajets envoyées</h2>
                         <div className="contentContainer">
