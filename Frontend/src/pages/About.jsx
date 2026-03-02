@@ -5,6 +5,7 @@ import * as Tabs from '@radix-ui/react-tabs';
 import * as Avatar from '@radix-ui/react-avatar';
 import * as Separator from '@radix-ui/react-separator';
 import Header from "../components/Header.jsx";
+import githubIcon from "../assets/github.png";
 import "./About.css";
 
 function About() {
@@ -136,7 +137,7 @@ function About() {
                     <div className="contact-links">
                         <a href="https://www.instagram.com/polyride_nantes/"><Instagram /> Instagram</a>
                         <a href="https://github.com/PolLamothe/PolyRide" target="_blank" rel="noopener noreferrer">
-                            <img src="/github.png" alt="GitHub" className="github-icon-img" /> GitHub
+                            <img src={githubIcon} alt="GitHub" className="github-icon-img" /> GitHub
                         </a>
                     </div>
                 </section>

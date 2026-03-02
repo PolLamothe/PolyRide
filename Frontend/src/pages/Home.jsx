@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import "./Home.css";
 import Header from "../components/Header.jsx";
 import logo from "../assets/PolyRide_LOGO-removebg-preview.png";
+import githubIcon from "../assets/github.png";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -199,7 +200,7 @@ export default function Home() {
       <section className="home-github-section">
         <div className="section-content">
           <a href="https://github.com/PolLamothe/PolyRide" target="_blank" rel="noopener noreferrer" className="home-github-link">
-            <img src="/github.png" alt="GitHub" className="home-github-icon" />
+            <img src={githubIcon} alt="GitHub" className="home-github-icon" />
             <span>Découvrir le projet sur GitHub</span>
           </a>
         </div>
