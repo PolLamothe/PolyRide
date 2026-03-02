@@ -13,7 +13,7 @@ import Schedule from "./pages/Schedule.jsx";
 import Tracking from "./pages/Tracking.jsx";
 import TutoEDT from './pages/TutoEDT.jsx';
 
-const appBasename = import.meta.env.VITE_ROUTER_BASE || '/';
+const appBasename = import.meta.env.BASE_URL;
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter basename={appBasename}>
