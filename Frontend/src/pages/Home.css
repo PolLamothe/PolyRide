@@ -382,6 +382,48 @@
   }
 }
 
+/* --- GitHub Section --- */
+.home-github-section {
+  background: white;
+  padding: 40px 0;
+  text-align: center;
+}
+
+.home-github-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+  background: #f1f5f9;
+  color: #1f2937;
+  padding: 15px 30px;
+  border-radius: 50px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 1px solid #e2e8f0;
+}
+
+.home-github-link:hover {
+  transform: translateY(-3px);
+  background: #e2e8f0;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.home-github-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+/* --- Footer --- */
+.home-footer {
+  text-align: center;
+  padding: 40px;
+  background: #111827;
+  color: #9ca3af;
+  font-size: 14px;
+}
+
 /* --- Responsive --- */
 @media (max-width: 768px) {
   .hero-title {

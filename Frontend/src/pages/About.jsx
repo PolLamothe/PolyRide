@@ -135,6 +135,9 @@ function About() {
                     <p>Restez connectés</p>
                     <div className="contact-links">
                         <a href="https://www.instagram.com/polyride_nantes/"><Instagram /> Instagram</a>
+                        <a href="https://github.com/PolLamothe/PolyRide" target="_blank" rel="noopener noreferrer">
+                            <img src="/github.png" alt="GitHub" className="github-icon-img" /> GitHub
+                        </a>
                     </div>
                 </section>
 

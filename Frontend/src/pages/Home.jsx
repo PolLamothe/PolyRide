@@ -195,7 +195,19 @@ export default function Home() {
         </div>
       </section>
 
-      
+      {/* GitHub Link Section */}
+      <section className="home-github-section">
+        <div className="section-content">
+          <a href="https://github.com/PolLamothe/PolyRide" target="_blank" rel="noopener noreferrer" className="home-github-link">
+            <img src="/github.png" alt="GitHub" className="home-github-icon" />
+            <span>Découvrir le projet sur GitHub</span>
+          </a>
+        </div>
+      </section>
+
+      <footer className="home-footer">
+        PolyRide • Projet Gestion de Projet Écologique
+      </footer>
     </div>
   );
 }
