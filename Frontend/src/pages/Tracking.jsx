@@ -1,4 +1,5 @@
 import polyrideDAO from "../dao/PolyrideDAO";
+import config from "../config.js";
 import Header from "../components/Header.jsx";
 import { useState, useEffect } from "react";
 import "./Tracking.css";
@@ -71,6 +72,22 @@ function Tracking(){
         <Header />
         <h2 className="title_Tracking">Suivi</h2>
 
+        {config.demoMode && (
+            <div style={{
+                backgroundColor: "#e7f3ff",
+                color: "#0c5460",
+                padding: "0.5rem 1rem",
+                borderRadius: "8px",
+                margin: "1rem auto",
+                maxWidth: "600px",
+                fontSize: "0.9rem",
+                textAlign: "center",
+                border: "1px solid #bee5eb"
+            }}>
+                <strong>Mode Démo :</strong> Le site est actuellement en mode démonstration. Les informations affichées sont fictives et non reliées au serveur.
+            </div>
+        )}
+
         {/* Message feedback */}
         {feedback && (
             <div
@@ -138,7 +155,7 @@ function Tracking(){
             </div>
         )}
 
-        {!user && (
+        {!user && !config.demoMode && (
             <Box className="trackingNotConnect" style={{ padding: "2rem", textAlign: "center" }}>
                 <Text>Vous devez être connecté pour accéder à cette page.</Text>
                 <Button

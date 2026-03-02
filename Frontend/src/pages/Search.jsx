@@ -5,6 +5,7 @@ import {useEffect, useState} from "react";
 import "./Search.css";
 import ResultSearchCard from "../components/ResultSearchCard.jsx";
 import polyrideDAO from "../dao/PolyrideDAO.js";
+import config from "../config.js";
 
 function getDateOfCurrentWeek(dayName) {
     const days = {
@@ -37,6 +38,7 @@ function getNameFromEmail(email) {
 }
 
 function getCookie(name) {
+    if (config.demoMode && name === "token") return "demo-token";
     const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
     if (match) return match[2];
     return null;
@@ -54,16 +56,21 @@ function isPastOrToday(dateString) {
 
 function Search() {
     const navigate = useNavigate();
-    const [isConnected, setIsConnected] = useState(false);
+    const [isConnected, setIsConnected] = useState(config.demoMode);
     const [day, setDay] = useState("Lundi");
     const [direction, setDirection] = useState("start");
     const [trajet, setTrajet] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [badProfile,setBadProfile] = useState();
+    const [badProfile,setBadProfile] = useState(config.demoMode ? false : undefined);
     const [message, setMessage] = useState("");
 
     useEffect(() => {
         const checkProfile = async () => {
+            if (config.demoMode) {
+                setIsConnected(true);
+                setBadProfile(false);
+                return;
+            }
             const token = getCookie("token");
             setIsConnected(!!token);
             if (token) {
@@ -88,7 +95,7 @@ function Search() {
     const allProposal = async (selectedDay, selectedDirection = direction) => {
         const dateKey = getDateOfCurrentWeek(selectedDay);
 
-        if (isPastOrToday(dateKey)) {
+        if (!config.demoMode && isPastOrToday(dateKey)) {
             setMessage("Impossible de rechercher un trajet pour un jour passé ou le jour même.");
             setTrajet([]);
             return;
@@ -149,6 +156,22 @@ function Search() {
             <Header />
 
             <h2 className="title_search">Recherche</h2>
+
+            {config.demoMode && (
+                <div style={{
+                    backgroundColor: "#e7f3ff",
+                    color: "#0c5460",
+                    padding: "0.5rem 1rem",
+                    borderRadius: "8px",
+                    margin: "0 auto 1.5rem",
+                    maxWidth: "600px",
+                    fontSize: "0.9rem",
+                    textAlign: "center",
+                    border: "1px solid #bee5eb"
+                }}>
+                    <strong>Mode Démo :</strong> Le site est actuellement en mode démonstration. Les informations affichées sont fictives et non reliées au serveur.
+                </div>
+            )}
 
             {!isConnected ? (
                 <Box className="searchNotConnect" style={{ padding: "2rem", textAlign: "center" }}>

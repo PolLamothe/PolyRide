@@ -3,6 +3,7 @@ import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from '@fullcalendar/timegrid';
 import { useEffect, useState } from "react";
 import polyrideDAO from "../dao/PolyrideDAO.js";
+import config from "../config.js";
 import { useNavigate } from "react-router-dom";
 import "./Schedule.css";
 import {Box, Button, Text} from "@radix-ui/themes/dist/esm/index.js";
@@ -35,8 +36,21 @@ function Schedule() {
         const now = new Date().getTime();
         const oneDay = 24 * 60 * 60 * 1000;
 
-        if (cachedSchedule && cachedTimestamp && (now - cachedTimestamp < oneDay)) {
-            setSchedule(JSON.parse(cachedSchedule));
+        let parsedSchedule = null;
+        if (cachedSchedule) {
+            try {
+                parsedSchedule = JSON.parse(cachedSchedule);
+                // Clear cache if the old bad format is found
+                if (parsedSchedule && parsedSchedule.events) {
+                    parsedSchedule = null;
+                    localStorage.removeItem('schedule');
+                    localStorage.removeItem('scheduleTimestamp');
+                }
+            } catch(e) {}
+        }
+
+        if (parsedSchedule && cachedTimestamp && (now - cachedTimestamp < oneDay)) {
+            setSchedule(parsedSchedule);
         } else {
             const today = new Date().toISOString().split('T')[0];
 
@@ -90,11 +104,29 @@ function Schedule() {
             <Header />
 
             <div className="schedule">
+                <h2 className="title_schedule">Emploi du temps</h2>
+
+                {config.demoMode && (
+                    <div style={{
+                        backgroundColor: "#e7f3ff",
+                        color: "#0c5460",
+                        padding: "0.5rem 1rem",
+                        borderRadius: "8px",
+                        margin: "1rem auto 1.5rem",
+                        width: "90%",
+                        maxWidth: "600px",
+                        fontSize: "0.9rem",
+                        textAlign: "center",
+                        border: "1px solid #bee5eb",
+                        boxSizing: "border-box"
+                    }}>
+                        <strong>Mode Démo :</strong> Le site est actuellement en mode démonstration. Les informations affichées sont fictives et non reliées au serveur.
+                    </div>
+                )}
                 {user ? (
                     user.calendarLink ? (
                         schedule ? (
                             <div className="temp" style={{ width: '100%' }}>
-                                <h2 className="title_schedule">Emploi du temps</h2>
                                 <div className="calendar">
                                     <FullCalendar
                                         plugins={[timeGridPlugin]}
@@ -129,8 +161,7 @@ function Schedule() {
                             <span className="loader">Chargement...</span>
                         )
                     ) : (
-                        <div style={{ width: '100%', gap: '2em' }}>
-                            <h2 className="title_schedule">Emploi du temps</h2>
+                        <div style={{ width: '100%', gap: '2em', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                             <h4>Insérer un lien ICS dans les paramètres de votre profil</h4>
                             <a href="" className="test" onClick={() => navigate("/tutoedt")}>Besoin d'aide ?</a>
                             <Button style={{width:"9em", padding:"1em"}} onClick={() => (window.location.href = "/account")}>Compte</Button>
@@ -138,7 +169,6 @@ function Schedule() {
                     )
                 ) : (
                     <div className="temp" style={{ width: '100%' }}>
-                        <h2 className="title_schedule">Emploi du temps</h2>
                         <Box className="scheduleNotConnect" style={{padding: "2rem", textAlign: "center"}}>
                             <Text>Vous devez être connecté pour accéder à cette page.</Text>
                             <Button

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {Box, Button, Text} from "@radix-ui/themes";
 import polyrideDAO from "../dao/PolyrideDAO";
+import config from "../config.js";
 import Header from "../components/Header.jsx";
 import './Account.css'
 
@@ -80,6 +81,22 @@ function Account() {
             <Header />
             <div className="account">
                 <h2 className="title_account">Informations du compte</h2>
+
+                {config.demoMode && (
+                    <div style={{
+                        backgroundColor: "#e7f3ff",
+                        color: "#0c5460",
+                        padding: "0.5rem 1rem",
+                        borderRadius: "8px",
+                        margin: "0 auto 1.5rem",
+                        maxWidth: "600px",
+                        fontSize: "0.9rem",
+                        textAlign: "center",
+                        border: "1px solid #bee5eb"
+                    }}>
+                        <strong>Mode Démo :</strong> Le site est actuellement en mode démonstration. Les informations affichées sont fictives et non reliées au serveur.
+                    </div>
+                )}
                 {/* affichage sans modif */}
                 {user && !isEditing && (
                     <div>
